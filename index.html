@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Consultant's Engagement Decision-Tree</title>
+<meta name="description" content="Operator registry of 108 Big4/MBB consulting frameworks audited for solo $0-ad-spend use — origin, rigor, reverse-engineer recipe and verdict for every operator.">
+<meta name="theme-color" content="#0f1518">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+  :root{
+    /* Learning-optimized palette (evidence-based, WCAG-AA verified):
+       - soft deep teal-charcoal base, no pure black -> no halation/glare (Smashing 2025; AccessibilityChecker)
+       - off-white ink, never #fff -> lower glare on long reads
+       - all chromatic hues low-saturation (desaturate 20-30% in dark mode) -> no headache/readability loss
+       - cool teal/blue chrome (calm, frees cognitive load on high-load tasks); warm/saturated reserved for verdict chips only
+       - achromatic luminance drives reading; chroma only for wayfinding (MDPI eye-tracking; Frontiers light-green 2025)
+       All text pairs >=4.5:1, UI hues >=3:1 (verified). */
+    --bg:#0f1518; --bg2:#141c1f; --panel:#1a2429; --panel2:#202c30; --line:#2a363a; --line2:#36444a; --read:#101e1b;
+    --ink:#e6ebef; --dim:#a3b2bd; --faint:#8694a0;
+    --keep:#4ec9a0; --adapt:#e3b45a; --switch:#5aa9e6; --discard:#e08585; --flag:#b48ce0;
+    --d-ml:#6b76d6; --d-entry:#52b8a4; --d-sales:#dd9456; --d-mktg:#cc6fa0; --d-analyst:#cba94e; --d-paid:#58a8de; --d-know:#86a35a; --d-deliver:#a07cd6; --d-rigor:#c47e7e;
+    --accent:#7fb6d6;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;min-height:100vh;color:var(--ink);
+     font:15px/1.65 'Newsreader',Georgia,serif;-webkit-font-smoothing:antialiased;
+     background:
+       radial-gradient(1100px 600px at 8% -8%, #16242a 0%, transparent 60%),
+       radial-gradient(900px 680px at 102% -2%, #15222b 0%, transparent 58%),
+       var(--bg)}
+  ::selection{background:#2c4250;color:#fff}
+  /* atmosphere: far-back blueprint hairline grid + vignette + grain overlay (all inline, no assets) */
+  body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.6;
+     background:
+       linear-gradient(transparent 95%, #ffffff05 95%) 0 0/100% 34px,
+       linear-gradient(90deg,transparent 95%, #ffffff04 95%) 0 0/34px 100%}
+  body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+     background:radial-gradient(125% 95% at 50% -5%, transparent 52%, #00000099 100%)}
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
+     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .prog{position:fixed;top:0;left:0;height:2px;width:0;z-index:60;
+     background:linear-gradient(90deg,var(--accent),var(--keep));box-shadow:0 0 9px var(--accent)}
+
+  /* ---------- masthead ---------- */
+  .masthead{position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:42px 40px 26px}
+  .mast-top{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:24px}
+  .dateline{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:3.5px;text-transform:uppercase;color:var(--accent)}
+  .search{position:relative}
+  .search input{font:400 14px 'Newsreader',serif;background:none;border:0;border-bottom:1px solid var(--line2);
+     color:var(--ink);padding:6px 26px 6px 22px;width:252px;outline:none;transition:border-color .2s}
+  .search input:focus{border-color:var(--accent)}
+  .search .clr{position:absolute;right:0;top:4px;display:none;background:none;border:0;color:var(--faint);
+     font:600 13px 'IBM Plex Mono',monospace;cursor:pointer;padding:2px 4px}
+  .search .clr:hover{color:var(--ink)}
+  .search.has-q .clr{display:block}
+  .qcount{font:500 10.5px 'IBM Plex Mono',monospace;color:var(--faint);margin-top:5px;min-height:13px}
+  .search input::placeholder{color:var(--faint);font-style:italic}
+  .search::before{content:"\1F50D";position:absolute;left:1px;top:6px;font-size:12px;opacity:.45}
+  .kicker{font:600 12px/1 'IBM Plex Mono',monospace;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:15px}
+  h1{margin:0;font:900 clamp(40px,6.6vw,74px)/.94 'Fraunces',serif;letter-spacing:-2px;color:var(--ink)}
+  h1 em{font-style:italic;font-weight:900;color:var(--accent)}
+  .standfirst{color:var(--dim);font-size:16px;line-height:1.6;margin:18px 0 0;max-width:62ch}
+  /* hero verdict-distribution bar — proportional segments, the board's at-a-glance summary */
+  .vbar{display:flex;margin-top:26px;height:40px;border:1px solid var(--line2);border-radius:5px;overflow:hidden;background:var(--panel)}
+  .vseg{display:flex;align-items:center;gap:6px;padding:0 12px;min-width:0;overflow:hidden;white-space:nowrap;border:0;
+     font:700 12px/1 'IBM Plex Mono',monospace;letter-spacing:.4px;color:#0c1215;box-shadow:inset -1px 0 0 #0c121540;
+     cursor:pointer;transition:opacity .18s,filter .18s,transform .08s}
+  .vseg:active{transform:scale(.985)}
+  .vseg .vt{font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:1px;opacity:.8}
+  .vbar.filtered .vseg:not(.on){opacity:.32;filter:saturate(.45)}
+  /* active-filter chips */
+  .chips{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px;min-height:0}
+  .chip{display:inline-flex;align-items:center;gap:7px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.5px;
+     color:var(--ink);background:var(--panel2);border:1px solid var(--line2);border-radius:99px;padding:5px 10px;cursor:pointer;transition:.15s}
+  .chip:hover{border-color:var(--accent)}
+  .chip .x{color:var(--faint);font-weight:700}
+  .chip:hover .x{color:var(--ink)}
+  .shown{font:500 10.5px 'IBM Plex Mono',monospace;color:var(--faint);letter-spacing:.5px}
+
+  /* ---------- a11y foundation ---------- */
+  .skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--panel2);color:var(--ink);
+     font:600 12px 'IBM Plex Mono',monospace;padding:10px 16px;border-radius:0 0 6px 0}
+  .skip:focus{left:0}
+  .lrow:focus-visible,.seg button:focus-visible,.sp:focus-visible,.vseg:focus-visible,.mini:focus-visible,
+  .chip:focus-visible,.dnavb:focus-visible,.copyb:focus-visible,.mcell:focus-visible{
+     outline:2px solid var(--accent);outline-offset:-2px;border-radius:3px}
+  .vis-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
+
+  /* ---------- left rail / decision spine ---------- */
+  .rail{position:sticky;top:22px;display:flex;flex-direction:column;gap:28px}
+  .rail-lbl{font:600 10px/1 'IBM Plex Mono',monospace;letter-spacing:2.5px;text-transform:uppercase;
+     color:var(--faint);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .spine{list-style:none;margin:0;padding:0;position:relative}
+  .spine::before{content:"";position:absolute;left:11px;top:8px;bottom:16px;width:1px;background:var(--line2)}
+  .sp{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;padding:7px 0;cursor:pointer}
+  .sp-n{font:600 11px/1 'IBM Plex Mono',monospace;color:var(--faint);background:var(--bg);
+     border:1px solid var(--line2);border-radius:50%;width:23px;height:23px;display:grid;place-items:center;
+     position:relative;z-index:1;transition:.2s}
+  .sp-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .sp-t b{font:600 12.5px 'Fraunces',serif;letter-spacing:.2px;color:var(--dim);transition:.2s;
+     display:flex;align-items:baseline;gap:7px}
+  .sp-t i{font:italic 400 11px/1.4 'Newsreader',serif;color:var(--faint)}
+  .sp-c{font:500 9.5px 'IBM Plex Mono',monospace;color:var(--faint);letter-spacing:.4px}
+  .sp.on .sp-c{color:var(--accent)}
+  .sp-bar{height:2px;width:64px;background:var(--line);border-radius:2px;margin-top:5px;overflow:hidden}
+  .sp-bar.zero{display:none}
+  .sp-bar i{display:block;height:100%;width:100%;transform:scaleX(var(--p,0));transform-origin:left;
+     background:var(--keep);opacity:.7;transition:transform .3s}
+  .sp:hover .sp-t b{color:var(--ink)}
+  .sp:hover .sp-n{border-color:var(--accent);color:var(--ink)}
+  .sp.on .sp-n{background:var(--accent);border-color:var(--accent);color:#08110f}
+  .sp.on .sp-t b{color:var(--ink)}
+
+  .seg{display:flex;flex-direction:column;border:1px solid var(--line2);border-radius:7px;overflow:hidden}
+  .seg button{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:1px;text-transform:uppercase;
+     color:var(--dim);background:none;border:0;border-bottom:1px solid var(--line);
+     padding:11px 13px;text-align:left;cursor:pointer;transition:.15s}
+  .seg button:last-child{border-bottom:0}
+  .seg button:hover{color:var(--ink);background:var(--panel)}
+  .seg button.on{background:var(--panel2);color:var(--accent);box-shadow:inset 2px 0 0 var(--accent)}
+  .railtools{display:flex;gap:8px;margin-top:10px}
+  .mini{flex:1;font:500 10.5px 'IBM Plex Mono',monospace;color:var(--faint);background:none;
+     border:1px solid var(--line);border-radius:6px;padding:8px;cursor:pointer;transition:.15s}
+  .mini:hover{color:var(--ink);border-color:var(--line2)}
+
+  .legend{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;
+     font:400 12px/1.45 'Newsreader',serif;color:var(--faint)}
+  .legend li{display:grid;grid-template-columns:10px 1fr;gap:10px;align-items:start;cursor:pointer;border-radius:3px}
+  .legend li:hover b{color:var(--ink)}
+  .legend b{color:var(--dim);font:600 10px/1.5 'IBM Plex Mono',monospace;letter-spacing:.6px}
+  .legend .dot{width:9px;height:9px;border-radius:2px;margin-top:4px;background:var(--c)}
+  .laws p{margin:0;font:italic 400 12px/1.6 'Newsreader',serif;color:var(--faint)}
+
+  /* ---------- 3-pane console shell (master-detail) ---------- */
+  .shell{max-width:1320px;margin:0 auto;padding:16px 40px 0;display:grid;
+     grid-template-columns:198px minmax(300px,1fr) minmax(372px,1.06fr);align-items:start;position:relative;z-index:2}
+
+  /* ---------- operator list (master) ---------- */
+  #list{border-left:1px solid var(--line);min-height:66vh}
+  .lgrp{scroll-margin-top:10px}
+  .lsub{position:sticky;top:0;z-index:6;display:flex;align-items:baseline;gap:12px;
+     padding:15px 18px 10px;background:linear-gradient(180deg,var(--bg) 60%,#0f151800);backdrop-filter:blur(3px);
+     border-bottom:1px solid var(--line2)}
+  .lsub .sn{font:900 14px/1 'Fraunces',serif;color:var(--kc,var(--accent));opacity:.9}
+  .lsub h3{margin:0;font:600 12px/1 'IBM Plex Mono',monospace;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink)}
+  .lsub .c{margin-left:auto;font:500 11px/1 'IBM Plex Mono',monospace;color:var(--faint)}
+  .lrow{display:grid;grid-template-columns:30px 1fr auto;gap:13px;align-items:center;
+     padding:11px 18px;border-bottom:1px solid var(--line);
+     cursor:pointer;transition:background .12s}
+  .lrow:hover{background:var(--panel)}
+  .lrow.sel{background:var(--panel2)}
+  .lrow.sel .rno{color:var(--accent)}
+  .lrow.read .rop{opacity:.62}
+  .lrow.read .rno::after{content:"·";color:var(--keep);margin-left:3px}
+  .lrow .rno{font:600 10.5px/1 'IBM Plex Mono',monospace;color:var(--faint)}
+  .lrow .rop{font:500 15px/1.35 'Newsreader',serif;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lrow .rop mark,.rsnip mark{background:#2c4250;color:var(--ink);border-radius:2px;padding:0 1px}
+  .lrow .rmeta{display:flex;align-items:center;gap:10px;white-space:nowrap}
+  .lrow .rdp{font:500 9.5px/1 'IBM Plex Mono',monospace;letter-spacing:.6px;text-transform:uppercase;color:var(--faint)}
+  .lrow .rv{font:700 9px/1 'IBM Plex Mono',monospace;letter-spacing:.5px;padding:4px 5px;border-radius:2px}
+  .rsnip{grid-column:2/-1;font:italic 400 12px/1.5 'Newsreader',serif;color:var(--dim);
+     overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;margin-top:-3px}
+  .pills{display:none}
+
+  /* ---------- detail pane (the record) ---------- */
+  #detail{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;
+     border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  #detail::-webkit-scrollbar{width:9px}
+  #detail::-webkit-scrollbar-thumb{background:var(--line2);border-radius:5px}
+  .drec{padding:28px 32px 40px;box-shadow:inset 0 2px 0 var(--vc,var(--accent));
+     background:linear-gradient(180deg,var(--read),transparent 55%);min-height:66vh}
+  .dnav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+  .dnavb{font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.6px;color:var(--dim);background:none;
+     border:1px solid var(--line);border-radius:5px;padding:7px 11px;cursor:pointer;transition:.15s}
+  .dnavb:hover:not(:disabled){color:var(--ink);border-color:var(--line2);background:var(--panel)}
+  .dnavb:disabled{opacity:.35;cursor:default}
+  .dpos{font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.8px;color:var(--faint);text-transform:uppercase}
+  .copyb{font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.6px;color:var(--faint);background:none;
+     border:1px solid var(--line);border-radius:4px;padding:5px 9px;cursor:pointer;margin-left:10px;transition:.15s}
+  .copyb:hover{color:var(--ink);border-color:var(--line2)}
+  .copyb.ok{color:var(--keep);border-color:var(--keep)}
+  .drel{margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+  .drel .dl{font:600 10px/1 'IBM Plex Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+  .drel a{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:7px 4px;
+     text-decoration:none;border-bottom:1px solid var(--line);transition:background .12s}
+  .drel a:last-child{border-bottom:0}
+  .drel a:hover{background:var(--panel)}
+  .drel .rno{font:600 10px 'IBM Plex Mono',monospace;color:var(--faint)}
+  .drel .rop{font:500 13.5px 'Newsreader',serif;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .drel .why{font:500 9px 'IBM Plex Mono',monospace;letter-spacing:.5px;text-transform:uppercase;color:var(--faint)}
+  .dno{font:600 11px/1 'IBM Plex Mono',monospace;letter-spacing:1.6px;text-transform:uppercase;color:var(--faint)}
+  .dhead{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin:15px 0 0}
+  .dop{font:600 clamp(23px,2.1vw,29px)/1.12 'Fraunces',serif;letter-spacing:-.5px;color:var(--ink)}
+  .dstamp{flex-shrink:0;font:700 10px/1 'IBM Plex Mono',monospace;letter-spacing:1.4px;padding:7px 11px;border-radius:2px;
+     box-shadow:inset 0 0 0 1px #ffffff16;white-space:nowrap}
+  .dmeta{margin:13px 0 20px;font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.7px;text-transform:uppercase;color:var(--faint)}
+  .dmeta .ph{color:var(--accent)}
+  .row .v .corp{color:var(--accent);font-weight:600}
+  .dempty{padding:64px 32px}
+  .dempty .di{font:italic 400 16px/1.55 'Newsreader',serif;color:var(--dim);margin-bottom:26px;max-width:42ch}
+  .dempty .dl{font:600 10px/1 'IBM Plex Mono',monospace;letter-spacing:2.5px;text-transform:uppercase;color:var(--faint);
+     margin-bottom:11px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .dempty p{margin:0;font:italic 400 13px/1.65 'Newsreader',serif;color:var(--faint);max-width:46ch}
+
+  /* field rows (reused inside the detail record) */
+  .row{display:grid;grid-template-columns:122px 1fr;gap:18px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .row:last-child{border-bottom:0}
+  .row .k{font:600 10px/1.5 'IBM Plex Mono',monospace;letter-spacing:1px;text-transform:uppercase;color:var(--faint);padding-top:3px}
+  .row .v{font-size:14.5px;line-height:1.72;color:var(--ink)}
+  .flagnote{margin-top:15px;font:italic 400 13px/1.55 'Newsreader',serif;color:var(--flag);
+     background:#1a1226;border:1px solid #3a2858;border-radius:3px;padding:12px 14px}
+
+  /* verdict color chips/stamps */
+  .v-KEEP{background:#143930;color:var(--keep)} .v-ADAPT{background:#352c12;color:var(--adapt)}
+  .v-SWITCH{background:#13304a;color:var(--switch)} .v-DISCARD{background:#3a1c1c;color:var(--discard)}
+  .v-FLAG{background:#2a1d3c;color:var(--flag)}
+
+  .empty{padding:54px 20px;text-align:center;color:var(--faint);font-style:italic;font-size:14px}
+
+  /* ---------- domain × phase matrix (the consultant map) ---------- */
+  .matrix{max-width:1320px;margin:6px auto 0;padding:0 40px;position:relative;z-index:2}
+  .mx-head{display:flex;align-items:baseline;gap:14px;margin-bottom:10px}
+  .mx-head h2{margin:0;font:600 13px 'IBM Plex Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+  .mx-head .hint{font:italic 400 12px 'Newsreader',serif;color:var(--faint)}
+  .mx-toggle{margin-left:auto;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:1px;color:var(--faint);
+     background:none;border:1px solid var(--line);border-radius:5px;padding:6px 10px;cursor:pointer;transition:.15s}
+  .mx-toggle:hover{color:var(--ink);border-color:var(--line2)}
+  .mx{display:grid;grid-template-columns:130px repeat(6,1fr);gap:3px;margin-bottom:8px}
+  .mx .mh{font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:1px;text-transform:uppercase;color:var(--faint);
+     padding:6px 4px;text-align:center;align-self:end}
+  .mx .mr{font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:.5px;text-transform:uppercase;color:var(--dim);
+     padding:0 8px 0 0;display:flex;align-items:center;justify-content:flex-end;text-align:right}
+  .mcell{position:relative;border:1px solid var(--line);border-radius:3px;background:var(--panel);min-height:34px;
+     font:600 11px 'IBM Plex Mono',monospace;color:var(--dim);cursor:pointer;transition:border-color .15s,transform .08s;
+     display:grid;place-items:center;padding:0}
+  .mcell:hover{border-color:var(--accent);color:var(--ink)}
+  .mcell:active{transform:scale(.96)}
+  .mcell.zero{cursor:default;color:var(--line2);background:transparent}
+  .mcell.zero:hover{border-color:var(--line)}
+  .mcell.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);color:var(--ink)}
+  .mcell .mv{position:absolute;left:0;right:0;bottom:0;height:3px;display:flex;overflow:hidden;border-radius:0 0 2px 2px}
+  .mcell .mv i{display:block;height:100%}
+  .mx-collapsed .mx{display:none}
+
+  /* ---------- command palette ---------- */
+  dialog.pal{margin:10vh auto 0;width:min(560px,92vw);background:var(--panel);color:var(--ink);
+     border:1px solid var(--line2);border-radius:10px;padding:0;box-shadow:0 24px 80px #000c}
+  dialog.pal::backdrop{background:#0a0f11cc;backdrop-filter:blur(2px)}
+  .pal input{width:100%;box-sizing:border-box;font:400 16px 'Newsreader',serif;background:none;border:0;
+     border-bottom:1px solid var(--line2);color:var(--ink);padding:15px 18px;outline:none}
+  .pal-list{max-height:46vh;overflow:auto;padding:6px 0}
+  .pal-grp{font:600 9px 'IBM Plex Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--faint);padding:9px 18px 4px}
+  .pal-it{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:9px 18px;cursor:pointer}
+  .pal-it.act{background:var(--panel2)}
+  .pal-it .rno{font:600 10px 'IBM Plex Mono',monospace;color:var(--faint)}
+  .pal-it .rop{font:500 14.5px 'Newsreader',serif;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pal-it .rv{font:700 9px 'IBM Plex Mono',monospace;letter-spacing:.5px;padding:4px 5px;border-radius:2px}
+  .pal-empty{padding:22px 18px;font:italic 400 13px 'Newsreader',serif;color:var(--faint)}
+  .pal-hint{display:flex;gap:14px;padding:9px 18px;border-top:1px solid var(--line);
+     font:500 9.5px 'IBM Plex Mono',monospace;color:var(--faint);letter-spacing:.5px}
+
+  /* ---------- motion ---------- */
+  @keyframes dIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  @keyframes rowIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+  @keyframes stampIn{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:none}}
+  .drec.anim{animation:dIn .18s cubic-bezier(.22,1,.36,1)}
+  .drec.anim .dstamp{animation:stampIn .16s cubic-bezier(.22,1,.36,1) .05s backwards}
+  .lgrp.anim .lrow{animation:rowIn .2s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--ri,0)*16ms)}
+  #list[data-dim] .lrow{transition:opacity .18s}
+  #list[data-dim] .lrow:not(.v-match){opacity:.28}
+
+  /* ---------- discovery (non-corpus) section ---------- */
+  .disc{max-width:1180px;margin:48px auto 8px;padding:0 24px;position:relative;z-index:2}
+  .disc-card{border:1px dashed #6a5a32;border-radius:10px;background:linear-gradient(180deg,var(--panel),var(--panel2));padding:22px 24px}
+  .disc-badge{display:inline-flex;align-items:center;gap:8px;font:600 10px/1 'IBM Plex Mono',monospace;
+     letter-spacing:1.6px;text-transform:uppercase;color:var(--adapt);border:1px dashed #6a5a32;
+     border-radius:3px;padding:5px 8px;margin-bottom:10px}
+  .disc-meta{font:600 11px/1.4 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--adapt)}
+  .disc h2{font:600 22px/1.25 'Fraunces',serif;color:var(--ink);margin:8px 0 6px}
+  .disc .lede{color:var(--dim);margin:0 0 18px;max-width:760px}
+  .disc table{width:100%;border-collapse:collapse;font:14px/1.5 'Newsreader',Georgia,serif;color:var(--ink)}
+  .disc thead tr{text-align:left;color:var(--faint);font:600 11px/1.4 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+  .disc th{padding:8px 10px;border-bottom:1px solid var(--line2)}
+  .disc td{padding:9px 10px;border-bottom:1px solid var(--line)}
+  .disc tbody tr:last-child td{border-bottom:0}
+  .disc tbody tr{transition:background .12s}
+  .disc tbody tr:hover{background:var(--panel)}
+  .disc .dno2{font:600 10px 'IBM Plex Mono',monospace;color:var(--faint);white-space:nowrap}
+  .disc .caveat{color:var(--faint);font:13px/1.5 'Newsreader',Georgia,serif;margin:16px 0 0}
+
+  /* ---------- footer ---------- */
+  footer{max-width:1320px;margin:0 auto;padding:28px 40px 54px;border-top:1px solid var(--line);
+     color:var(--faint);font:italic 400 13px/1.65 'Newsreader',serif;position:relative;z-index:2}
+  footer code{font:500 12px 'IBM Plex Mono',monospace;color:var(--dim);font-style:normal}
+
+  /* ---------- responsive: collapse to stacked master-detail ---------- */
+  @media(max-width:1080px){
+    .shell{grid-template-columns:1fr;padding:14px 24px 0}
+    .rail{position:static;display:grid;grid-template-columns:1fr 1fr;gap:22px 30px;
+       margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+    .rail nav{grid-column:1/-1}
+    .spine{display:grid;grid-template-columns:1fr 1fr;gap:2px 24px}
+    .spine::before{display:none}
+    #list{border-left:0}
+    .matrix{padding:0 24px}
+    .mx{grid-template-columns:96px repeat(6,1fr)}
+    /* detail becomes a bottom sheet */
+    #detail{position:fixed;inset:auto 0 0 0;max-height:80vh;z-index:50;margin:0;
+       background:var(--bg2);border:1px solid var(--line2);border-bottom:0;border-radius:16px 16px 0 0;
+       box-shadow:0 -14px 48px #000b;transform:translateY(102%);
+       transition:transform .32s cubic-bezier(.32,.72,0,1);overflow:auto;overscroll-behavior:contain}
+    #detail.open{transform:none}
+    #detail::before{content:"";display:block;width:40px;height:4px;border-radius:3px;background:var(--line2);
+       margin:10px auto 0}
+    .sheetback{display:none;position:fixed;inset:0;z-index:49;background:#0a0f11aa}
+    .sheetback.open{display:block}
+    .pills{display:flex;gap:7px;overflow-x:auto;position:sticky;top:0;z-index:7;
+       padding:10px 2px;background:linear-gradient(180deg,var(--bg) 78%,transparent);
+       -webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .pills::-webkit-scrollbar{display:none}
+    .pill{flex:0 0 auto;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.8px;text-transform:uppercase;
+       color:var(--dim);background:var(--panel);border:1px solid var(--line);border-radius:99px;
+       padding:7px 12px;cursor:pointer}
+    .pill:active{background:var(--panel2)}
+    .masthead{padding:32px 24px 22px}
+    footer{padding:26px 24px 46px}
+  }
+  @media(max-width:560px){
+    .mast-top{flex-direction:column;align-items:stretch;gap:14px}
+    .search,.search input{width:100%}
+    .rail{grid-template-columns:1fr}
+    .spine{grid-template-columns:1fr}
+    .lrow{grid-template-columns:26px 1fr auto;gap:10px;padding-left:13px}
+    .drec{padding:24px 20px 32px}
+    h1{letter-spacing:-.6px}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#list">Skip to operator list</a>
+<div class="prog" id="prog"></div>
+<div class="grain"></div>
+<div class="sheetback" id="sheetback"></div>
+<div class="vis-hidden" aria-live="polite" id="live"></div>
+
+<header class="masthead">
+  <div class="mast-top">
+    <div class="dateline" id="dateline">Engagement Doctrine · Operator Registry · v1.1.0</div>
+    <div class="search" id="searchwrap">
+      <input id="q" placeholder="search operators…  ( / )" autocomplete="off" aria-label="Search operators">
+      <button class="clr" id="qclr" aria-label="Clear search">×</button>
+      <div class="qcount" id="qcount"></div>
+    </div>
+  </div>
+  <div class="kicker">The Big4 / MBB Consultant's</div>
+  <h1>Engagement <em>Decision-Tree</em></h1>
+  <p class="standfirst">Every operator the doctrine surfaced — origin, rigor, reverse-engineer recipe and verdict. Read it like a field manual: walk the six-phase decision spine at left, open any entry for its full record.</p>
+  <div class="vbar" id="vbar" role="group" aria-label="Verdict distribution — click a segment to filter"></div>
+  <div class="chips" id="chips"></div>
+</header>
+
+<section class="matrix" id="matrix" aria-label="Domain by phase map">
+  <div class="mx-head">
+    <h2>The Consultant Map</h2>
+    <span class="hint">domain × phase · click a cell to filter · color = verdict mix</span>
+    <button class="mx-toggle" id="mxtoggle" aria-expanded="true">Collapse</button>
+  </div>
+  <div class="mx" id="mx" role="grid"></div>
+</section>
+
+<div class="shell">
+  <aside class="rail">
+    <nav>
+      <div class="rail-lbl">Decision Spine</div>
+      <ol class="spine" id="spine">
+        <li class="sp" data-phase="Diagnose" tabindex="0" role="button"><span class="sp-n">01</span><span class="sp-t"><b>Diagnose <span class="sp-c"></span></b><i>Real, acute, funded problem?</i><span class="sp-bar"><i></i></span></span></li>
+        <li class="sp" data-phase="Size" tabindex="0" role="button"><span class="sp-n">02</span><span class="sp-t"><b>Size <span class="sp-c"></span></b><i>Big enough to live on, small enough to own?</i><span class="sp-bar"><i></i></span></span></li>
+        <li class="sp" data-phase="Price" tabindex="0" role="button"><span class="sp-n">03</span><span class="sp-t"><b>Price <span class="sp-c"></span></b><i>What will the acute buyer actually pay?</i><span class="sp-bar"><i></i></span></span></li>
+        <li class="sp" data-phase="Position" tabindex="0" role="button"><span class="sp-n">04</span><span class="sp-t"><b>Position <span class="sp-c"></span></b><i>What single slot do we own?</i><span class="sp-bar"><i></i></span></span></li>
+        <li class="sp" data-phase="Capture" tabindex="0" role="button"><span class="sp-n">05</span><span class="sp-t"><b>Capture <span class="sp-c"></span></b><i>Reach the buyer at $0 ad spend?</i><span class="sp-bar"><i></i></span></span></li>
+        <li class="sp" data-phase="Measure" tabindex="0" role="button"><span class="sp-n">06</span><span class="sp-t"><b>Measure <span class="sp-c"></span></b><i>Stay honest about what worked?</i><span class="sp-bar"><i></i></span></span></li>
+      </ol>
+    </nav>
+    <div>
+      <div class="rail-lbl">Arrange By</div>
+      <div class="seg" id="groupSeg">
+        <button data-g="domain" class="on">Domain</button>
+        <button data-g="phase">Phase</button>
+        <button data-g="verdict">Verdict</button>
+      </div>
+    </div>
+    <div>
+      <div class="rail-lbl">Verdict Key</div>
+      <ul class="legend" id="legend">
+        <li data-v="KEEP"><i class="dot" style="--c:var(--keep)"></i><span><b>KEEP</b> transfers as-is</span></li>
+        <li data-v="ADAPT"><i class="dot" style="--c:var(--adapt)"></i><span><b>ADAPT</b> keep reasoning, drop apparatus</span></li>
+        <li data-v="SWITCH"><i class="dot" style="--c:var(--switch)"></i><span><b>SWITCH</b> discard now, flips on trigger</span></li>
+        <li data-v="DISCARD"><i class="dot" style="--c:var(--discard)"></i><span><b>DISCARD</b> sample / spend-bound</span></li>
+        <li data-v="FLAG"><i class="dot" style="--c:var(--flag)"></i><span><b>FLAG</b> proprietary / unverified</span></li>
+      </ul>
+      <a href="#added-discovery" style="display:inline-block;margin-top:16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:1.2px;text-transform:uppercase;color:var(--adapt);text-decoration:none;border:1px dashed #6a5a32;border-radius:3px;padding:6px 9px">Discovery (pre-Gate A) ↓</a>
+    </div>
+  </aside>
+
+  <section id="list" role="listbox" aria-label="Operator list"></section>
+  <aside id="detail" aria-label="Operator detail"></aside>
+</div>
+
+<dialog class="pal" id="pal" aria-label="Command palette">
+  <input id="palq" placeholder="jump to operator or command…" autocomplete="off" aria-label="Search operators and commands">
+  <div class="pal-list" id="pallist"></div>
+  <div class="pal-hint"><span>↑↓ navigate</span><span>↵ open</span><span>esc close</span><span>⌘K toggle</span></div>
+</dialog>
+
+<section id="added-discovery" class="disc" aria-label="Added discovery operators">
+  <div class="disc-card">
+    <span class="disc-badge">⚠ Non-corpus · added frameworks</span>
+    <div class="disc-meta">Added 2026-06-05 · Non-DR frameworks · not part of the verbatim corpus</div>
+    <h2>Discovery operators — the white-space front-end</h2>
+    <p class="lede">Closes the audited gap: the 108-op corpus ran strong from Diagnose&rarr;Measure but thin on <em>where to look · who is underserved · how starved</em>. These six are standard published frameworks (not DR-sourced), kept visually separate so the verbatim-corpus honesty boundary holds. All <strong style="color:var(--keep)">KEEP</strong>. They generate &amp; rank candidate sub-TAMs <em>before</em> Gate A. Canonical in <code>engagement-doctrine-contract.md</code> &sect;4a.</p>
+    <table>
+      <thead><tr><th></th><th>Operator</th><th>Phase</th><th>Owner</th><th>What it does</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr id="disc-1"><td class="dno2">A-01</td><td><strong>Blue Ocean Six Paths</strong></td><td style="color:var(--dim)">Diagnose (pre)</td><td style="color:var(--d-entry)">STRATEGIST</td><td>WHERE to look — scan alt industries · strategic groups · buyer chain · complements · functional&harr;emotional · trends-over-time</td><td style="color:var(--dim)">Kim &amp; Mauborgne</td></tr>
+        <tr id="disc-2"><td class="dno2">A-02</td><td><strong>Three Tiers of Noncustomers</strong></td><td style="color:var(--dim)">Diagnose (pre)</td><td style="color:var(--d-entry)">STRATEGIST</td><td>WHO is underserved — soon-to-be / refusing / unexplored; pocket usually tier 2&ndash;3</td><td style="color:var(--dim)">Kim &amp; Mauborgne</td></tr>
+        <tr id="disc-3"><td class="dno2">A-03</td><td><strong>Buyer Utility Map</strong></td><td style="color:var(--dim)">Diagnose / Position</td><td style="color:var(--d-entry)">STRATEGIST</td><td>utility blockers across the buyer experience cycle (reframe lever)</td><td style="color:var(--dim)">Kim &amp; Mauborgne</td></tr>
+        <tr id="disc-4"><td class="dno2">A-04</td><td><strong>ODI Opportunity Algorithm</strong></td><td style="color:var(--dim)">Size</td><td style="color:var(--d-know)">RESEARCHER</td><td>HOW starved — Importance + max(Importance &minus; Satisfaction, 0); &ge;~12 = demand-hungry gap</td><td style="color:var(--dim)">Ulwick</td></tr>
+        <tr id="disc-5"><td class="dno2">A-05</td><td><strong>Kano need-typing</strong></td><td style="color:var(--dim)">Diagnose</td><td style="color:var(--d-know)">RESEARCHER</td><td>must-be / performance / delighter; underserved performance/delighter + paid workaround = target</td><td style="color:var(--dim)">Kano</td></tr>
+        <tr id="disc-6"><td class="dno2">A-06</td><td><strong>Strategic Group Map</strong></td><td style="color:var(--dim)">Position</td><td style="color:var(--d-entry)">STRATEGIST</td><td>structural white-space = empty cell (price &times; dedication-to-sub-TAM) with proven paid demand</td><td style="color:var(--dim)">Hunt 1972 · popularized by Porter</td></tr>
+      </tbody>
+    </table>
+    <p class="caveat">Binding caveat: reasoning frameworks at small-n (directional, not inferential). CDD remains downstream <em>validation</em>, never discovery.</p>
+  </div>
+</section>
+
+<footer>
+  Operator registry for <code>.vault/protocols/engagement-doctrine-contract.md</code>, version-controlled in <code>.vault/ecom/12-INTEL/</code>. Honesty preserved: the Meta "1:5:3 One Campaign Method" is shown <strong>UNVERIFIED</strong>; "grey-hair/toehold review" shown as a could-not-verify note; proprietary methods tagged FLAG.
+</footer>
+
+<script>
+/* ============================================================
+   VERBATIM CORPUS — every cell is exact DR text (backtick literals).
+   verdict (pile) + phase are the only DERIVED/added-organization fields.
+   ============================================================ */
+const D = [
+/* ===================== DR1 — prose, 5 sections ===================== */
+{dr:"DR1",domain:"Market-Entry",phase:"Diagnose",verdict:"KEEP",operator:"Hypothesis-driven problem solving",
+ body:`Hypothesis-driven problem solving (KEEP). The McKinsey method, documented in Ethan Rasiel's *The McKinsey Way* (McGraw-Hill, 1999), is "fact-based, rigidly structured, and hypothesis-driven": form a day-one "initial hypothesis" and then test it rather than gathering all data first. Transfers directly — a solo operator should write the one-sentence bet ("this segment will pay $X right now because of pain Y") on day one and design work to falsify it.`},
+{dr:"DR1",domain:"Market-Entry",phase:"Diagnose",verdict:"KEEP",operator:"Issue trees / logic trees",
+ body:`Issue trees / logic trees (KEEP). The foundational structuring tool; every branch is a falsifiable question, decomposed MECE. Transfers as the operator's diagnostic skeleton for "why would this micro-monopoly fail/succeed."`},
+{dr:"DR1",domain:"Market-Entry",phase:"Diagnose",verdict:"KEEP",operator:"MECE + Minto Pyramid Principle",
+ body:`MECE + Minto Pyramid Principle (KEEP). Barbara Minto's *The Pyramid Principle* (answer-first, grouped MECE support, SCQA intro). Transfers as both a thinking tool and the structure for the operator's own decision documents.`},
+{dr:"DR1",domain:"Market-Entry",phase:"Diagnose",verdict:"KEEP",operator:`"Don't boil the ocean" / 80-20`,
+ body:`"Don't boil the ocean" / 80-20 (KEEP). Rasiel: be selective, know when you've done enough, then stop. Highly relevant to a solo operator with finite hours — prevents over-analysis of a deliberately tiny market.`},
+{dr:"DR1",domain:"Market-Entry",phase:"Diagnose",verdict:"KEEP",operator:"Gary Klein pre-mortem",
+ body:`Gary Klein pre-mortem (KEEP). From "Performing a Project Premortem," *Harvard Business Review*, September 2007. Imagine the launch has already failed; work backward to causes. Klein runs it in 20–30 minutes and writes that "prospective hindsight—imagining that an event has already occurred—increases the ability to correctly identify reasons for future outcomes by 30%," citing the underlying study by Mitchell, D.J., Russo, J.E. & Pennington, N. (1989), "Back to the Future: Temporal Perspective in the Explanation of Events," *Journal of Behavioral Decision Making* 2(1):25–38. Klein himself notes a solo operator can adapt it (ideally pulling in one outside person). Transfers.`},
+{dr:"DR1",domain:"Market-Entry",phase:"Diagnose",verdict:"KEEP",operator:"Risk registers",
+ body:`Risk registers (KEEP, lightweight). A structured list of risks with likelihood/impact/mitigation. Transfers as a one-page artifact; the heavyweight enterprise PMO version is overkill.`},
+{dr:"DR1",domain:"Market-Entry",phase:"Size",verdict:"ADAPT",operator:"TAM/SAM/SOM market sizing with top-down vs bottom-up triangulation",
+ body:`TAM/SAM/SOM market sizing with top-down vs bottom-up triangulation (PARTIAL — mostly DISCARD as designed, KEEP one mechanic). The canonical discipline: size the market two+ ways and force them to converge (~within 15–20%); divergence flags broken assumptions. For an inverse price-to-TAM model in a deliberately tiny TAM, conventional market sizing is the *wrong objective* — the whole thesis is that volume is intentionally small. DISCARD the "size a big TAM" framing. KEEP only the bottom-up unit build (count the realistically reachable burning-desire buyers × price) and the triangulation *habit* as a sanity check on "are there enough acute buyers at this price to clear my income target."`},
+{dr:"DR1",domain:"Market-Entry",phase:"Size",verdict:"DISCARD",operator:"Commercial due diligence (CDD) full apparatus",
+ body:`Commercial due diligence (CDD) full apparatus (DISCARD). Multi-week, multi-source demand modeling, competitor share, forecast scenarios. Enterprise/PE-scale; presupposes a research team and a deal thesis. The *spirit* (validate demand before committing) survives via VoC and pre-mortem, but the apparatus does not.`},
+{dr:"DR1",domain:"Market-Entry",phase:"Position",verdict:"DISCARD",operator:"Entry-mode analysis (build/buy/ally/JV/license)",
+ body:`Entry-mode analysis (build/buy/ally/JV/license) (DISCARD). Designed for corporates choosing how to enter a geography/segment. A solo operator has exactly one mode (organic build). Not applicable.`},
+
+{dr:"DR1",domain:"Analytical-Rigor",phase:"Price",verdict:"KEEP",operator:"Economic Value to the Customer / EVC",
+ body:`Economic Value to the Customer / EVC (KEEP — highest priority). Originated by McKinsey's John Forbis and Nitin Mehta (1979) and formalized in Thomas Nagle's *The Strategy and Tactics of Pricing* (1st ed. 1987 with Reed Holden [correction 2026-06-12: Holden co-authored from the 2nd ed., 1995 — 1st ed. was Nagle alone]; 7th ed. 2023). EVC = reference value (next-best alternative's price) + differentiation value (monetized performance/outcome deltas) − switching costs; price captures a share (often 20–50%) of the differentiation value. This is the *core* transfer for an inverse price-to-TAM, burning-desire model: it quantifies in dollars the value of the dream outcome to a narrow segment, justifying a high price independent of search volume. Maps directly onto the Hormozi value equation numerator (dream outcome × perceived likelihood).`},
+{dr:"DR1",domain:"Analytical-Rigor",phase:"Price",verdict:"KEEP",operator:"Willingness-to-pay isolation — Van Westendorp Price Sensitivity Meter",
+ body:`Willingness-to-pay isolation — Van Westendorp Price Sensitivity Meter (KEEP). Original: Peter van Westendorp, "NSS-Price Sensitivity Meter," Proceedings of the ESOMAR 29th Congress, Venice, 1976, pp. 139–167. Four open-ended price questions (too cheap / cheap / expensive / too expensive) yield an acceptable price range. Caveat: it measures *stated price perception*, not true WTP — it complements rather than replaces choice methods. KEEP as a fast, cheap probe even on small samples, but interpret with caution.`},
+{dr:"DR1",domain:"Analytical-Rigor",phase:"Price",verdict:"KEEP",operator:"Gabor-Granger",
+ body:`Gabor-Granger (KEEP). Developed by André Gabor and Clive Granger (1960s). Ask purchase intent at sequential discrete price points to build a demand/revenue curve and find the revenue-maximizing price for a single, fixed offer with no competitive set — almost exactly this use case. More directly tied to purchase than Van Westendorp; biases (understating WTP when price is explicit) partly cancel. KEEP.`},
+{dr:"DR1",domain:"Analytical-Rigor",phase:"Price",verdict:"DISCARD",operator:"Conjoint / discrete-choice analysis",
+ body:`Conjoint / discrete-choice analysis (DISCARD for this operator). Powerful for feature-price trade-offs and competitive simulation, but it is sample-hungry and designed for multi-attribute, multi-competitor categories. For a single-product micro-monopoly with tiny samples, it is over-engineered. DISCARD; use Gabor-Granger/Van Westendorp instead.`},
+{dr:"DR1",domain:"Analytical-Rigor",phase:"Size",verdict:"KEEP",operator:"Value driver trees / profit-pool & unit-economics analysis",
+ body:`Value driver trees / profit-pool & unit-economics analysis (KEEP, simplified). Profit/driver trees decompose profit into price × volume and cost components. KEEP a simple unit-economics tree (contribution margin per order, payback on any organic-content effort). The enterprise "profit pool across the value chain" mapping is DISCARD.`},
+{dr:"DR1",domain:"Analytical-Rigor",phase:"Size",verdict:"KEEP",operator:"Scenario & sensitivity analysis discipline",
+ body:`Scenario & sensitivity analysis discipline (KEEP). State assumptions explicitly; show ranges, not false precision; test which inputs move the answer. Transfers as a one-spreadsheet practice (best/base/worst on conversion × price × reachable buyers).`},
+{dr:"DR1",domain:"Analytical-Rigor",phase:"Size",verdict:"DISCARD",operator:"Monte Carlo simulation",
+ body:`Monte Carlo simulation (BORDERLINE / mostly DISCARD). Valuable when you have a credible distribution of inputs; with tiny-sample organic data the input distributions are guesses, so Monte Carlo risks "false precision dressed up as rigor." KEEP only as a rough triangular-distribution sanity check on the income model; do not over-trust it.`},
+
+{dr:"DR1",domain:"ML-DataScience",phase:"Measure",verdict:"KEEP",operator:"CRISP-DM",
+ body:`CRISP-DM (KEEP — as a lightweight lifecycle). Cross-Industry Standard Process for Data Mining (1999): Business Understanding → Data Understanding → Data Preparation → Modeling → Evaluation → Deployment. The most-used data-science process framework. KEEP the *discipline of starting from the business question and iterating*; ignore the heavy tooling.`},
+{dr:"DR1",domain:"ML-DataScience",phase:"Measure",verdict:"DISCARD",operator:"Microsoft TDSP",
+ body:`Microsoft TDSP (DISCARD — team framework). Team Data Science Process (2016) adds Customer Acceptance and standardized team deliverables, git-based collaboration, role assignments. Explicitly built for *teams* standardizing across projects. DISCARD for a solo operator.`},
+{dr:"DR1",domain:"ML-DataScience",phase:"Measure",verdict:"KEEP",operator:"Experiment tracking",
+ body:`Experiment tracking (KEEP, minimal). Versioning what you tried and what happened. Transfers as a simple structured log/changelog — cheap and valuable even solo.`},
+{dr:"DR1",domain:"ML-DataScience",phase:"Measure",verdict:"SWITCH",operator:`A/B testing discipline + "Trustworthy Online Controlled Experiments" (Kohavi, Tang, Xu, 2020)`,
+ body:`A/B testing discipline + "Trustworthy Online Controlled Experiments" (Kohavi, Tang, Xu, 2020) (DISCARD on power, KEEP on mindset). Rigorous controlled experimentation requires traffic the operator does not have; small differences need large samples. DISCARD running formal A/B tests. KEEP the *intuition-buster lessons* (don't trust tiny-sample "wins," beware sample-ratio mismatch, most effects are small).`},
+{dr:"DR1",domain:"ML-DataScience",phase:"Measure",verdict:"DISCARD",operator:"CUPED / variance reduction",
+ body:`CUPED / variance reduction (DISCARD). Deng, Xu, Kohavi & Walker (2013), "Improving the Sensitivity of Online Controlled Experiments by Utilizing Pre-Experiment Data." The paper reports: "The results on Bing's experimentation system are very successful: we can reduce variance by about 50%, effectively achieving the same statistical power with only half of the users, or half the duration." Brilliant, and useless without experiment-scale traffic. DISCARD.`},
+{dr:"DR1",domain:"ML-DataScience",phase:"Measure",verdict:"DISCARD",operator:"Causal inference — difference-in-differences, synthetic control, uplift modeling",
+ body:`Causal inference — difference-in-differences, synthetic control, uplift modeling (DISCARD). Synthetic control (Abadie et al.) and DiD need panel data / donor pools; uplift modeling needs treated-vs-control populations. None feasible at solo scale. DISCARD, but KEEP the *conceptual reflex*: ask "what's my counterfactual?" before claiming an organic tactic "worked."`},
+{dr:"DR1",domain:"ML-DataScience",phase:"Measure",verdict:"SWITCH",operator:"Walk-forward / time-series cross-validation",
+ body:`Walk-forward / time-series cross-validation (BORDERLINE). If the operator ever forecasts demand or seasonality from their own time series, walk-forward validation (train on past, test on the immediately following period, roll forward) is the correct, honest method and is feasible with modest data. KEEP if/when forecasting; otherwise N/A.`},
+{dr:"DR1",domain:"ML-DataScience",phase:"Measure",verdict:"KEEP",operator:"Probability calibration — Platt scaling, isotonic regression",
+ body:`Probability calibration — Platt scaling, isotonic regression (KEEP conceptually; specific methods BORDERLINE). From Platt (1999) and Niculescu-Mizil & Caruana (ICML 2005), "Predicting Good Probabilities with Supervised Learning": Platt scaling (logistic fit) is preferable when calibration data is scarce because it "has some overfitting control built in," making it "easier for [isotonic] to overfit when the calibration set is small"; the paper finds that only "when there are 1000 or more points in the calibration set, Isotonic Regression always yields performance as good as, or better than, Platt Scaling." For a solo operator the *literal* algorithms rarely apply, but the underlying discipline — *are my stated probabilities honest?* (Brier score thinking) — strongly transfers to forecasting conversions and demand.`},
+{dr:"DR1",domain:"ML-DataScience",phase:"Measure",verdict:"KEEP",operator:"Model cards & Datasheets for Datasets",
+ body:`Model cards (Mitchell et al., 2019) & Datasheets for Datasets (Gebru et al., 2018) (KEEP — repurposed as evidence hygiene). Originally transparency docs for ML models/datasets. Repurpose the *idea*: a one-page "what do I actually know, from what data, with what limitations" card for the operator's demand evidence. Cheap, prevents self-deception.`},
+{dr:"DR1",domain:"ML-DataScience",phase:"Measure",verdict:"KEEP",operator:"Drift monitoring",
+ body:`Drift monitoring (KEEP, manual). Watch for the burning-desire segment's language/needs shifting over time. Transfers as a manual periodic VoC re-read, not an automated pipeline.`},
+
+{dr:"DR1",domain:"Knowledge-Research",phase:"Diagnose",verdict:"KEEP",operator:"Voice-of-Customer (VoC) methodology",
+ body:`Voice-of-Customer (VoC) methodology (KEEP — high priority). Institutionalized by Abbie Griffin & John Hauser, "The Voice of the Customer," *Marketing Science* (1993): customers' needs in their own words, organized hierarchically, by segment. Key discipline (Gerry Katz, Applied Marketing Science): do *not* ask "what do you want?" — needs ≠ solutions. For a burning-desire segment, VoC done right surfaces the exact language of the pain/insecurity, which is the operator's offer copy and qualification script. Transfers fully.`},
+{dr:"DR1",domain:"Knowledge-Research",phase:"Diagnose",verdict:"KEEP",operator:"Jobs-to-be-Done",
+ body:`Jobs-to-be-Done (KEEP). Interview for the *progress the customer is trying to make* and the real comparison set (often "do nothing," a spreadsheet, a workaround). Directly serves urgency/desire-intensity mapping. Transfers.`},
+{dr:"DR1",domain:"Knowledge-Research",phase:"Diagnose",verdict:"KEEP",operator:"Structured expert-call methodology",
+ body:`Structured expert-call methodology (KEEP the METHOD; DISCARD the networks). Expert networks (GLG, AlphaSights, Third Bridge, Tegus/AlphaSense, Guidepoint) are billed to clients at roughly $750–$1,500/hour for a standard call (a buyer on Fishbowl reports paying "GLG $750-1500/hour for their expert network"; per an ex-McKinsey advisor on Quora, senior experts can run "north of $2,000" with the network "tak[ing] at least half that amount for themselves") — DISCARD on cost. But the *call-structuring method* transfers and is citable to practitioner literature: (1) start with a specific, falsifiable question, not "tell me about the industry"; (2) form hypotheses *before* the call so questions are targeted; (3) build a written discussion guide; (4) use the call to prove/disprove, not gather generic background; (5) triangulate across multiple sources, never treat one as gospel; (6) pause every 3–4 calls to refine the guide; (7) document and post-call review. A solo operator can apply all of this to free customer-discovery calls.`},
+{dr:"DR1",domain:"Knowledge-Research",phase:"Diagnose",verdict:"KEEP",operator:"Evidence standards / source-tiering / hierarchy of evidence",
+ body:`Evidence standards / source-tiering / hierarchy of evidence (KEEP). The discipline of ranking sources by reliability (primary/firsthand > secondary > anecdote) and not over-weighting a single source. Transfers as explicit evidence hygiene.`},
+{dr:"DR1",domain:"Knowledge-Research",phase:"Diagnose",verdict:"KEEP",operator:"Qualitative coding — thematic analysis (Braun & Clarke, 2006) and grounded theory",
+ body:`Qualitative coding — thematic analysis (Braun & Clarke, 2006) and grounded theory (KEEP — high priority). Braun & Clarke's reflexive thematic analysis is a flexible six-phase method (familiarization → coding → theme development → review → naming → writing) usable with any sample size; grounded theory is for richer, intensive data without an a-priori hypothesis. For a VoC corpus (reviews, DMs, call notes, forum posts from the burning segment), thematic coding turns scattered quotes into reliable themes — far more rigorous than cherry-picking. Transfers fully.`},
+{dr:"DR1",domain:"Knowledge-Research",phase:"Measure",verdict:"KEEP",operator:"Knowledge-management systems",
+ body:`Knowledge-management systems (DISCARD as enterprise tooling, KEEP as a personal second brain). Enterprise KM platforms are overkill; the *principle* of a searchable, structured personal repository of customer insight transfers.`},
+
+{dr:"DR1",domain:"Delivery-Project",phase:"Position",verdict:"KEEP",operator:"Amazon Working-Backwards PR/FAQ + 6-pager",
+ body:`Amazon Working-Backwards PR/FAQ + 6-pager (KEEP — high priority). Documented in Bryar & Carr, *Working Backwards* (2021). Write the press release and FAQ *before building*; replace slides with a 6-page narrative read silently at the start of a meeting. For a solo operator the PR/FAQ is a forcing function: define the customer, the burning need, the differentiated solution, the price, and *why they'll switch from their current workaround* before writing a line of code or copy. The narrative-memo discipline (full sentences force clarity slides hide) transfers even when the "meeting" is the operator with themselves.`},
+{dr:"DR1",domain:"Delivery-Project",phase:"Diagnose",verdict:"KEEP",operator:"Decision memos — SCR / Pyramid-structured",
+ body:`Decision memos — SCR / Pyramid-structured (KEEP). Situation-Complication-Resolution (Minto). KEEP as the structure for any non-trivial decision the operator writes down.`},
+{dr:"DR1",domain:"Delivery-Project",phase:"Capture",verdict:"KEEP",operator:"Stage-Gate / phase-gate process",
+ body:`Stage-Gate / phase-gate process (KEEP, radically simplified). Robert G. Cooper's Stage-Gate (term coined 1988; *Winning at New Products*): stages separated by Go/Kill gates with explicit criteria; new-product success is largely decided in the first third (ideation, preliminary assessment, VoC, value-in-use). KEEP the *gate discipline* — predefined Go/Kill criteria before each phase (validate demand → price test → build → launch) prevents the solo failure mode of sunk-cost persistence. DISCARD the cross-functional committee machinery.`},
+{dr:"DR1",domain:"Delivery-Project",phase:"Diagnose",verdict:"KEEP",operator:"Red-team / separate-evaluator / devil's-advocacy review",
+ body:`Red-team / separate-evaluator / devil's-advocacy review (KEEP — adapted). Citable to Richards J. Heuer Jr., *Psychology of Intelligence Analysis* (CIA, 1999) and Heuer & Pherson, *Structured Analytic Techniques for Intelligence Analysis* (CQ Press, 2010), which formalize Devil's Advocacy, Red Team Analysis, and Team A/Team B (the named method originating in the 1976 CIA "Team B" competitive-analysis exercise). For a solo operator, the transfer is deliberately adopting an adversarial stance against your own plan — scheduled, on paper — since there is no second partner to do it. Pairs naturally with the pre-mortem.`},
+{dr:"DR1",domain:"Delivery-Project",phase:"Measure",verdict:"DISCARD",operator:"Engagement structuring & workstream orchestration",flag:`"grey-hair review" and "toehold review" are NOT established, citable named practices — informal jargon or misremembered terms. Maister's "Grey Hair projects" is a work-TYPE, not a review method. The genuine transferable substance is the red-team/devil's-advocacy discipline.`,
+ body:`Engagement structuring & workstream orchestration (DISCARD). Multi-workstream staffing, team plans, and the formal "client service review" by a senior off-engagement partner all presuppose a team. DISCARD. (Note: "grey-hair review" and "toehold review" are *not* established, citable named practices — they appear to be informal jargon or misremembered terms; the genuine senior-reviewer practice exists at MBB but is not a documented method. The transferable substance is the red-team/devil's-advocacy discipline above. Separately, David Maister's *Managing the Professional Service Firm* (1993) does define "Grey Hair projects" — but as a *type of experience-based work*, not a review practice.)`},
+{dr:"DR1",domain:"Delivery-Project",phase:"Measure",verdict:"KEEP",operator:"QA / review discipline — so-what? + elevator test",
+ body:`QA / review discipline generally (KEEP the tests). Rasiel's *The McKinsey Way* "so-what?" test (every analysis must prove its relevance) and "elevator test" (summarize the answer in 30 seconds) are solo-usable QA heuristics.`},
+
+/* ===================== DR2 — table, 5 sections ===================== */
+{dr:"DR2",domain:"ML-DataScience",phase:"Diagnose",verdict:"KEEP",operator:"Feature engineering & selection",
+ origin:`No single inventor; codified in statistics/ML pedagogy (e.g., Guyon & Elisseeff, JMLR 2003, "An Introduction to Variable and Feature Selection")`,
+ rigor:`Turning raw signals into a few predictive variables; ruthless dimensionality reduction`,
+ reverse:`List the ≤5 observable buyer attributes that actually predict "burning desire" (e.g., recent trigger event, budget authority, prior spend on substitutes). Hand-score each lead.`,
+ verdictText:`KEEP — At n<50 the discipline of choosing 3–5 high-signal features *is* the analysis; it forces you to name what predicts willingness-to-pay.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Measure",verdict:"ADAPT",operator:"Train/validation discipline; walk-forward / time-series cross-validation",
+ origin:`Rooted in Stone (1974) cross-validation; walk-forward standard in quantitative finance backtesting`,
+ rigor:`Never evaluate on data used to fit; respect time ordering to avoid look-ahead bias`,
+ reverse:`Don't "fit" a niche thesis on the same 10 interviews you used to form it. Form hypothesis on first cohort, test messaging on the next cohort.`,
+ verdictText:`ADAPT — The anti-overfitting logic transfers; the k-fold machinery does not. Use sequential cohorts as your folds.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Measure",verdict:"ADAPT",operator:"Probability calibration: Platt scaling; isotonic regression",
+ origin:`Platt scaling (Platt 1999, "Probabilistic Outputs for SVMs," Advances in Large Margin Classifiers); isotonic regression (Zadrozny & Elkan 2002, building on Pool Adjacent Violators / Barlow & Brunk 1972). Microsoft (Platt); academic ML`,
+ rigor:`Make stated confidence match observed frequency`,
+ reverse:`Track your own forecast hygiene: when you say "70% likely to close," log outcomes and check if ~70% actually close. Recalibrate your gut.`,
+ verdictText:`ADAPT — The *concept* (calibrate confidence to reality) is gold for a solo forecaster; the sigmoid/PAVA fitting needs hundreds of points, so do it as a tally, not a model.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Measure",verdict:"KEEP",operator:"Brier score",
+ origin:`Glenn Brier, "Verification of Forecasts Expressed in Terms of Probability," Monthly Weather Review, 1950`,
+ rigor:`Single scalar scoring accuracy of probabilistic predictions (mean squared error of probability)`,
+ reverse:`Keep a simple spreadsheet of predicted close-probabilities vs. 0/1 outcomes; compute mean squared error monthly to see if you're over/under-confident.`,
+ verdictText:`KEEP — Trivially computable on n<50; a genuine discipline check on deal forecasting.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Measure",verdict:"ADAPT",operator:"Difference-in-differences",
+ origin:`Lineage to Snow's 1850s cholera work; modern form Card & Krueger (1994, minimum-wage NJ/PA study)`,
+ rigor:`Subtract pre/post change in a control from pre/post change in treated to isolate effect`,
+ reverse:`When you change one thing (price, headline), compare your trend vs. an untouched comparable channel/segment over the same window.`,
+ verdictText:`ADAPT — Logic of a parallel control is usable qualitatively; clean DiD needs stable panel data you won't have.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Measure",verdict:"DISCARD",operator:"Synthetic control",
+ origin:`Abadie & Gardeazabal (2003, Basque study); Abadie, Diamond & Hainmueller (Prop 99 tobacco; NBER w12831, 2007; *JASA* 2010)`,
+ rigor:`Build a weighted "synthetic" counterfactual from a donor pool when you have one treated unit`,
+ reverse:`Mostly aspirational solo; informally, estimate "what would have happened anyway" by triangulating 2–3 comparable niches before crediting your intervention.`,
+ verdictText:`DISCARD — Requires a donor pool of units and pre-treatment time series; no solo substitute preserves the rigor. Use it only as a mental caution against self-attribution.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Diagnose",verdict:"ADAPT",operator:"Uplift modeling",
+ origin:`Direct-marketing/causal-ML literature (Radcliffe & Surry 1999 onward)`,
+ rigor:`Model *incremental* response (persuadables) not gross response`,
+ reverse:`Ask in discovery: "Would you have solved this anyway without me?" Target only buyers whose action depends on you.`,
+ verdictText:`ADAPT — The persuadable-vs-sure-thing distinction is a powerful qualifying filter; the modeling is DISCARD at n<50.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Measure",verdict:"DISCARD",operator:"CUPED (variance reduction)",
+ origin:`Microsoft — Deng, Xu, Kohavi & Walker, "Improving the Sensitivity of Online Controlled Experiments by Utilizing Pre-Experiment Data," WSDM 2013`,
+ rigor:`Use pre-experiment covariates to cut variance and detect smaller lifts faster`,
+ reverse:`None faithful — its entire purpose is to squeeze power out of large online samples.`,
+ verdictText:`DISCARD — Explicitly a large-traffic experimentation accelerator; irrelevant at n<50 with zero traffic.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Measure",verdict:"SWITCH",operator:"A/B testing & controlled experimentation",
+ origin:`R.A. Fisher, *The Design of Experiments* (1935); industrialized by Google/Microsoft/Amazon online-experiment platforms`,
+ rigor:`Randomized assignment to isolate causal effect of one change`,
+ reverse:`Can't reach significance solo. Substitute: sequential one-variable changes with honest qualitative read; or "vote with a deposit" tests.`,
+ verdictText:`DISCARD (statistical form) — Needs traffic/sample for power. KEEP only the underlying habit of changing one variable at a time.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Diagnose",verdict:"KEEP",operator:"Anomaly / outlier detection",
+ origin:`Tukey (1977, boxplots/fences); broad statistical lineage`,
+ rigor:`Flag points that don't fit the pattern`,
+ reverse:`Eyeball your <50 data points; a single weird deal review beats any algorithm at this scale.`,
+ verdictText:`KEEP (manual) — At n<50 human inspection is more rigorous than any detector; no tooling needed.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Size",verdict:"ADAPT",operator:"Segmentation / clustering (k-means)",
+ origin:`Lloyd (1957, Bell Labs); MacQueen (1967, coined "k-means")`,
+ rigor:`Group observations by similarity into discrete segments`,
+ reverse:`Manually card-sort your buyers into 2–3 named segments by job/pain; pick the one sub-segment with acute pain.`,
+ verdictText:`ADAPT — The segmentation *intent* is core to the filter; k-means itself needs more data and adds nothing at this scale.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Size",verdict:"SWITCH",operator:"Demand forecasting: ARIMA; exponential smoothing; Prophet",
+ origin:`ARIMA (Box & Jenkins, *Time Series Analysis*, 1970/1976); exponential smoothing (Holt 1957, Winters 1960, Gardner 1985); Prophet (Taylor & Letham, Facebook, "Forecasting at Scale," 2017/2018). Box-Jenkins; Facebook`,
+ rigor:`Decompose trend + seasonality to project a series forward`,
+ reverse:`With <50 datapoints you can't fit these; instead track a simple moving average of monthly inquiries and name your seasonality qualitatively.`,
+ verdictText:`DISCARD (the models) — All need long, regular series. KEEP the decomposition mindset (separate trend from seasonality from noise).`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Measure",verdict:"KEEP",operator:"Model cards",
+ origin:`Google — Mitchell, Wu, Zaldivar, Barnes, Vasserman, Hutchinson, Spitzer, Raji & Gebru, "Model Cards for Model Reporting," FAT* 2019 (arXiv 1810.03993)`,
+ rigor:`Document a model's intended use, performance, and limits for accountability`,
+ reverse:`Write a one-page "offer card": who it's for, where it works, where it fails, what it costs. Forces honest scoping.`,
+ verdictText:`KEEP (as offer/decision documentation) — The documentation discipline transfers perfectly and builds buyer trust.`},
+{dr:"DR2",domain:"ML-DataScience",phase:"Measure",verdict:"KEEP",operator:"Datasheets for datasets",
+ origin:`Gebru, Morgenstern, Vecchione, Vaughan, Wallach, Daumé III & Crawford, "Datasheets for Datasets," 2018 (arXiv 1803.09010; later CACM 2021)`,
+ rigor:`Document a dataset's provenance, composition, collection, limitations`,
+ reverse:`Keep a provenance log for your research inputs: who you interviewed, how recruited, what bias that introduces.`,
+ verdictText:`KEEP — Provenance hygiene is exactly the standard this report enforces; cheap and high-trust at any scale.`},
+
+{dr:"DR2",domain:"Market-Entry",phase:"Diagnose",verdict:"KEEP",operator:"Hypothesis-first problem solving",
+ origin:`McKinsey practice; popularized by Ethan Rasiel, *The McKinsey Way* (1999)`,
+ rigor:`State the answer as a falsifiable hypothesis first, then test — not boil the ocean`,
+ reverse:`Write your one-sentence bet ("Segment X will pay $3k to solve Y") before research; spend interviews trying to kill it.`,
+ verdictText:`KEEP — Pure thinking discipline; zero apparatus; perfectly suited to solo speed.`},
+{dr:"DR2",domain:"Market-Entry",phase:"Diagnose",verdict:"KEEP",operator:"Issue/logic trees & MECE",
+ origin:`Barbara Minto, McKinsey (first female post-MBA hire, 1963), *The Pyramid Principle* (1985); MECE coined late 1960s`,
+ rigor:`Decompose a problem into mutually exclusive, collectively exhaustive branches`,
+ reverse:`Break "will this micro-niche work?" into a MECE tree: demand exists / reachable organically / willing to pay / I can be the only one.`,
+ verdictText:`KEEP — A pen-and-paper rigor amplifier; the single best antidote to sloppy niche reasoning.`},
+{dr:"DR2",domain:"Market-Entry",phase:"Size",verdict:"KEEP",operator:"TAM/SAM/SOM triangulation (top-down vs bottom-up)",
+ origin:`Standard VC/strategy practice; no single inventor`,
+ rigor:`Cross-check market size two independent ways to bound truth`,
+ reverse:`Bottom-up: # of identifiable sufferers × price. Top-down: sanity-cap from category. For inverse price-to-TAM, *deliberately* seek a small, defensible SOM.`,
+ verdictText:`KEEP (inverted) — Use it to confirm the TAM is *small enough* to monopolize, the opposite of VC use.`},
+{dr:"DR2",domain:"Market-Entry",phase:"Position",verdict:"ADAPT",operator:"Entry-mode analysis",
+ origin:`International-business strategy literature (e.g., Franklin Root, *Entry Strategies for International Markets*, 1987)`,
+ rigor:`Choose how to enter (build/partner/niche) given resources and risk`,
+ reverse:`For solo/$0-ads: entry mode is fixed — organic/SEO/community niche wedge. Use the framework to rule out modes that need capital.`,
+ verdictText:`ADAPT — Most modes assume capital/headcount; keep only as a checklist that confirms the organic-wedge constraint.`},
+{dr:"DR2",domain:"Market-Entry",phase:"Capture",verdict:"KEEP",operator:"Stage-Gate Go/Kill",
+ origin:`Robert G. Cooper, "Stage-Gate Systems: A New Tool for Managing New Products," *Business Horizons*, 1990 (concept from mid-1980s)`,
+ rigor:`Phase-gate funnel with explicit kill criteria before more investment`,
+ reverse:`Define 3 gates: (1) pain validated in interviews → (2) someone pre-pays → (3) repeatable delivery. Kill if a gate fails.`,
+ verdictText:`KEEP — Scales down perfectly; protects a solo operator's scarcest resource (time) with explicit kill thresholds.`},
+{dr:"DR2",domain:"Market-Entry",phase:"Diagnose",verdict:"KEEP",operator:"Pre-mortem",
+ origin:`Gary Klein, "Performing a Project Premortem," *Harvard Business Review*, Sept 2007 (grounded in Mitchell, Russo & Pennington 1989 "prospective hindsight," which improved correct identification of failure reasons by ~30%)`,
+ rigor:`Imagine the project already failed; work backward to surface hidden risks`,
+ reverse:`Solo version: write "it's 12 months on and this niche failed — why?" before launch; list and pre-empt the top 5 causes.`,
+ verdictText:`KEEP — Designed as a fast 20–30 minute exercise; works alone; counters solo overconfidence.`},
+{dr:"DR2",domain:"Market-Entry",phase:"Price",verdict:"KEEP",operator:"Profit-pool analysis / value-driver trees",
+ origin:`Orit Gadiesh & James Gilbert, Bain & Company, "Profit Pools: A Fresh Look at Strategy," *HBR*, May–June 1998`,
+ rigor:`Map where money actually pools across a value chain, not just revenue share`,
+ reverse:`Map the buyer's spend chain around the pain; find the step with fat margin and acute pain — price to a slice of that pool.`,
+ verdictText:`KEEP — The "follow the margin, not the revenue" lens (illustrated by Bain's U-Haul case, 10% operating margin vs. <3% industry average) directly justifies high-ticket pricing in a tiny TAM.`},
+
+{dr:"DR2",domain:"Sales",phase:"Price",verdict:"KEEP",operator:"Economic Value to the Customer (EVC)",
+ origin:`John L. Forbis & Nitin T. Mehta, McKinsey staff paper, Feb 1979 (Cleveland office); later codified by Thomas Nagle, *The Strategy and Tactics of Pricing*`,
+ rigor:`Price = value of next-best alternative + monetized value of your differentiation`,
+ reverse:`For each deal compute: cost of buyer's current workaround + dollar value of the pain you remove = ceiling price. Anchor offer below it.`,
+ verdictText:`KEEP — The core willingness-to-pay engine for high-ticket; needs one buyer, not a sample.`},
+{dr:"DR2",domain:"Sales",phase:"Price",verdict:"KEEP",operator:"Van Westendorp Price Sensitivity Meter",
+ origin:`Peter van Westendorp, Dutch economist, 1976`,
+ rigor:`Four questions (too cheap / bargain / expensive / too expensive) map acceptable price range and optimal price point`,
+ reverse:`Run the 4 questions across 20–40 niche interviews; plot cumulative curves by hand to find the acceptable band.`,
+ verdictText:`KEEP (ADAPT sample) — Explicitly designed for new products with no benchmark; works at n≈30–40, ideal for a tiny segment.`},
+{dr:"DR2",domain:"Sales",phase:"Price",verdict:"ADAPT",operator:"Gabor-Granger",
+ origin:`André Gabor & C.W.J. (Clive) Granger, University of Nottingham, "Price Sensitivity of the Consumer," *Journal of Advertising Research*, Vol. 4 No. 4, Dec 1964`,
+ rigor:`Sequential yes/no at ascending prices → demand curve & revenue-max price`,
+ reverse:`Ask 20–30 prospects purchase-intent at discrete price points ($1k/$3k/$5k); find where revenue (price × intent) peaks.`,
+ verdictText:`ADAPT — Usable at small n as directional; treat as willingness-to-pay probing, not an elasticity estimate.`},
+{dr:"DR2",domain:"Sales",phase:"Capture",verdict:"KEEP",operator:"Value-based selling",
+ origin:`Lineage from EVC/Nagle; institutionalized in B2B sales orgs`,
+ rigor:`Sell on quantified business outcome, not features/price`,
+ reverse:`Lead every pitch with the buyer's own monetized pain number from your EVC math.`,
+ verdictText:`KEEP — Pure method; the natural language of high-ticket organic sales.`},
+{dr:"DR2",domain:"Sales",phase:"Diagnose",verdict:"KEEP",operator:"MEDDIC (esp. Identify Pain + Metrics)",
+ origin:`Created 1996 at PTC (Parametric Technology Corp.) by Dick Dunkel & Jack Napoli under SVP John McMahon; PTC grew annual revenue from $300M to over $1B in four years`,
+ rigor:`Qualify on Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain, Champion`,
+ reverse:`Use "Identify Pain" + "Metrics" as your desire-intensity filter: no quantified, acute, funded pain → disqualify the lead.`,
+ verdictText:`KEEP — The single best burning-desire/WTP isolator; checklist works for one rep.`},
+{dr:"DR2",domain:"Sales",phase:"Diagnose",verdict:"KEEP",operator:"SPIN Selling",
+ origin:`Neil Rackham, *SPIN Selling* (1988), from a 12-year Huthwaite study; a team of 30 researchers studied 35,000 sales calls across 10,000 salespeople in 23 countries, funded by an initial ~$1M backed by Xerox and IBM`,
+ rigor:`Situation→Problem→Implication→Need-payoff questioning escalates felt pain`,
+ reverse:`In discovery, ride Implication questions ("what does this cost you if unsolved?") to amplify acute pain before pricing.`,
+ verdictText:`KEEP — Question discipline; needs no scale; directly intensifies the pain narrative.`},
+{dr:"DR2",domain:"Sales",phase:"Position",verdict:"KEEP",operator:"Challenger Sale",
+ origin:`Matthew Dixon & Brent Adamson, Corporate Executive Board (CEB, now part of Gartner), *The Challenger Sale* (Portfolio/Penguin, 2011); CEB study of more than 6,000 sales reps across ~90 companies, where Challengers outperformed other types by nearly 15% and made up nearly 40% of star performers (vs. just 7% for Relationship Builders)`,
+ rigor:`Teach–Tailor–Take Control; reframe the buyer's thinking with a commercial insight`,
+ reverse:`Build one sharp "reframe" that challenges how the niche thinks about its pain; lead content/SEO with it.`,
+ verdictText:`KEEP (ADAPT) — Teach-tailor-take-control is the engine of organic authority; the enterprise team apparatus is not needed.`},
+{dr:"DR2",domain:"Sales",phase:"Capture",verdict:"KEEP",operator:"Sandler Selling System",
+ origin:`David Sandler, founded 1967; commercialized by Sandler Training; the "Sandler Submarine" 7-compartment process (each step secured before advancing, no going back)`,
+ rigor:`Up-front contracts + mutual qualification; disqualify early, no chasing`,
+ reverse:`Use up-front contracts on every call ("if this isn't a fit we'll both say so"); protects solo time.`,
+ verdictText:`KEEP — Time-protection and early-disqualification are vital for a one-person shop.`},
+{dr:"DR2",domain:"Sales",phase:"Price",verdict:"KEEP",operator:"Willingness-to-pay isolation",
+ origin:`Synthesis of EVC + Van Westendorp + Gabor-Granger`,
+ rigor:`Separate "interested" from "will actually pay $X"`,
+ reverse:`Require a small deposit / paid discovery to convert stated WTP into revealed WTP.`,
+ verdictText:`KEEP — Revealed-preference test is the truest filter; trivial to run solo.`},
+{dr:"DR2",domain:"Sales",phase:"Price",verdict:"KEEP",operator:"Anchoring / negotiation discipline",
+ origin:`Amos Tversky & Daniel Kahneman, "Judgment under Uncertainty: Heuristics and Biases," *Science*, Vol. 185 No. 4157, 1974 (anchoring: "different starting points yield different estimates, which are biased toward the initial values")`,
+ rigor:`First number stated biases the final outcome; adjustments are insufficient`,
+ reverse:`Always state your high-ticket price first and anchored to the EVC ceiling, not to competitor prices.`,
+ verdictText:`KEEP — One cognitive lever, no scale needed; directly supports premium pricing.`},
+
+{dr:"DR2",domain:"Marketing",phase:"Diagnose",verdict:"KEEP",operator:"Jobs-to-be-Done",
+ origin:`Tony Ulwick (Strategyn) conceptualized 1990, named Outcome-Driven Innovation 1999; introduced to Clayton Christensen 1999, popularized in Christensen's *The Innovator's Solution* (2003)`,
+ rigor:`Customers "hire" a product for a functional job; the job is stable, products are not`,
+ reverse:`Interview your niche on the job they're trying to get done; define your offer around the job, not the demographic.`,
+ verdictText:`KEEP — The foundational lens for finding a burning-desire segment; pure qualitative method.`},
+{dr:"DR2",domain:"Marketing",phase:"Diagnose",verdict:"KEEP",operator:"Outcome-Driven Innovation (desired-outcome statements)",
+ origin:`Tony Ulwick / Strategyn; *What Customers Want* (2005); job map in HBR 2008`,
+ rigor:`Turn needs into measurable "desired outcome" metrics, find unmet (high-importance/low-satisfaction) ones`,
+ reverse:`Score ~10–15 outcome statements with 20–30 buyers on importance × satisfaction; target the highest-gap outcome.`,
+ verdictText:`KEEP (ADAPT) — Opportunity-gap scoring works at small n and pinpoints the acute unmet need.`},
+{dr:"DR2",domain:"Marketing",phase:"Diagnose",verdict:"KEEP",operator:"Voice-of-Customer with qualitative coding",
+ origin:`Griffin & Hauser, "The Voice of the Customer," *Marketing Science* (1993); thematic analysis: Braun & Clarke, "Using Thematic Analysis in Psychology," *Qualitative Research in Psychology* (2006)`,
+ rigor:`Systematic coding of customer language into themes; rigor in qualitative data`,
+ reverse:`Record interviews; code transcripts into themes via Braun & Clarke's 6 phases; quote verbatim buyer language in copy.`,
+ verdictText:`KEEP — Thematic analysis is *designed* for small qualitative samples; the rigor engine for n<50.`},
+{dr:"DR2",domain:"Marketing",phase:"Position",verdict:"KEEP",operator:"STP segmentation",
+ origin:`Wendell Smith, "Product Differentiation and Market Segmentation as Alternative Marketing Strategies," *Journal of Marketing* (1956); formalized by Philip Kotler`,
+ rigor:`Segment → target → position deliberately`,
+ reverse:`Segment your niche, pick the one acute-pain sub-segment, position exclusively for it.`,
+ verdictText:`KEEP — Targeting discipline is the heart of micro-monopoly selection.`},
+{dr:"DR2",domain:"Marketing",phase:"Position",verdict:"KEEP",operator:"Positioning",
+ origin:`Al Ries & Jack Trout; term coined by Trout 1969, *Advertising Age* "Positioning Era" series 1972, book *Positioning: The Battle for Your Mind* (1981)`,
+ rigor:`Own a single distinct word/slot in the prospect's mind; be first in a category`,
+ reverse:`Define the one slot you can own as the *only* brand for sub-TAM X; build all messaging around it.`,
+ verdictText:`KEEP — The conceptual core of micro-monopoly; costs nothing but clarity.`},
+{dr:"DR2",domain:"Marketing",phase:"Position",verdict:"KEEP",operator:"Category design",
+ origin:`Al Ramadan, Dave Peterson, Christopher Lochhead & Kevin Maney, *Play Bigger* (2016)`,
+ rigor:`Create and own a new category rather than compete in an existing one`,
+ reverse:`Name and frame the problem as a new category you define; become its default.`,
+ verdictText:`KEEP (with caution) — Powerful for being "the only one," but don't over-invest in category evangelism on a $0 budget; let SEO/content carry it.`},
+{dr:"DR2",domain:"Marketing",phase:"Position",verdict:"ADAPT",operator:"Mental & physical availability + distinctive brand assets",
+ origin:`Byron Sharp, *How Brands Grow* (Oxford University Press, 2010), Ehrenberg-Bass Institute; built on Ehrenberg & Goodhart`,
+ rigor:`Growth via penetration + being easy to recall (mental) and buy (physical); distinctiveness > differentiation`,
+ reverse:`Build distinctive assets (name, look, phrase) and own the few category entry points your niche searches.`,
+ verdictText:`ADAPT — Distinctive-asset and "be easy to recall/buy" advice transfers; the mass-penetration doctrine conflicts with a tiny-TAM niche (see caveat).`},
+{dr:"DR2",domain:"Marketing",phase:"Capture",verdict:"ADAPT",operator:"Long/short marketing balance",
+ origin:`Les Binet & Peter Field, *The Long and the Short of It* (IPA, 2013)`,
+ rigor:`Balance long-term brand building with short-term activation`,
+ reverse:`Solo: ~70% evergreen SEO/content (long), ~30% direct outreach/offers (short).`,
+ verdictText:`ADAPT — Ratio logic transfers; the IPA evidence base is paid-media-derived, so apply directionally only.`},
+{dr:"DR2",domain:"Marketing",phase:"Measure",verdict:"DISCARD",operator:"Attribution & marketing-mix modeling",
+ origin:`Econometric MMM lineage; multi-touch digital attribution`,
+ rigor:`Allocate credit across channels to spend efficiently`,
+ reverse:`With one organic channel, attribution is trivial; just ask every buyer "how did you find me?"`,
+ verdictText:`DISCARD (modeling) — MMM/MTA need spend across many channels and volume; KEEP only the one-question self-report.`},
+{dr:"DR2",domain:"Marketing",phase:"Capture",verdict:"DISCARD",operator:"Paid-media / performance-marketing operators",
+ origin:`Google/Meta ads ecosystem`,
+ rigor:`Buy reach and optimize CAC via auction`,
+ reverse:`—`,
+ verdictText:`DISCARD — Operator runs zero paid ads by definition; entire class is out of scope.`},
+
+{dr:"DR2",domain:"Analyst-Firm",phase:"Position",verdict:"KEEP",operator:"Gartner Magic Quadrant — two axes + 15 weighted criteria",
+ origin:`Gartner, Inc. (founded 1979 by Gideon Gartner, ex-Oppenheimer & Co. analyst); "How Markets and Vendors Are Evaluated in Gartner Magic Quadrants" (published methodology)`,
+ rigor:`Two axes — Completeness of Vision (x) and Ability to Execute (y); 15 standard criteria`,
+ reverse:`Build your own 2-axis grid (your "vision" vs. your "delivery") and plot yourself vs. 3–5 niche competitors using a weighted criteria list.`,
+ verdictText:`KEEP (method) — The weighted two-axis skeleton is fully rebuildable; proves micro-monopoly visually.`},
+{dr:"DR2",domain:"Analyst-Firm",phase:"Position",verdict:"KEEP",operator:"Gartner sub-criteria & weighting logic",
+ origin:`Gartner published methodology`,
+ rigor:`Ability to Execute = products/services, viability, sales execution/pricing, market responsiveness, marketing execution, customer experience, operations; Vision = market understanding, marketing/sales/offering strategy, business model, vertical strategy, innovation, geographic strategy. Per Gartner: "We then adapt the rating criteria to a market by prioritizing and weighting them based on a 'high,' 'low' or 'medium' scale of importance. In some cases, a criterion may have a 'no rating' weight."`,
+ reverse:`Pick 6–8 of these criteria relevant to your niche; assign high/med/low weights; score honestly.`,
+ verdictText:`KEEP — Gives a defensible rubric; flag that Gartner's *exact* weightings are proprietary/undisclosed (see below).`},
+{dr:"DR2",domain:"Analyst-Firm",phase:"Position",verdict:"FLAG",operator:"Gartner proprietary weighting",
+ origin:`Gartner`,
+ rigor:`The precise numeric weights and scoring calculations are NOT published`,
+ reverse:`Don't try to reverse the exact numbers — they're opaque; invent your own transparent weights instead.`,
+ verdictText:`FLAG — Proprietary/undisclosed; do not guess Gartner's internal math.`},
+{dr:"DR2",domain:"Analyst-Firm",phase:"Position",verdict:"KEEP",operator:"Forrester Wave — scorecard structure",
+ origin:`Forrester Research (Wave reports since the early 2000s); "The Forrester Wave Methodology" (published)`,
+ rigor:`Three categories — Current Offering, Strategy, Market Presence (Market Presence → Customer Feedback for Waves kicking off after July 1, 2024); ~14-step process`,
+ reverse:`Build a 3-column scorecard: what you offer now / your strategy / your market traction, scored vs. competitors.`,
+ verdictText:`KEEP — The most transparent of the three; explicitly designed to be re-weighted by users.`},
+{dr:"DR2",domain:"Analyst-Firm",phase:"Position",verdict:"KEEP",operator:"Forrester Wave — 0–5 scoring scale & weighting to 100%",
+ origin:`Forrester published methodology; downloadable .xlsm scorecard with exposed scores/weights`,
+ rigor:`Each criterion scored 0 (not offered/won't disclose) to 5 (best); weighted and summed; weights total 100%`,
+ reverse:`Replicate the 0–5 rubric (classic Wave; post-2024 Waves use a simplified rubric) in a spreadsheet; write a scale explanation for each criterion before scoring.`,
+ verdictText:`KEEP — Cheapest highest-fidelity rebuild; the published scale (0–5) and exposed-spreadsheet design are explicitly transparent.`},
+{dr:"DR2",domain:"Analyst-Firm",phase:"Position",verdict:"FLAG",operator:"Forrester weighting disclosure timing",
+ origin:`Forrester`,
+ rigor:`Criteria weightings are NOT shared with vendors until post-publication`,
+ reverse:`When scoring yourself, set weights to your buyer's priorities, not a guess at Forrester's.`,
+ verdictText:`FLAG — Pre-publication weightings are withheld; treat your weights as your own, not a reconstruction.`},
+{dr:"DR2",domain:"Analyst-Firm",phase:"Position",verdict:"KEEP",operator:"IDC MarketScape — methodology",
+ origin:`IDC (founded 1964); "IDC MarketScape Methodology" (published)`,
+ rigor:`Two scored axes — Capabilities (x) and Strategies (y); market share = bubble size; categories Leaders/Major Players/Contenders/Participants`,
+ reverse:`Score your Capabilities (today) and Strategies (3–5 yr) vs. competitors; represent your niche "share" qualitatively.`,
+ verdictText:`KEEP (method) — The capabilities-vs-strategy split plus bottom-up framing is rebuildable.`},
+{dr:"DR2",domain:"Analyst-Firm",phase:"Size",verdict:"KEEP",operator:"IDC taxonomy / market-definition discipline",
+ origin:`IDC published methodology`,
+ rigor:`Rigorous market definition and taxonomy before scoring; criteria/weights from user interviews, buyer surveys, IDC review board`,
+ reverse:`Write a crisp one-paragraph market definition for your micro-niche *before* scoring anyone — this defines your monopoly's borders.`,
+ verdictText:`KEEP — Market-definition rigor is exactly how you draw a defensible sub-TAM boundary.`},
+{dr:"DR2",domain:"Analyst-Firm",phase:"Size",verdict:"KEEP",operator:"IDC bottom-up market sizing & forecast technique",
+ origin:`IDC (positioned as "the industry's leading ICT forecast and market share provider")`,
+ rigor:`Bottom-up sizing from unit/segment data; forecasts on 3–5 year horizon`,
+ reverse:`Size your niche bottom-up (identifiable sufferers × price); forecast conservatively from inquiry trend, not top-down hype.`,
+ verdictText:`KEEP — Bottom-up sizing is the rigorous half of inverse price-to-TAM; the exact IDC data/models are proprietary.`},
+{dr:"DR2",domain:"Analyst-Firm",phase:"Size",verdict:"DISCARD",operator:"Analyst market figures (the *numbers*)",
+ origin:`Gartner/Forrester/IDC paid reports`,
+ rigor:`Published market sizes, shares, growth rates`,
+ reverse:`—`,
+ verdictText:`DISCARD — Per the brief, extract METHOD not market-data product; never buy or cite the figures.`},
+
+/* ===================== DR3 — table, 4 sections + doctrine ===================== */
+{dr:"DR3",domain:"Paid-Signal-Google",phase:"Capture",verdict:"KEEP",operator:"First-party data strategy + Customer Match uploader",
+ origin:`Google Ads Help, "About Customer Match" / "Customer Match Best Practices" (2024–25)`,
+ spendShell:`The upload→match→serve mechanism across Search/YouTube/Gmail/Display; the 1,000-member minimum [2026 update: cut to 100 members, Search May 2024 then all networks] and 540-day list rules; auction targeting`,
+ signalCore:`The *discipline of building a structured first-party dataset of your best customers and modeling "more like them"* — i.e., a labeled positive-class training set`,
+ reproduction:`ML: build a CRM/lead table of closed high-value buyers as the positive class; organic: use it to define ICP language for SEO/AEO entity targeting`,
+ verdictText:`KEEP-reversed / ADAPT. Works at n<50 Y — even 20–40 closed deals define an ICP; this is data hygiene, not auction volume`},
+{dr:"DR3",domain:"Paid-Signal-Google",phase:"Capture",verdict:"KEEP",operator:"Value-based bidding (import per-conversion value / value rules)",
+ origin:`Google Ads Help, "About Target ROAS bidding"; Search Engine Land on lifecycle goals (2024)`,
+ spendShell:`Auction-time bid multiplication by predicted value; the tROAS bid engine`,
+ signalCore:`**Per-conversion value ranking**: assign each prospect/niche a predicted $ value and invest disproportionately in the top deciles`,
+ reproduction:`ML: a predicted-value regression/ranking model = the **FINDS engine** core; organic: prioritize content for the highest-AOV intent clusters`,
+ verdictText:`KEEP-reversed (highest leverage) / ADAPT. n<50 Y *with caveats* — requires shrinkage (see §2); naive per-segment value estimates are unstable at small n`},
+{dr:"DR3",domain:"Paid-Signal-Google",phase:"Measure",verdict:"ADAPT",operator:"Data-driven attribution (DDA)",
+ origin:`Google Ads Help, "About data-driven attribution"; Google blog (2021)`,
+ spendShell:`The cross-touchpoint fractional-credit ML model on Search/YouTube/Display paths; auction feedback loop. **Proprietary**: Google does not disclose the DDA crediting internals`,
+ signalCore:`The *idea that conversions are multi-touch and credit should be distributed by measured contribution, not last-click*`,
+ reproduction:`ML: a simple multi-touch contribution heuristic on your own funnel logs (email→content→call); organic: map which content assets recur on winning paths`,
+ verdictText:`ADAPT (loose). n<50 N for a genuine model — per Google Ads Help, "some types of conversion actions need at least 300 conversions and 3,000 ad interactions in supported networks within 30 days to be eligible" (eligibility lapses below 200 conversions / 2,000 interactions) [2026 update: eligibility gate removed — all conversion actions now eligible; 200/2,000 per 30d survives only as a recommendation]; at n<50 you can only do qualitative path mapping`},
+{dr:"DR3",domain:"Paid-Signal-Google",phase:"Capture",verdict:"KEEP",operator:"Audience signals (in Performance Max)",
+ origin:`Google Ads Help, "About audience signals for PMax" (2024)`,
+ spendShell:`PMax asset-group signal slot; the fact that "signals are NOT targeting" and Google overrides them once it has conversions`,
+ signalCore:`The *seeding hypothesis*: tell the model who you think converts (search activity, URLs, apps) as a warm start`,
+ reproduction:`ML: feature priors / informative priors in your scoring model; organic: custom-segment keywords become your SEO topic seeds`,
+ verdictText:`KEEP-reversed / ADAPT. n<50 Y — audience signals are explicitly *most* valuable for small/low-conversion accounts as a warm start`},
+{dr:"DR3",domain:"Paid-Signal-Google",phase:"Measure",verdict:"ADAPT",operator:"Seasonality adjustments (Smart Bidding)",
+ origin:`Google Ads Help, "About seasonality adjustments" (1–7 day conversion-rate modifier)`,
+ spendShell:`The real-time bid modifier tied to the auction; the 0.1–10.0 conversion_rate_modifier API`,
+ signalCore:`The *principle of anticipating short, known conversion-rate spikes and weighting recent data more heavily*`,
+ reproduction:`ML: time-weighted features / recency weighting in the model; organic: schedule content/launches around known high-intent windows`,
+ verdictText:`ADAPT. n<50 partial — you can recency-weight, but you lack the conversion density to detect seasonality reliably`},
+{dr:"DR3",domain:"Paid-Signal-Google",phase:"Capture",verdict:"KEEP",operator:"Search-term mining / search-terms report",
+ origin:`Google Ads Help, "Get negative keyword ideas using the search terms report"`,
+ spendShell:`The report itself (requires ad impressions to populate); Google's redaction of low-volume terms`,
+ signalCore:`**Query mining**: real buyer language → promote converting queries into targeted assets`,
+ reproduction:`Organic: Google Search Console queries + autocomplete + People-Also-Ask are the $0 substitute for the search-terms report`,
+ verdictText:`KEEP-reversed. n<50 Y — GSC and autocomplete give intent language with zero ad spend`},
+{dr:"DR3",domain:"Paid-Signal-Google",phase:"Capture",verdict:"KEEP",operator:"Negative keywords",
+ origin:`Google Ads Help, "About negative keywords"`,
+ spendShell:`Account/campaign-level negative lists applied in the auction`,
+ signalCore:`**Intent disqualification**: explicitly exclude wrong-intent searchers (free, jobs, DIY, wholesale)`,
+ reproduction:`Organic: write content that self-disqualifies low-intent readers (price framing, "for X not Y"); structure pages to repel wrong-fit`,
+ verdictText:`KEEP-reversed. n<50 Y — disqualification is editorial, not data-bound`},
+{dr:"DR3",domain:"Paid-Signal-Google",phase:"Position",verdict:"KEEP",operator:"Ad theming / asset groups for intent",
+ origin:`Google Ads Help, PMax asset groups; Search Engine Land (2024)`,
+ spendShell:`Asset-group serving; creative combination engine`,
+ signalCore:`*Cluster offers/messages by distinct intent, one theme per cluster* (don't duplicate creative across signals)`,
+ reproduction:`Organic: SEO topic clusters / pillar pages, one intent per cluster; AEO Q&A blocks per intent`,
+ verdictText:`KEEP-reversed. n<50 Y — clustering is structural`},
+{dr:"DR3",domain:"Paid-Signal-Google",phase:"Price",verdict:"ADAPT",operator:"tCPA → tROAS bidding shift",
+ origin:`Google Ads Help, "About Target ROAS"/"Target CPA"; Adalysis, Store Growers (2026)`,
+ spendShell:`Both are auction bid engines; both need ~30 (tCPA)/~50 (tROAS) conversions to be stable`,
+ signalCore:`The *strategic shift from cost-control to value-maximization* once you can distinguish a junk lead from a high-value one`,
+ reproduction:`ML: move the objective from "count conversions" to "maximize predicted value" — the FINDS engine's loss function`,
+ verdictText:`ADAPT. n<50 N for the live strategy, but Y as a *modeling objective* — adopt value-weighting conceptually even before you have volume`},
+
+{dr:"DR3",domain:"Paid-Signal-Meta",phase:"Size",verdict:"KEEP",operator:"Anti-fragmentation doctrine",
+ origin:`Meta "Understand auction overlap" / "About overlapping audiences" docs; practitioners Andrew Foxwell, Nick Shackelford, Jon Loomer, Common Thread Collective / Taylor Holiday`,
+ spendShell:`The ad-set count structure, Advantage+ delivery, the ~50-conversions-per-ad-set-per-week learning-phase exit benchmark, and last-touch attribution are all irreducibly Meta auction/delivery-bound`,
+ signalCore:`Consolidate signal into one dense learning pool; don't splinter. (Meta enters only the highest-value ad among overlapping ad sets "so that your ads are not competing against each other, which can drive up costs." Accuracy flag: "compete with yourself" is practitioner paraphrase; Meta's documented downside is under-delivery, uneven spend, extended learning phase.)`,
+ reproduction:`ML: partial pooling / James-Stein shrinkage — pool the niche's prospects into one model with a shared prior, let segment deviations emerge where data support. Do NOT build one model per micro-segment; build one partially-pooled value model. Pooling-for-density beats segmenting-for-precision when (i) n per segment is small, (ii) segments are related/exchangeable, (iii) confounders included as covariates (Simpson guard). Gelman & Hill 2007; Stein 1956 / James & Stein 1961; Wimmer et al. (partial pooling raised accuracy at <50).`,
+ verdictText:`KEEP-reversed as partial pooling. The anti-fragmentation instinct is *correct at small n* and is formally just shrinkage.`},
+{dr:"DR3",domain:"Paid-Signal-Meta",phase:"Capture",verdict:"KEEP",operator:`Channel pre-existing intent (demand-capture vs demand-generation)`,
+ origin:`Prof. John Dawes (Ehrenberg-Bass / LinkedIn B2B Institute), "Advertising effectiveness and the 95-5 rule," 2021`,
+ spendShell:`Paid performance channels (search, social, retail media) capture demand created elsewhere — the paid-delivery layer is the spend-shell`,
+ signalCore:`Demand already exists; you route it rather than manufacture it. Only ~5% of buyers are in-market in a given quarter (~95% are not; figures not meant literally). The hard ceiling of demand capture ("you can only capture demand that already exists") is a *feature* for a deliberately tiny TAM, not a bug.`,
+ reproduction:`Validates an SEO/AEO-first, demand-capture strategy over any demand-generation spend: intercept the searcher who already wants this; do not pay to manufacture awareness in a market defined as small on purpose.`,
+ verdictText:`KEEP-reversed → AEO/SEO-first demand capture. For a tiny-TAM burning-desire segment, acute high-WTP buyers are already searching.`},
+
+{dr:"DR3",domain:"Organic-Capture",phase:"Capture",verdict:"KEEP",operator:"Keyword/intent theming → SEO topic + entity targeting",
+ origin:`Google Search Central: same "helpful, reliable, people-first content" eligibility applies to AI surfaces; no special tags`,
+ rigor:`Organic equivalent of paid keyword/intent theming: pillar/cluster architecture`,
+ reverse:`SEO topic + entity targeting; pillar/cluster architecture`,
+ verdictText:`Strong parallel`},
+{dr:"DR3",domain:"Organic-Capture",phase:"Capture",verdict:"KEEP",operator:"Negative keywords → intent-disqualification in content",
+ origin:`Standard SEO practice; mirrors Google's negative-keyword logic`,
+ rigor:`Organic equivalent of negative keywords`,
+ reverse:`Intent-disqualification in content (price framing, "for X not Y", explicit non-fit callouts)`,
+ verdictText:`Loose — organic can't hard-block impressions, only self-select readers`},
+{dr:"DR3",domain:"Organic-Capture",phase:"Diagnose",verdict:"KEEP",operator:"Audience signals → search-intent segmentation",
+ origin:`PMax custom-segment keywords ≈ SEO topic seeds`,
+ rigor:`Organic equivalent of audience signals`,
+ reverse:`Search-intent segmentation; ICP language in content`,
+ verdictText:`Strong parallel`},
+{dr:"DR3",domain:"Organic-Capture",phase:"Capture",verdict:"KEEP",operator:"Value-based bidding → prioritizing high-AOV intent clusters in content",
+ origin:`Allocate writing/AEO effort to the top predicted-value clusters`,
+ rigor:`Organic face of the FINDS engine`,
+ reverse:`Prioritizing high-AOV intent clusters in content investment`,
+ verdictText:`Strong (this is the organic face of the FINDS engine)`},
+{dr:"DR3",domain:"Organic-Capture",phase:"Capture",verdict:"KEEP",operator:"Auction real-time placement → AEO/GEO citation capture in AI answers",
+ origin:`Aggarwal et al., "GEO: Generative Engine Optimization," KDD 2024 (arXiv:2311.09735): "GEO can boost visibility by up to 40% in generative engine responses"; top methods (Cite Sources, Quotation Addition, Statistics Addition) achieved 30–40% relative improvement on Position-Adjusted Word Count across the 10,000-query GEO-bench`,
+ rigor:`Organic equivalent of the auction's real-time placement`,
+ reverse:`AEO/GEO recipe: lead each section with a 40–60-word direct answer; add original statistics + cited quotable claims; FAQPage/Article schema; entity clarity (canonical answer URL, consistent sameAs); target long-tail low-competition questions to become *the* cited source.`,
+ verdictText:`Loose/imperfect — generative engines are black-box; "content creators have little control over when and how content is displayed" (Aggarwal et al.). AI-citation tracking is primitive and platform-volatile; treat as directional.`},
+
+{dr:"DR3",domain:"Paid-Signal-Meta",phase:"Capture",verdict:"DISCARD",operator:"Advantage+ Shopping (ASC)",
+ origin:`Meta Business Help / Meta for Developers; practitioner guides (2024–26)`,
+ spendShell:`The entire automated delivery engine: AI audience-finding, dynamic budget allocation, placement optimization, 150-creative combination testing; needs ~50 conv/week. **Proprietary**: the "Andromeda" retrieval-ranking internals are undisclosed`,
+ signalCore:`Thin but real: *consolidate prospecting + retargeting; let one broad pool find the buyer; existing-customer cap to bias toward new acquisition*`,
+ reproduction:`ML: the consolidation principle = partial pooling (§2); the existing-customer cap = exclude known buyers from the prospect-scoring set`,
+ verdictText:`Mostly DISCARD; ADAPT the consolidation principle only. n<50 N for ASC itself (it needs ≥50 conv/week); the *principle* transfers`},
+{dr:"DR3",domain:"Paid-Signal-Meta",phase:"Measure",verdict:"DISCARD",operator:"Creative scaling / creative-fatigue rotation",
+ origin:`Practitioner consensus; Meta delivery docs`,
+ spendShell:`Frequency/fatigue is measured from live impression and frequency data; rotation is an auction-delivery action`,
+ signalCore:`Marginal: *the iterate-test-promote-winners loop* as an abstract method`,
+ reproduction:`Organic: A/B test landing-page/email angles on your own traffic, promote winners — but no impression-frequency signal exists at $0`,
+ verdictText:`DISCARD the fatigue mechanic; ADAPT only the generic test-and-promote loop. n<50 N — fatigue detection is irreducibly impression-bound`},
+];
+
+/* ---- the unverified-framework honesty card (DR3 caveat) ---- */
+const UNVERIFIED = {dr:"DR3",domain:"Paid-Signal-Meta",phase:"Size",verdict:"FLAG",operator:`"One Campaign Method" 1:5:3 — UNVERIFIED`,
+ flag:`Per DR3: the "1:5:3" (1 campaign : 5 ad sets : 3 ads) branded framework COULD NOT BE VERIFIED to any owner and must NOT be cited as fact. Closest real attributable artifacts: Charley Tichenor IV's "3:2:2 Method" and "One Campaign Blueprint (OCB)." The consolidation doctrine itself is genuine (Foxwell, Shackelford, Loomer, CTC/Taylor Holiday) — see the Anti-fragmentation card.`,
+ body:`Shown here ONLY to mark it unverified. The transferable substance lives in the "Anti-fragmentation doctrine" card; this ratio is not an established method.`};
+D.push(UNVERIFIED);
+
+/* ============================================================
+   DERIVED LAYER (NOT verbatim) — corp/source + industry use case per operator.
+   Keyed by № (D index+1) so duplicate operator names don't collide.
+   Corp = originating firm where real; author/institution where the method is academic/individual.
+   DR1 entries also carry distilled r (reverse-engineer) + v (verdict); DR2/DR3 reuse their own fields.
+   ============================================================ */
+const META={
+1:{c:`McKinsey & Company`,s:`Ethan Rasiel, The McKinsey Way (1999)`,u:`Consultants open an engagement with a day-one falsifiable hypothesis and run fact-based work to test it rather than gathering all data first.`,r:`Write your one-sentence bet ("this segment pays $X now because of pain Y") on day one and design work to falsify it.`,v:`Transfers directly.`},
+2:{c:`McKinsey & Company`,s:`MECE problem-structuring (Minto lineage)`,u:`The foundational consulting tool — decompose any client problem into MECE, falsifiable branches before analysis.`,r:`Use as your diagnostic skeleton: "why would this micro-monopoly fail or succeed?"`,v:`Transfers as-is.`},
+3:{c:`McKinsey & Company`,s:`Barbara Minto, The Pyramid Principle (1985)`,u:`Structures analyses and documents answer-first, with grouped MECE support and an SCQA intro.`,r:`Use as both a thinking tool and the structure for your own decision documents.`,v:`Transfers as-is.`},
+4:{c:`McKinsey & Company`,s:`Ethan Rasiel, The McKinsey Way`,u:`Engagement discipline of being selective, hitting the vital few drivers, and stopping once the answer is good enough.`,r:`Prevents over-analysis of a deliberately tiny market when hours are finite.`,v:`Transfers — high relevance solo.`},
+5:{c:`Klein Associates`,s:`Gary Klein, HBR (Sept 2007)`,u:`Teams imagine the project has already failed and work backward to causes — a 20–30 min exercise that lifts risk-identification ~30%.`,r:`Write "it's 12 months on and this failed — why?" before launch; pre-empt the top 5 causes.`,v:`Transfers (ideally pull in one outside person).`},
+6:{c:`Project-management practice (PMO)`,s:`PMBOK risk-register practice`,u:`Enterprises log risks with likelihood / impact / mitigation to govern delivery exposure.`,r:`Keep a one-page risk list; skip the heavyweight PMO version.`,v:`KEEP, lightweight.`},
+7:{c:`VC / corporate strategy`,s:`Standard market-sizing practice`,u:`Size a market top-down and bottom-up and force convergence (~15–20%) to bound the opportunity and flag broken assumptions.`,r:`Keep only the bottom-up build (reachable burning-desire buyers × price) as a sanity check; the thesis wants a SMALL TAM.`,v:`ADAPT — invert it.`},
+8:{c:`PE / strategy consultancies`,s:`Commercial due-diligence practice`,u:`Multi-week demand modeling, competitor-share and forecast scenarios run to validate a deal thesis before acquisition.`,r:`The spirit (validate demand first) survives via VoC + pre-mortem; the apparatus doesn't.`,v:`DISCARD (apparatus).`},
+9:{c:`International-business strategy`,s:`Franklin Root, Entry Strategies for International Markets (1987)`,u:`Corporates choose build / buy / ally / JV / license to enter a new geography or segment given resources and risk.`,r:`A solo operator has exactly one mode — organic build.`,v:`DISCARD — N/A solo.`},
+10:{c:`McKinsey & Company`,s:`Forbis & Mehta (1979); Nagle, The Strategy and Tactics of Pricing`,u:`Pricing teams quantify a product's dollar value vs. the next-best alternative to justify a premium price independent of volume.`,r:`Quantify the dream-outcome value to a narrow segment to justify a high price with no search volume.`,v:`KEEP — highest priority.`},
+11:{c:`ESOMAR / market research`,s:`Peter van Westendorp (1976)`,u:`Researchers ask four price-perception questions to map an acceptable price band for a new product.`,r:`Run the 4 questions on a small sample as a fast, cheap price probe.`,v:`KEEP (interpret with caution).`},
+12:{c:`University of Nottingham`,s:`André Gabor & Clive Granger (1960s)`,u:`Test purchase intent at ascending price points to build a demand curve and find the revenue-max price for a single fixed offer.`,r:`Almost exactly this use case — find where price × intent peaks.`,v:`KEEP.`},
+13:{c:`Academic marketing science`,s:`Choice-modeling literature`,u:`Brands model feature–price trade-offs across many attributes and competitors to simulate share — sample-hungry.`,r:`Over-engineered for a single-product micro-monopoly; use Gabor-Granger instead.`,v:`DISCARD.`},
+14:{c:`Strategy / finance practice`,s:`Profit-driver-tree practice`,u:`Decompose profit into price × volume and cost components to find the levers that move margin.`,r:`Keep a simple unit-economics tree (contribution margin, payback); drop the value-chain profit-pool map.`,v:`KEEP, simplified.`},
+15:{c:`Strategy / FP&A practice`,s:`Scenario-planning discipline`,u:`State assumptions explicitly and test ranges, not false precision, to see which inputs actually move the answer.`,r:`One spreadsheet: best / base / worst on conversion × price × reachable buyers.`,v:`KEEP.`},
+16:{c:`Quant finance / risk`,s:`Monte Carlo methods`,u:`Simulate thousands of input draws to produce outcome distributions — only as good as the input distributions.`,r:`Use only as a rough triangular-distribution sanity check; don't over-trust.`,v:`Mostly DISCARD.`},
+17:{c:`Cross-industry consortium`,s:`CRISP-DM (1999)`,u:`The most-used data-science lifecycle: Business→Data→Prep→Model→Eval→Deploy, iterating from the business question.`,r:`Keep the discipline of starting from the business question; ignore the heavy tooling.`,v:`KEEP (lightweight).`},
+18:{c:`Microsoft`,s:`Team Data Science Process (2016)`,u:`Microsoft's team framework standardizing roles, deliverables and git collaboration across data-science projects.`,r:`Built for teams; no solo fit.`,v:`DISCARD.`},
+19:{c:`ML-engineering practice`,s:`MLOps tooling (MLflow, W&B)`,u:`Teams version what they tried and what happened so models and results are reproducible.`,r:`A simple structured changelog — cheap and valuable even solo.`,v:`KEEP, minimal.`},
+20:{c:`Microsoft / Google / Amazon`,s:`Kohavi, Tang & Xu, Trustworthy Online Controlled Experiments (2020)`,u:`Big-tech platforms run rigorous controlled experiments; the book codifies the trustworthy-experiment playbook.`,r:`Keep the intuition-buster lessons (distrust tiny-sample "wins"); drop formal tests.`,v:`SWITCH — mindset only.`},
+21:{c:`Microsoft (Bing)`,s:`Deng, Xu, Kohavi & Walker (2013)`,u:`Bing cut experiment variance ~50% using pre-experiment data to detect smaller lifts with the same traffic.`,r:`Useless without experiment-scale traffic.`,v:`DISCARD.`},
+22:{c:`Academic econometrics`,s:`Abadie et al.; Card & Krueger`,u:`Economists isolate causal effects from observational panels via controls, donor pools or treated-vs-control groups.`,r:`Keep the reflex: ask "what's my counterfactual?" before claiming a tactic worked.`,v:`DISCARD (methods).`},
+23:{c:`Quant finance`,s:`Time-series backtesting practice`,u:`Train on past, test on the next period, roll forward — the honest way to validate a forecast.`,r:`Use if and when you ever forecast demand from your own series.`,v:`SWITCH — if forecasting.`},
+24:{c:`Academic ML`,s:`Platt (1999); Niculescu-Mizil & Caruana (2005)`,u:`Fit a calibrator so predicted probabilities match observed frequency; Platt scaling is safer on small sets.`,r:`Keep the discipline: are my stated probabilities honest? (Brier-score thinking).`,v:`KEEP conceptually.`},
+25:{c:`Google`,s:`Mitchell et al. (2019); Gebru et al. (2018)`,u:`Transparency docs recording a model's or dataset's intended use, performance and limits.`,r:`Repurpose as a one-page "what do I know, from what data, with what limits" evidence card.`,v:`KEEP — evidence hygiene.`},
+26:{c:`MLOps practice`,s:`Production-ML monitoring`,u:`Watch for shifts in input/label distributions so a deployed model doesn't silently decay.`,r:`A manual periodic VoC re-read, not a pipeline.`,v:`KEEP, manual.`},
+27:{c:`MSI / academic marketing`,s:`Griffin & Hauser, Marketing Science (1993)`,u:`Capture customer needs in their own words, organized hierarchically by segment — never ask "what do you want?"`,r:`Surfaces the exact pain language that becomes your copy and qualification script.`,v:`KEEP — high priority.`},
+28:{c:`Harvard / Christensen`,s:`Clayton Christensen`,u:`Interview for the progress a customer is trying to make and the real comparison set (often "do nothing").`,r:`Define your offer around the job; serves urgency / desire mapping.`,v:`KEEP.`},
+29:{c:`Expert networks (GLG, AlphaSights, Tegus)`,s:`Practitioner literature`,u:`Investors and consultants run hypothesis-led expert calls ($750–1,500/hr) with written guides, triangulating across sources.`,r:`Apply the 7-step call-structuring method to FREE customer-discovery calls.`,v:`KEEP method; DISCARD the networks.`},
+30:{c:`Intelligence / research practice`,s:`Hierarchy-of-evidence discipline`,u:`Analysts rank sources by reliability (primary > secondary > anecdote) and avoid over-weighting any single one.`,r:`Explicit evidence hygiene.`,v:`KEEP.`},
+31:{c:`Academic psychology`,s:`Braun & Clarke (2006)`,u:`Code transcripts through a six-phase reflexive method to turn scattered quotes into reliable themes at any sample size.`,r:`Turn a VoC corpus into reliable themes instead of cherry-picking.`,v:`KEEP — high priority.`},
+32:{c:`Enterprise IT`,s:`KM-platform practice`,u:`Organizations maintain searchable, structured repositories of institutional insight.`,r:`Keep the principle (a personal second brain); skip enterprise platforms.`,v:`KEEP as principle.`},
+33:{c:`Amazon`,s:`Bryar & Carr, Working Backwards (2021)`,u:`Teams write the press release + FAQ and a 6-page narrative before building, read silently to open meetings.`,r:`The PR/FAQ forces you to define customer, pain, price and switch-reason before building.`,v:`KEEP — high priority.`},
+34:{c:`McKinsey & Company`,s:`Minto Situation-Complication-Resolution`,u:`Consultants structure recommendations Situation–Complication–Resolution, answer-first.`,r:`Use for any non-trivial decision you write down.`,v:`KEEP.`},
+35:{c:`Robert G. Cooper`,s:`Stage-Gate, coined 1988; Winning at New Products`,u:`New-product orgs separate stages with explicit Go/Kill gates; most success is decided in the first third.`,r:`Predefine Go/Kill criteria (validate→price→build→launch) to beat sunk-cost persistence.`,v:`KEEP gate discipline.`},
+36:{c:`CIA / intelligence community`,s:`Heuer, Psychology of Intelligence Analysis (1999)`,u:`Analysts deliberately argue against their own conclusion (Team A / Team B) to counter confirmation bias.`,r:`Adopt a scheduled adversarial stance against your own plan, on paper.`,v:`KEEP — adapted.`},
+37:{c:`MBB consulting`,s:`Engagement-management practice`,u:`Firms staff multi-workstream teams with senior off-engagement review — presupposes a team.`,r:`No solo substitute; the transferable substance is the red-team discipline above.`,v:`DISCARD (FLAG: "grey-hair / toehold review" not a citable method).`},
+38:{c:`McKinsey & Company`,s:`Ethan Rasiel, The McKinsey Way`,u:`Every analysis must pass the "so what?" relevance test and be summarizable in a 30-second elevator answer.`,r:`Solo-usable QA heuristics.`,v:`KEEP the tests.`},
+39:{c:`Academic / industry ML`,s:`Guyon & Elisseeff, JMLR (2003)`,u:`Data scientists turn raw signals into a few predictive variables and ruthlessly cut dimensionality.`},
+40:{c:`Statistics / ML`,s:`Stone (1974), cross-validation`,u:`Modelers never evaluate on data used to fit, and respect time order to avoid look-ahead bias.`},
+41:{c:`Microsoft / academic ML`,s:`Platt (1999); Zadrozny & Elkan (2002)`,u:`Calibrate stated confidence to observed frequency so a "70%" prediction closes ~70% of the time.`},
+42:{c:`US Weather Bureau`,s:`Glenn Brier, Monthly Weather Review (1950)`,u:`A single scalar (mean squared error of probabilities) scoring how accurate probabilistic forecasts are.`},
+43:{c:`Academic econometrics`,s:`Card & Krueger (1994)`,u:`Subtract a control group's pre/post change from the treated group's to isolate an intervention's effect.`},
+44:{c:`Academic econometrics`,s:`Abadie, Diamond & Hainmueller (2010)`,u:`Build a weighted synthetic counterfactual from a donor pool when only one unit is treated.`},
+45:{c:`Direct-marketing / causal ML`,s:`Radcliffe & Surry (1999)`,u:`Model incremental response (persuadables), not gross response, to target only buyers whose action depends on you.`},
+46:{c:`Microsoft`,s:`Deng et al., WSDM (2013)`,u:`Use pre-experiment covariates to cut variance and detect smaller lifts faster in large online experiments.`},
+47:{c:`Google / Microsoft / Amazon`,s:`R.A. Fisher (1935); online-experiment platforms`,u:`Randomized assignment isolates the causal effect of one change — industrialized at scale by big tech.`},
+48:{c:`Statistics`,s:`Tukey (1977), boxplots / fences`,u:`Flag data points that don't fit the pattern using fences and broader detectors.`},
+49:{c:`Bell Labs / academia`,s:`Lloyd (1957); MacQueen (1967)`,u:`Group observations by similarity into discrete segments for targeting.`},
+50:{c:`Box-Jenkins / Facebook`,s:`Box & Jenkins (1970); Prophet, Facebook (2017)`,u:`Decompose trend + seasonality to project a time series forward — needs long, regular series.`},
+51:{c:`Google`,s:`Mitchell et al., FAT* (2019)`,u:`Document a model's intended use, performance and limits for accountability.`},
+52:{c:`Google / academia`,s:`Gebru et al. (2018)`,u:`Document a dataset's provenance, composition, collection and limitations.`},
+53:{c:`McKinsey & Company`,s:`Ethan Rasiel, The McKinsey Way (1999)`,u:`State the answer as a falsifiable hypothesis first, then test — don't boil the ocean.`},
+54:{c:`McKinsey & Company`,s:`Barbara Minto, The Pyramid Principle (1985)`,u:`Decompose a problem into mutually-exclusive, collectively-exhaustive branches.`},
+55:{c:`VC / strategy`,s:`Standard triangulation practice`,u:`Cross-check market size two independent ways (top-down vs bottom-up) to bound the truth.`},
+56:{c:`International-business strategy`,s:`Franklin Root (1987)`,u:`Choose a build / partner / niche entry mode given resources and risk.`},
+57:{c:`Robert G. Cooper`,s:`Cooper, Business Horizons (1990)`,u:`Run a phase-gate funnel with explicit kill criteria before further investment.`},
+58:{c:`Klein Associates`,s:`Gary Klein, HBR (2007)`,u:`Imagine the project already failed and work backward to surface hidden risks before launch.`},
+59:{c:`Bain & Company`,s:`Gadiesh & Gilbert, HBR (1998)`,u:`Map where money actually pools across a value chain (Bain's U-Haul case) to find fat-margin, acute-pain steps.`},
+60:{c:`McKinsey & Company`,s:`Forbis & Mehta (1979); Nagle`,u:`Price = next-best-alternative value + the monetized value of your differentiation.`},
+61:{c:`Dutch market research`,s:`Peter van Westendorp (1976)`,u:`Four price questions map an acceptable price range and optimal point for a new product.`},
+62:{c:`University of Nottingham`,s:`Gabor & Granger, J. Advertising Research (1964)`,u:`Sequential yes/no at ascending prices yields a demand curve and revenue-max price.`},
+63:{c:`B2B sales practice`,s:`Lineage from EVC / Nagle`,u:`Reps sell on quantified business outcome, not features or price.`},
+64:{c:`PTC (Parametric Technology)`,s:`Dunkel & Napoli under John McMahon (1996)`,u:`B2B reps qualify on Metrics, Economic buyer, Decision criteria/process, Identify pain, Champion — drove PTC $300M→$1B.`},
+65:{c:`Huthwaite`,s:`Neil Rackham, SPIN Selling (1988), 35,000-call study`,u:`Situation→Problem→Implication→Need-payoff questioning escalates the buyer's felt pain.`},
+66:{c:`CEB / Gartner`,s:`Dixon & Adamson (2011), 6,000-rep study`,u:`Teach–Tailor–Take-Control: reframe the buyer's thinking with a commercial insight (Challengers out-performed ~15%).`},
+67:{c:`Sandler Training`,s:`David Sandler (1967)`,u:`Up-front contracts + mutual qualification; disqualify early and don't chase (the 7-step "submarine").`},
+68:{c:`Pricing practice`,s:`Synthesis of EVC + Van Westendorp + Gabor-Granger`,u:`Separate "interested" from "will actually pay $X", ideally via a deposit / paid-discovery revealed-preference test.`},
+69:{c:`Academic behavioral economics`,s:`Tversky & Kahneman, Science (1974)`,u:`The first number stated biases the final outcome; adjustments from it are insufficient.`},
+70:{c:`Strategyn / Christensen`,s:`Ulwick (1990); Christensen (2003)`,u:`Customers "hire" a product for a stable functional job; design the offer around the job, not the demographic.`},
+71:{c:`Strategyn`,s:`Tony Ulwick, What Customers Want (2005)`,u:`Turn needs into measurable desired-outcome statements; target high-importance / low-satisfaction gaps.`},
+72:{c:`MSI / academia`,s:`Griffin & Hauser (1993); Braun & Clarke (2006)`,u:`Systematically code customer language into themes and quote verbatim buyer language in copy.`},
+73:{c:`Kotler / academic marketing`,s:`Wendell Smith (1956); Kotler`,u:`Segment → target → position deliberately around one chosen sub-segment.`},
+74:{c:`Ries & Trout`,s:`Positioning: The Battle for Your Mind (1981)`,u:`Own a single distinct word or slot in the prospect's mind; be first in a category.`},
+75:{c:`Play Bigger`,s:`Ramadan, Peterson, Lochhead & Maney (2016)`,u:`Create and own a new category rather than compete inside an existing one.`},
+76:{c:`Ehrenberg-Bass Institute`,s:`Byron Sharp, How Brands Grow (2010)`,u:`Grow via penetration and being easy to recall and buy; distinctiveness over differentiation.`},
+77:{c:`IPA (Binet & Field)`,s:`The Long and the Short of It (2013)`,u:`Balance long-term brand-building (~60%) with short-term activation (~40%).`},
+78:{c:`Econometric / digital marketing`,s:`Marketing-mix + multi-touch attribution`,u:`Allocate credit across channels to spend efficiently — needs many channels and volume.`},
+79:{c:`Google / Meta ads`,s:`Auction ad ecosystem`,u:`Buy reach and optimize CAC via the ad auction — out of scope for a $0-ad operator.`},
+80:{c:`Gartner, Inc.`,s:`Gartner published methodology`,u:`Rates vendors on two axes — Completeness of Vision × Ability to Execute — across 15 weighted criteria.`},
+81:{c:`Gartner, Inc.`,s:`Gartner published methodology`,u:`Defines the Execute and Vision sub-criteria and weights them high / medium / low per market.`},
+82:{c:`Gartner, Inc.`,s:`Undisclosed internal math`,u:`The precise numeric weights and scoring calculations are not published — do not reconstruct.`},
+83:{c:`Forrester Research`,s:`The Forrester Wave methodology`,u:`Scores vendors across Current Offering, Strategy and Market Presence in a ~14-step process.`},
+84:{c:`Forrester Research`,s:`Published .xlsm scorecard`,u:`Each criterion scored 0–5, weighted to 100% and summed in an openly downloadable spreadsheet.`},
+85:{c:`Forrester Research`,s:`Forrester disclosure policy`,u:`Criteria weightings aren't shared with vendors until after publication.`},
+86:{c:`IDC`,s:`IDC MarketScape methodology`,u:`Scores Capabilities × Strategies with market-share bubble size; tiers Leaders→Participants.`},
+87:{c:`IDC`,s:`IDC published methodology`,u:`Rigorously define the market and taxonomy before scoring anyone.`},
+88:{c:`IDC`,s:`IDC forecast methodology`,u:`Size markets bottom-up from unit/segment data with 3–5 year forecasts.`},
+89:{c:`Gartner / Forrester / IDC`,s:`Paid analyst reports`,u:`Published market sizes, shares and growth rates sold as a data product — take the method, not the numbers.`},
+90:{c:`Google`,s:`Google Ads, Customer Match (2024)`,u:`Advertisers upload best-customer lists to serve "more like them" — i.e. a labeled positive-class training set.`},
+91:{c:`Google`,s:`Google Ads, Target ROAS`,u:`Multiply auction bids by each conversion's predicted value to invest in the highest-value deciles.`},
+92:{c:`Google`,s:`Google Ads, data-driven attribution (2021)`,u:`An ML model distributes conversion credit across touchpoints by measured contribution, not last click.`},
+93:{c:`Google`,s:`Google Ads, audience signals (2024)`,u:`Seed Performance Max with who you think converts as a warm start; Google overrides once it has conversions.`},
+94:{c:`Google`,s:`Google Ads Smart Bidding`,u:`Apply a short 1–7 day conversion-rate modifier to anticipate known spikes.`},
+95:{c:`Google`,s:`Google Ads search-terms report`,u:`Mine real buyer queries to promote converting terms and add negatives.`},
+96:{c:`Google`,s:`Google Ads, negative keywords`,u:`Exclude wrong-intent searchers (free, jobs, DIY, wholesale) from the auction.`},
+97:{c:`Google`,s:`Google Ads PMax asset groups`,u:`Cluster offers and messages by distinct intent, one theme per cluster.`},
+98:{c:`Google`,s:`Google Ads bidding`,u:`Shift the bid objective from cost-control to value-maximization once you can tell junk from high-value leads.`},
+99:{c:`Meta + practitioners (Foxwell, Shackelford, CTC)`,s:`Meta auction-overlap docs`,u:`Consolidate signal into one dense learning pool rather than splintering ad sets that compete with each other.`},
+100:{c:`Ehrenberg-Bass (Dawes)`,s:`John Dawes, the 95-5 rule (2021)`,u:`Performance channels capture demand created elsewhere; only ~5% of buyers are in-market in a given quarter.`},
+101:{c:`Google Search Central`,s:`Helpful-content guidance`,u:`Organic equivalent of paid intent theming: pillar / cluster content architecture and entity targeting.`},
+102:{c:`SEO practice`,s:`Mirrors Google negative-keyword logic`,u:`Self-disqualify wrong-fit readers in content (price framing, "for X not Y").`},
+103:{c:`SEO practice`,s:`PMax-signal analogue`,u:`Translate ICP language into search-intent segmentation and SEO topic seeds.`},
+104:{c:`Organic FINDS engine`,s:`Value-based-bidding analogue`,u:`Allocate writing and AEO effort to the top predicted-value intent clusters.`},
+105:{c:`Academic (GEO)`,s:`Aggarwal et al., GEO, KDD 2024`,u:`Lead sections with a 40–60-word answer plus cited stats and schema to become the source AI engines cite (up to +40% visibility).`},
+106:{c:`Meta`,s:`Meta Business Help`,u:`A fully-automated delivery engine (audience-finding, budget, placements, 150-creative testing) needing ~50 conv/week.`},
+107:{c:`Meta + practitioners`,s:`Meta delivery docs`,u:`Rotate creative against live impression and frequency-fatigue data — irreducibly impression-bound.`},
+108:{c:`UNVERIFIED`,s:`No attributable owner (FLAG)`,u:`A branded 1 campaign : 5 ad sets : 3 ads ratio that could not be verified to any owner — do not cite as fact.`}
+};
+
+/* ============================ RENDER ============================ */
+const DOMAIN_ORDER=["Market-Entry","Analytical-Rigor","Sales","Marketing","ML-DataScience","Knowledge-Research","Delivery-Project","Analyst-Firm","Paid-Signal-Google","Paid-Signal-Meta","Organic-Capture"];
+const PHASE_ORDER=["Diagnose","Size","Price","Position","Capture","Measure"];
+const VERDICT_ORDER=["KEEP","ADAPT","SWITCH","DISCARD","FLAG"];
+const DOMAIN_HUE={"ML-DataScience":"var(--d-ml)","Market-Entry":"var(--d-entry)","Sales":"var(--d-sales)","Marketing":"var(--d-mktg)","Analyst-Firm":"var(--d-analyst)","Paid-Signal-Google":"var(--d-paid)","Paid-Signal-Meta":"var(--d-paid)","Organic-Capture":"var(--d-know)","Knowledge-Research":"var(--d-know)","Delivery-Project":"var(--d-deliver)","Analytical-Rigor":"var(--d-rigor)"};
+const PHASE_NOTE={Diagnose:"Is there a real, acute, funded problem?",Size:"Big enough to live on, small enough to own?",Price:"What will the acute buyer actually pay?",Position:"What single slot do we own?",Capture:"How do we reach the buyer at $0 ad spend?",Measure:"How do we stay honest about what worked?"};
+
+const MOTION_OK=matchMedia('(prefers-reduced-motion: no-preference)').matches;
+const isMobile=()=>window.innerWidth<=1080;
+let state={group:"domain",src:"all",q:"",verdict:null,domain:null,phase:null};
+let sel=null, filtered=[], userNav=false, readTimer=null;
+const list=document.getElementById('list'), detail=document.getElementById('detail');
+const liveEl=document.getElementById('live'), sheetback=document.getElementById('sheetback');
+
+/* ---- read tracking ---- */
+let READS=new Set();
+try{READS=new Set(JSON.parse(localStorage.getItem('dt-reads-v1')||'[]'));}catch(e){}
+function saveReads(){try{localStorage.setItem('dt-reads-v1',JSON.stringify([...READS]));}catch(e){}}
+function updateDateline(){
+  document.getElementById('dateline').textContent=
+    `Engagement Doctrine · Operator Registry · v1.1.0 · ${READS.size}/${D.length} read`;
+}
+
+function vbar(){
+  const order=VERDICT_ORDER, tot=D.length;
+  document.getElementById('vbar').innerHTML=order.map(v=>{
+    const n=D.filter(d=>d.verdict===v).length;
+    const on=state.verdict===v;
+    return `<button class="vseg${on?' on':''}" data-v="${v}" aria-pressed="${on}" title="${v} — ${n} of ${tot} operators · click to filter" style="flex:${n} ${n} 0;background:var(--${v.toLowerCase()})"><b>${n}</b><span class="vt">${v}</span></button>`;
+  }).join('');
+  document.getElementById('vbar').classList.toggle('filtered',!!state.verdict);
+}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function md(s){return esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>');}
+function cssid(s){return String(s).replace(/[^a-z0-9]+/gi,'-');}
+function rxesc(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+/* highlight matches inside already-escaped text */
+function hi(raw,q){
+  const e=esc(raw||'');
+  if(!q) return e;
+  try{return e.replace(new RegExp(rxesc(esc(q)),'gi'),m=>`<mark>${m}</mark>`);}catch(err){return e;}
+}
+
+/* ---- weighted scorer: exact > prefix > word-start > substring; field-weighted ---- */
+const FIELDS=[['operator',3],['domain',2],['phase',2],['verdict',2],['dr',2],
+  ['origin',1],['rigor',1],['reverse',1],['verdictText',1],['body',1],
+  ['spendShell',1],['signalCore',1],['reproduction',1],['flag',1]];
+function score(d,q){
+  let s=0, frag='';
+  for(const [f,w] of FIELDS){
+    const v=(d[f]||'').toLowerCase(); if(!v) continue;
+    const idx=v.indexOf(q); if(idx<0) continue;
+    if(v===q) s+=100*w;
+    else if(idx===0) s+=50*w;
+    else if(/[^a-z0-9]/.test(v[idx-1])) s+=30*w;
+    else s+=12*w;
+    if(!frag && w===1){
+      const raw=d[f], i2=raw.toLowerCase().indexOf(q);
+      frag='…'+raw.slice(Math.max(0,i2-28),i2+q.length+64).trim()+'…';
+    }
+  }
+  return {s,frag};
+}
+function matches(d){
+  if(state.src!=='all' && d.dr!==state.src) return false;
+  if(state.verdict && d.verdict!==state.verdict) return false;
+  if(state.domain && d.domain!==state.domain) return false;
+  if(state.phase && d.phase!==state.phase) return false;
+  if(!state.q) return true;
+  return score(d,state.q).s>0;
+}
+function clearFilters(){state.verdict=null;state.domain=null;state.phase=null;state.q='';
+  document.getElementById('q').value='';}
+
+/* ---- active-filter chips + counts ---- */
+function chips(){
+  const c=document.getElementById('chips'); let h='';
+  const chip=(k,label)=>`<button class="chip" data-k="${k}">${label} <span class="x">×</span></button>`;
+  if(state.verdict) h+=chip('verdict','verdict: '+state.verdict);
+  if(state.domain) h+=chip('domain','domain: '+esc(state.domain));
+  if(state.phase) h+=chip('phase','phase: '+state.phase);
+  if(state.q) h+=chip('q','“'+esc(state.q)+'”');
+  if(h) h+=`<span class="shown">${filtered.length} / ${D.length} shown</span>`;
+  c.innerHTML=h;
+  document.getElementById('searchwrap').classList.toggle('has-q',!!state.q);
+  document.getElementById('qcount').textContent=state.q?`${filtered.length} / ${D.length}`:'';
+}
+document.getElementById('chips').onclick=e=>{
+  const b=e.target.closest('.chip'); if(!b) return;
+  const k=b.dataset.k;
+  if(k==='q'){state.q='';document.getElementById('q').value='';}
+  else state[k]=null;
+  userNav=true; vbar(); syncMatrix(); render();
+};
+
+/* ---- master list row ---- */
+function lrow(d,i,ri){
+  const meta = state.group==='domain'? d.phase : state.group==='phase'? d.domain : `${d.domain} · ${d.phase}`;
+  const sc = state.q?score(d,state.q):null;
+  const snip = sc&&sc.frag?`<span class="rsnip">${hi(sc.frag,state.q)}</span>`:'';
+  return `<div class="lrow${READS.has(i)?' read':''}" role="option" aria-selected="false" tabindex="-1" data-i="${i}" data-v="${d.verdict}" style="--ri:${Math.min(ri,15)}">
+    <span class="rno">${String(i+1).padStart(3,'0')}</span>
+    <span class="rop" title="${esc(d.operator)}">${hi(d.operator,state.q)}</span>
+    <span class="rmeta"><span class="rdp">${esc(meta)}</span><span class="rv v-${d.verdict}">${d.verdict[0]}</span></span>
+    ${snip}
+  </div>`;
+}
+function render(){
+  let rows=D.map((d,i)=>({d,i,s:state.q?score(d,state.q).s:0})).filter(x=>matches(x.d));
+  filtered=rows.map(x=>x.i);
+  chips(); updateSpine();
+  if(!rows.length){list.innerHTML='<div class="empty">No operators match. Clear a filter or press Esc.</div>';syncSpine();announce('0 operators shown');return;}
+  const keyer=state.group, order = state.group==='domain'?DOMAIN_ORDER:state.group==='phase'?PHASE_ORDER:VERDICT_ORDER;
+  const groups={};
+  rows.forEach(x=>{(groups[x.d[keyer]] ||= []).push(x);});
+  const keys=Object.keys(groups).sort((a,b)=>{const ia=order.indexOf(a),ib=order.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});
+  let html='';
+  keys.forEach((k,gi)=>{
+    const g=groups[k];
+    if(state.q) g.sort((a,b)=>b.s-a.s);
+    const chue = state.group==='domain'?(DOMAIN_HUE[k]||'var(--accent)'):state.group==='verdict'?`var(--${k.toLowerCase()})`:'var(--accent)';
+    html+=`<section class="lgrp${userNav&&MOTION_OK?' anim':''}" id="grp-${cssid(k)}" data-key="${esc(k)}" style="--kc:${chue}">
+      <div class="lsub"><span class="sn">${String(gi+1).padStart(2,'0')}</span><h3>${esc(k)}</h3><span class="c">${g.length}</span></div>
+      ${g.map((x,ri)=>lrow(x.d,x.i,ri)).join('')}
+    </section>`;
+  });
+  const pills=isMobile()?`<div class="pills" role="tablist" aria-label="Jump to phase">${PHASE_ORDER.map(p=>`<button class="pill" data-ph="${p}">${p}</button>`).join('')}</div>`:'';
+  list.innerHTML=pills+html;
+  userNav=false;
+  markSel();
+  syncSpine();
+  announce(`${filtered.length} of ${D.length} operators shown`);
+}
+function announce(msg){liveEl.textContent=msg;}
+
+/* ---- related operators ---- */
+function related(d,i){
+  const m=META[i+1], picks=[], seen=new Set([i]);
+  const take=(arr,why,n)=>{arr.filter(j=>!seen.has(j)).slice(0,n).forEach(j=>{seen.add(j);picks.push({j,why});});};
+  if(m&&m.c){const corp=m.c;
+    take(D.map((x,j)=>j).filter(j=>META[j+1]&&META[j+1].c===corp),'same owner',2);}
+  take(D.map((x,j)=>j).filter(j=>D[j].domain===d.domain&&D[j].phase===d.phase),'same cell',2);
+  take(D.map((x,j)=>j).filter(j=>D[j].phase===d.phase),'same phase',2);
+  if(!picks.length) return '';
+  return `<div class="drel"><div class="dl">See also</div>${picks.slice(0,6).map(({j,why})=>{
+    const r=D[j], no=String(j+1).padStart(3,'0');
+    return `<a href="#op-${no}"><span class="rno">${no}</span><span class="rop">${esc(r.operator)}</span><span class="why">${why} · <i class="rv v-${r.verdict}" style="font-style:normal;padding:2px 4px">${r.verdict[0]}</i></span></a>`;
+  }).join('')}</div>`;
+}
+
+/* ---- detail pane (the record) ---- */
+function step(dir){
+  if(!filtered.length) return;
+  let pos=filtered.indexOf(sel);
+  pos = pos<0 ? (dir>0?0:filtered.length-1) : Math.max(0,Math.min(filtered.length-1,pos+dir));
+  select(filtered[pos]);
+  const r=document.querySelector(`.lrow[data-i="${filtered[pos]}"]`); if(r) r.scrollIntoView({block:'nearest'});
+}
+function select(i,fromKb){
+  if(i==null||!D[i]) return;
+  sel=i; const d=D[i], m=META[i+1];
+  let rows='';
+  const R=(k,v)=>v?`<div class="row"><div class="k">${k}</div><div class="v">${md(v)}</div></div>`:'';
+  const RAW=(k,v)=>v?`<div class="row"><div class="k">${k}</div><div class="v">${v}</div></div>`:'';
+  if(m){
+    rows+=RAW('Corp / Source',`<span class="corp">${esc(m.c)}</span>${m.s?` &nbsp;·&nbsp; <em>${esc(m.s)}</em>`:''}`);
+    rows+=R('Industry use case',m.u);
+  }else{
+    if(d.body) rows+=R('Detail',d.body);
+    rows+=R('Origin',d.origin);
+  }
+  if(d.dr==='DR1' && m){
+    rows+=R('Reverse-engineer',m.r);
+    rows+=R('Verdict',m.v);
+  }else{
+    rows+=R('Rigor',d.rigor);
+    rows+=R('Spend-shell',d.spendShell);
+    rows+=R('Signal-core',d.signalCore);
+    rows+=R('0-ad rebuild',d.reproduction);
+    rows+=R('Reverse-engineer',d.reverse);
+    rows+=R('Verdict',d.verdictText);
+  }
+  const flag=d.flag?`<div class="flagnote">⚑ ${md(d.flag)}</div>`:'';
+  const no=String(i+1).padStart(3,'0');
+  const pos=filtered.indexOf(i);
+  const nav=`<div class="dnav">
+    <button class="dnavb" id="dprev" ${pos<=0?'disabled':''} aria-label="Previous operator">← ${pos>0?String(filtered[pos-1]+1).padStart(3,'0'):''}</button>
+    <span class="dpos">${pos>=0?`${pos+1} of ${filtered.length} in view`:'outside current filter'}</span>
+    <button class="dnavb" id="dnext" ${pos<0||pos>=filtered.length-1?'disabled':''} aria-label="Next operator">${pos>=0&&pos<filtered.length-1?String(filtered[pos+1]+1).padStart(3,'0'):''} →</button>
+  </div>`;
+  detail.innerHTML=`<div class="drec${MOTION_OK?' anim':''}" style="--vc:var(--${d.verdict.toLowerCase()})">
+    ${nav}
+    <div class="dno">№ ${no} · ${esc(d.domain)}<button class="copyb" id="copyb" title="Copy deep link">⧉ link</button></div>
+    <div class="dhead"><div class="dop">${esc(d.operator)}</div><span class="dstamp v-${d.verdict}">${d.verdict}</span></div>
+    <div class="dmeta"><span class="ph">◆ ${esc(d.phase)}</span></div>
+    ${rows}${flag}${related(d,i)}
+  </div>`;
+  detail.scrollTop=0;
+  document.getElementById('dprev').onclick=()=>step(-1);
+  document.getElementById('dnext').onclick=()=>step(1);
+  document.getElementById('copyb').onclick=e=>{
+    const url=location.origin+location.pathname+'#op-'+no;
+    navigator.clipboard&&navigator.clipboard.writeText(url).then(()=>{
+      e.target.textContent='✓ copied'; e.target.classList.add('ok');
+      setTimeout(()=>{e.target.textContent='⧉ link';e.target.classList.remove('ok');},1300);
+    });
+  };
+  markSel();
+  if(fromKb){const r=document.querySelector(`.lrow[data-i="${i}"]`); if(r) r.focus({preventScroll:true});}
+  try{history.replaceState(null,'','#op-'+no);}catch(e){}
+  if(isMobile()) openSheet();
+  announce(`№ ${no} ${d.operator}, verdict ${d.verdict}`);
+  /* read mark after 3s dwell */
+  clearTimeout(readTimer);
+  if(!READS.has(i)) readTimer=setTimeout(()=>{
+    READS.add(i); saveReads(); updateDateline(); updateSpine();
+    const r=document.querySelector(`.lrow[data-i="${i}"]`); if(r) r.classList.add('read');
+  },3000);
+}
+function markSel(){document.querySelectorAll('.lrow').forEach(r=>{
+  const on=+r.dataset.i===sel;
+  r.classList.toggle('sel',on);
+  r.setAttribute('aria-selected',on?'true':'false');
+  r.setAttribute('tabindex',on?'0':'-1');
+});}
+function detailEmpty(){
+  detail.innerHTML=`<div class="dempty">
+    <div class="di">Select an operator to read its full record — origin, rigor, the $0 reverse-engineer recipe, and the verdict.</div>
+    <div class="dl">4 Convergence Laws</div>
+    <p>Every KEEP operator sits on at least one: weighted multi-criteria scoring · two-axis today-vs-tomorrow evaluation · value vs. next-best-alternative (EVC / JTBD) · a quantified, falsifiable claim before action.</p>
+    <div class="dl" style="margin-top:24px">Keys</div>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-style:normal">j / k or ↑ ↓ — walk operators &nbsp;·&nbsp; / — search &nbsp;·&nbsp; ⌘K — jump anywhere &nbsp;·&nbsp; esc — clear</p>
+  </div>`;
+}
+
+/* ---- mobile bottom sheet ---- */
+function openSheet(){detail.classList.add('open');sheetback.classList.add('open');}
+function closeSheet(){detail.classList.remove('open');sheetback.classList.remove('open');}
+sheetback.onclick=closeSheet;
+let sy=null;
+detail.addEventListener('pointerdown',e=>{if(isMobile()&&detail.scrollTop<=0)sy=e.clientY;},{passive:true});
+detail.addEventListener('pointermove',e=>{if(sy!=null&&e.clientY-sy>70){sy=null;closeSheet();}},{passive:true});
+detail.addEventListener('pointerup',()=>{sy=null;},{passive:true});
+
+/* ---- spine: counts, read bars, scrollspy, click-to-phase ---- */
+function updateSpine(){
+  document.querySelectorAll('.sp').forEach(sp=>{
+    const ph=sp.dataset.phase;
+    const tot=D.filter(d=>d.phase===ph).length;
+    const shown=filtered.filter(i=>D[i].phase===ph).length;
+    const rd=[...READS].filter(i=>D[i]&&D[i].phase===ph).length;
+    sp.querySelector('.sp-c').textContent=(state.q||state.verdict||state.domain||state.phase)?`${shown}/${tot}`:tot;
+    const bar=sp.querySelector('.sp-bar');
+    bar.classList.toggle('zero',!rd);
+    bar.querySelector('i').style.setProperty('--p',tot?(rd/tot).toFixed(3):0);
+    sp.classList.toggle('on',state.phase===ph||sp.classList.contains('on')&&state.group==='phase');
+  });
+}
+let io;
+function syncSpine(){
+  if(io){io.disconnect();io=null;}
+  const sps=document.querySelectorAll('.sp');
+  if(state.group!=='phase'){if(!state.phase)sps.forEach(sp=>sp.classList.remove('on'));return;}
+  io=new IntersectionObserver(es=>{es.forEach(en=>{ if(en.isIntersecting){
+    const key=en.target.dataset.key;
+    sps.forEach(sp=>sp.classList.toggle('on',sp.dataset.phase===key));
+  }});},{rootMargin:'-8% 0px -82% 0px',threshold:0});
+  document.querySelectorAll('.lgrp').forEach(g=>io.observe(g));
+}
+function setGroup(g){
+  state.group=g; userNav=true;
+  [...document.getElementById('groupSeg').children].forEach(b=>b.classList.toggle('on',b.dataset.g===g));
+  render();
+}
+
+/* ---- domain × phase matrix ---- */
+const MATRIX={};
+D.forEach((d,i)=>{
+  (MATRIX[d.domain] ||= {});
+  (MATRIX[d.domain][d.phase] ||= {n:0,v:{},is:[]});
+  const c=MATRIX[d.domain][d.phase]; c.n++; c.v[d.verdict]=(c.v[d.verdict]||0)+1; c.is.push(i);
+});
+function buildMatrix(){
+  const mx=document.getElementById('mx');
+  let h='<span class="mh"></span>'+PHASE_ORDER.map(p=>`<span class="mh">${p}</span>`).join('');
+  DOMAIN_ORDER.forEach(dom=>{
+    h+=`<span class="mr">${dom.replace('-',' ')}</span>`;
+    PHASE_ORDER.forEach(ph=>{
+      const c=(MATRIX[dom]||{})[ph];
+      if(!c){h+=`<span class="mcell zero" aria-hidden="true">·</span>`;return;}
+      const on=state.domain===dom&&state.phase===ph;
+      const segs=VERDICT_ORDER.filter(v=>c.v[v]).map(v=>
+        `<i style="flex:${c.v[v]};background:var(--${v.toLowerCase()});opacity:.75"></i>`).join('');
+      const tip=`${dom} × ${ph} · ${c.n} op${c.n>1?'s':''} · `+VERDICT_ORDER.filter(v=>c.v[v]).map(v=>`${c.v[v]} ${v}`).join(', ');
+      h+=`<button class="mcell${on?' on':''}" data-d="${esc(dom)}" data-p="${ph}" title="${tip}" aria-pressed="${on}">${c.n}<span class="mv">${segs}</span></button>`;
+    });
+  });
+  mx.innerHTML=h;
+}
+function syncMatrix(){document.querySelectorAll('.mcell').forEach(b=>{
+  const on=state.domain===b.dataset.d&&state.phase===b.dataset.p;
+  b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);
+});}
+document.getElementById('mx').onclick=e=>{
+  const b=e.target.closest('.mcell'); if(!b||b.classList.contains('zero')) return;
+  const dom=b.dataset.d, ph=b.dataset.p;
+  if(state.domain===dom&&state.phase===ph){state.domain=null;state.phase=null;}
+  else{state.domain=dom;state.phase=ph;}
+  userNav=true; syncMatrix(); render();
+  document.querySelector('.shell').scrollIntoView(MOTION_OK?{behavior:'smooth',block:'start'}:{block:'start'});
+};
+const mxt=document.getElementById('mxtoggle');
+function setMx(collapsed){
+  document.getElementById('matrix').classList.toggle('mx-collapsed',collapsed);
+  mxt.textContent=collapsed?'Expand':'Collapse';
+  mxt.setAttribute('aria-expanded',!collapsed);
+  try{localStorage.setItem('dt-mx',collapsed?'1':'');}catch(e){}
+}
+mxt.onclick=()=>setMx(!document.getElementById('matrix').classList.contains('mx-collapsed'));
+try{setMx(localStorage.getItem('dt-mx')==='1'||isMobile());}catch(e){}
+
+/* ---- verdict bar + legend filters ---- */
+document.getElementById('vbar').onclick=e=>{
+  const b=e.target.closest('.vseg'); if(!b) return;
+  state.verdict=state.verdict===b.dataset.v?null:b.dataset.v;
+  userNav=true; vbar(); render();
+};
+const legend=document.getElementById('legend');
+legend.onclick=e=>{
+  const li=e.target.closest('li[data-v]'); if(!li) return;
+  state.verdict=state.verdict===li.dataset.v?null:li.dataset.v;
+  userNav=true; vbar(); render();
+};
+legend.addEventListener('mouseover',e=>{
+  const li=e.target.closest('li[data-v]'); if(!li) return;
+  list.dataset.dim=li.dataset.v;
+  document.querySelectorAll('.lrow').forEach(r=>r.classList.toggle('v-match',r.dataset.v===li.dataset.v));
+});
+legend.addEventListener('mouseleave',()=>{delete list.dataset.dim;});
+
+/* ---- wiring ---- */
+document.getElementById('groupSeg').onclick=e=>{if(e.target.dataset.g) setGroup(e.target.dataset.g);};
+list.onclick=e=>{
+  const p=e.target.closest('.pill');
+  if(p){
+    if(state.group!=='phase') setGroup('phase');
+    const sec=document.getElementById('grp-'+cssid(p.dataset.ph));
+    if(sec) sec.scrollIntoView(MOTION_OK?{behavior:'smooth',block:'start'}:{block:'start'});
+    return;
+  }
+  const r=e.target.closest('.lrow'); if(r) select(+r.dataset.i);
+};
+document.getElementById('spine').onclick=e=>{
+  const li=e.target.closest('.sp'); if(!li) return;
+  const ph=li.dataset.phase;
+  if(state.group!=='phase') setGroup('phase');
+  const sec=document.getElementById('grp-'+cssid(ph));
+  if(sec){sec.scrollIntoView(MOTION_OK?{behavior:'smooth',block:'start'}:{block:'start'}); const f=sec.querySelector('.lrow'); if(f) select(+f.dataset.i);}
+};
+document.getElementById('spine').addEventListener('keydown',e=>{
+  if(e.key==='Enter'||e.key===' '){const li=e.target.closest('.sp');if(li){e.preventDefault();li.click();}}
+});
+const qEl=document.getElementById('q');
+qEl.oninput=e=>{state.q=e.target.value.trim().toLowerCase();userNav=true;render();};
+qEl.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){state.q='';qEl.value='';render();qEl.blur();}
+  if(e.key==='Enter'&&filtered.length){select(filtered[0]);
+    const r=document.querySelector(`.lrow[data-i="${filtered[0]}"]`); if(r) r.scrollIntoView({block:'center'});}
+});
+document.getElementById('qclr').onclick=()=>{state.q='';qEl.value='';render();qEl.focus();};
+
+/* ---- command palette ---- */
+const pal=document.getElementById('pal'), palq=document.getElementById('palq'), pallist=document.getElementById('pallist');
+let palAct=0, palItems=[];
+const COMMANDS=[
+  {label:'Group by domain',run:()=>setGroup('domain')},
+  {label:'Group by phase',run:()=>setGroup('phase')},
+  {label:'Group by verdict',run:()=>setGroup('verdict')},
+  ...VERDICT_ORDER.map(v=>({label:'Filter: '+v,run:()=>{state.verdict=v;vbar();render();}})),
+  {label:'Clear all filters',run:()=>{clearFilters();vbar();syncMatrix();render();}},
+  {label:'Toggle consultant map',run:()=>mxt.click()},
+  {label:'Jump to Discovery operators (non-corpus)',run:()=>document.getElementById('added-discovery').scrollIntoView(MOTION_OK?{behavior:'smooth'}:{})},
+];
+function palRender(){
+  const q=(palq.value||'').trim().toLowerCase();
+  const ops=q?D.map((d,i)=>({i,sc:score(d,q).s,d})).filter(x=>x.sc>0).sort((a,b)=>b.sc-a.sc).slice(0,12)
+            :D.map((d,i)=>({i,d})).slice(0,8);
+  const cmds=COMMANDS.filter(c=>!q||c.label.toLowerCase().includes(q)).slice(0,5);
+  palItems=[...ops.map(x=>({type:'op',...x})),...cmds.map(c=>({type:'cmd',c}))];
+  palAct=Math.min(palAct,Math.max(0,palItems.length-1));
+  let h='';
+  if(ops.length){h+='<div class="pal-grp">Operators</div>'+ops.map((x,k)=>
+    `<div class="pal-it${k===palAct?' act':''}" data-k="${k}"><span class="rno">${String(x.i+1).padStart(3,'0')}</span><span class="rop">${hi(x.d.operator,q)}</span><span class="rv v-${x.d.verdict}">${x.d.verdict[0]}</span></div>`).join('');}
+  if(cmds.length){h+='<div class="pal-grp">Commands</div>'+cmds.map((c,k)=>
+    `<div class="pal-it${ops.length+k===palAct?' act':''}" data-k="${ops.length+k}"><span class="rno">⌘</span><span class="rop">${esc(c.label)}</span><span></span></div>`).join('');}
+  if(!palItems.length)h='<div class="pal-empty">Nothing matches.</div>';
+  pallist.innerHTML=h;
+  const a=pallist.querySelector('.pal-it.act'); if(a) a.scrollIntoView({block:'nearest'});
+}
+function palGo(k){
+  const it=palItems[k]; if(!it) return;
+  pal.close();
+  if(it.type==='op'){
+    if(!matches(D[it.i])){clearFilters();vbar();syncMatrix();render();}
+    select(it.i);
+    const r=document.querySelector(`.lrow[data-i="${it.i}"]`); if(r) r.scrollIntoView({block:'center'});
+  } else it.c.run();
+}
+palq.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'){e.preventDefault();palAct=Math.min(palItems.length-1,palAct+1);palRender();}
+  else if(e.key==='ArrowUp'){e.preventDefault();palAct=Math.max(0,palAct-1);palRender();}
+  else if(e.key==='Enter'){e.preventDefault();palGo(palAct);}
+});
+palq.oninput=()=>{palAct=0;palRender();};
+pallist.onclick=e=>{const it=e.target.closest('.pal-it'); if(it) palGo(+it.dataset.k);};
+function palOpen(){palq.value='';palAct=0;palRender();pal.showModal();palq.focus();}
+
+/* ---- keyboard nav ---- */
+window.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal.open?pal.close():palOpen();return;}
+  if(pal.open) return;
+  if(e.target.tagName==='INPUT') return;
+  if(e.key==='/'){e.preventDefault();qEl.focus();return;}
+  if(e.key==='Escape'){
+    if(isMobile()&&detail.classList.contains('open')){closeSheet();return;}
+    if(state.q||state.verdict||state.domain||state.phase){clearFilters();vbar();syncMatrix();render();return;}
+  }
+  if(!filtered.length) return;
+  if(e.key==='Home'){e.preventDefault();select(filtered[0],true);return;}
+  if(e.key==='End'){e.preventDefault();select(filtered[filtered.length-1],true);return;}
+  const down=e.key==='ArrowDown'||e.key==='j', up=e.key==='ArrowUp'||e.key==='k';
+  if(e.key==='Enter'&&sel!=null) return;
+  if(!down&&!up) return;
+  e.preventDefault();
+  step(down?1:-1);
+});
+
+/* ---- scroll-progress hairline ---- */
+const prog=document.getElementById('prog');
+function onScroll(){const h=document.documentElement;const max=h.scrollHeight-h.clientHeight;
+  prog.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+window.addEventListener('scroll',onScroll,{passive:true});
+
+/* ---- init + deep-link ---- */
+function fromHash(){const m=(location.hash||'').match(/op-(\d+)/); if(m){const i=+m[1]-1; if(D[i]){
+  if(!matches(D[i])){clearFilters();vbar();syncMatrix();render();}
+  select(i); const r=document.querySelector(`.lrow[data-i="${i}"]`); if(r) r.scrollIntoView({block:'center'});}}}
+window.addEventListener('hashchange',fromHash);
+buildMatrix();vbar();render();detailEmpty();updateDateline();fromHash();onScroll();
+</script>
+</body>
+</html>
