@@ -63,6 +63,31 @@ The harness does not run on the model alone. It orchestrates a set of MCP tools 
 
 The point of the tool layer is grounding, not autonomy. The operator still issues the command and owns the judgment; the MCP tools just make sure the model is reasoning over real, current context. The harness is exactly as good as the operator commanding it.
 
+## Claims are machine-checked
+
+The private system enforces the discipline consultants are actually paid for — defensible claims —
+as running code, not as a style guide. Every written artifact is checked at write time:
+
+- **Provenance typing:** every research document declares what it is — facts lifted from a source,
+  the analyst's own interpretation, or a cross-source synthesis — and the three never blend in one
+  paragraph. On source disagreement, both sides are presented; numbers are never averaged into a
+  blended statistic.
+- **Verification altitude:** each document declares how deeply its claims were checked (read
+  somewhere / cross-checked against a second source / verified against the primary). Overstating
+  the level is a violation; downgrading is honest.
+- **Quantified claims carry citations:** any percentage, dollar figure, or "studies show" sentence
+  without a citation signal in its paragraph gets flagged.
+- **Filler detection:** sentences that survive swapping the client's name for any other company's
+  say nothing, and are flagged as portable filler.
+- **Link liveness:** cited URLs are HEAD-checked; dead links are dropped or replaced, never invented.
+
+The gates were built exam-first — known-good and known-bad fixture documents with expected verdicts
+written before the checker existed; the checker passed its contract on the first run with zero
+false positives. Rollout is deliberately staged: advisory first, and only the mechanical checks
+(dead links, missing provenance typing) earn blocking status after a measured week of
+zero-false-positive live traffic. Pattern-matchers surface candidates; judgment decides — the
+regex is never the judge.
+
 ## Honesty boundaries
 
 The atlas was citation-audited (40 of 46 source claims verified against primaries, zero fabricated). Operators that rest on proprietary or unverified mechanics are tagged FLAG and withhold the mechanics by design. No client, sourcing, financial, or private business data appears anywhere in this repo.
