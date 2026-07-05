@@ -19,6 +19,35 @@ Every screen runs on a 6-phase spine:
 
 Each operator gets one of five verdicts: **KEEP** (transfers as-is), **ADAPT** (keep the reasoning, drop the apparatus), **SWITCH** (discarded now, flips to leverage on a named trigger), **DISCARD** (sample- or spend-bound, no honest substitute), **FLAG** (proprietary or unverified, reconstruct the principle but never the hidden mechanics).
 
+## The operating method: top-down / bottom-up, run as a machine
+
+Structured problem solving has two motions, and the harness runs both as machinery rather than
+memory:
+
+- **Top-down (the frame).** Every program of work opens with the consulting frame — problem
+  statement → objectives → MECE key drivers → falsifiable hypotheses → key questions. The frame is
+  delivered through *context engineering*: it lives as a persistent context artifact loaded at the
+  open of every work session, so all analytical work descends from one tree instead of being
+  improvised per session.
+- **Bottom-up (the loops).** The analytical work runs as engineered closed loops through *loop
+  engineering*: every work batch carries a machine-checkable exam written **before** the artifact
+  (known-good and known-bad fixtures as kill-tests, a control row in every hypothesis table,
+  bounded iterations, an attended brake). A batch's exam doubles as the kill-test for one of the
+  frame's hypotheses.
+- **Roll-up.** Verdicts — supported, refuted, or partial, each with a proof artifact — write back
+  into the frame; driver status updates; the objectives scorecard fills in. A refuted hypothesis is
+  a finding, not a failure: it redirects scope with evidence.
+
+One distinction does most of the work: a knowledge synthesis (what was read, how strongly sources
+corroborate) is the **evidence shelf** — supply-side. The **frame** is demand-side: it stands on
+the actual system, states the problem, and pulls evidence per question. Confusing the map of what
+you know with the structure of the problem is how analysis drifts into inventory.
+
+Proven live, not just designed: a retrieval-quality regression in the private system was recently
+repaired *as* one of these loops — a 4-threshold machine contract, failing-probe feedback per
+iteration, a 3-iteration brake with operator escalation — and the repair held on the first
+contract re-run.
+
 ## How I build
 
 I specify what gets built, how it should work, and what counts as done. The agents write the code against that spec, and I review and validate every output. Database design, data pipelines, agent orchestration, and the decision logic are mine; the execution is AI-augmented. This repo is the public, sanitized slice of a larger private system.
