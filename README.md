@@ -1,6 +1,10 @@
 # cdd-harness
 
-An operator who knows commercial due diligence, amplified. A Claude Code harness that runs the $0 educated-guess desk-screen a consultant would run *before* committing weeks of research, plus an interactive atlas of the decision framework behind it.
+**Commercial due diligence exists to answer one question: will this drive sales?** Everything else in a CDD — market sizing, competitive mapping, pricing analysis, customer evidence — is machinery in service of that verdict. This is a Claude Code harness that runs that screen the way a diligence team would run it *before* committing weeks of research, plus an interactive atlas of the decision framework behind it.
+
+The screen doesn't care what you point it at. An M&A target, a new business or niche entry, a marketing strategy, a paid-media plan, an ad-copy angle — if the underlying question is *"will this generate revenue, and is the claim honest?"*, it goes through the same spine and comes out with the same verdict discipline.
+
+This is the layer McKinsey's diligence practice calls **outside-in**: forming the commercial view from public evidence before anyone opens a data room ([their gen-AI diligence work](https://www.mckinsey.com/capabilities/transformation/our-insights/from-potential-to-performance-using-gen-ai-to-conduct-outside-in-diligence) names exactly this screen). Their [M&A practice](https://www.mckinsey.com/capabilities/m-and-a/how-we-help-clients/m-and-a-strategy-due-diligence) files commercial due diligence alongside commercial excellence and pricing — the growth levers — and their value-creation research holds that in many industries a point of revenue growth is worth more than a point of margin. Sales first is not a simplification of CDD; it *is* CDD.
 
 > Scope, honestly: this is the **desk layer**, not a full CDD engagement. Real commercial due diligence takes weeks because most of it is primary research (data rooms, management interviews, customer surveys) — no model one-shots that. This harness owns the fast kill-screen that decides what is *worth* researching. The intelligence is in the operator's command; the harness amplifies it.
 
@@ -10,6 +14,22 @@ I reverse-engineered how commercial due-diligence and strategy consultants actua
 
 1. **The decision atlas** (`index.html`) — an interactive, citation-audited map of 108 consulting operators (frameworks from McKinsey, Porter, Kano, Van Westendorp, and others), each sorted by where a consultant reaches for it and whether it survives at small scale. Filterable by phase, domain, and verdict; deep-linkable per operator.
 2. **The harness** — the Claude Code agent setup that operationalises the atlas: I own the requirements, the logic, and the quality gates; the agents execute against them.
+
+## Who runs the screen — the agent bench
+
+Every operator in the atlas has exactly one owning specialist agent — an owner-map, not a
+free-for-all. The bench mirrors how a diligence team actually staffs: a **STRATEGIST** owns
+market-entry and positioning operators, a **QUANT** owns pricing and modeling, an **ANALYST**
+owns scorecards and causal reads, a **RESEARCHER** owns jobs-to-be-done and voice-of-customer,
+a **CONVERSION** specialist owns the sales-methodology operators, **SEO/ACQUISITION** own
+zero-spend capture, and **PAID** owns the media-buying operators (mostly to rule spend *out*
+until a named trigger flips it). Nineteen specialists in all, reporting through directors to a
+C-suite tier.
+
+The tiering isn't decoration — it's how a verdict stays readable. A non-trivial screen rolls up
+a reporting vertical: the specialist leads with full mechanism, a director reframes it as scope
+and risk in plain language, and the C-suite line states what it means for the business — the
+same answer, legible to an engineer and to a founder, with the register shifting per tier.
 
 ## The framework
 
