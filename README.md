@@ -88,6 +88,38 @@ false positives. Rollout is deliberately staged: advisory first, and only the me
 zero-false-positive live traffic. Pattern-matchers surface candidates; judgment decides — the
 regex is never the judge.
 
+## The harness engineers itself — under guard
+
+The newest layer is a self-improvement loop with the failure mode designed out. A nightly cycle
+reads the day's work and proposes rewrites to the system's own memory and doctrine files; a human
+reviews every diff (approve / reject / defer), approved changes apply atomically, originals are
+archived never deleted, and rejected proposals feed back as anti-context so the next cycle stops
+re-proposing them.
+
+The guard on that loop is the interesting part. The first version caught *vanished facts* — any
+date, number, path, trigger phrase, or link that a proposed rewrite would drop without relocating.
+An adversarial audit then found the gap that token-counting cannot see: rewrites that keep every
+measured token while destroying the meaning. Two fixtures encoding that attack — a dropped
+negation ("NEVER cite as fact" → "cite as fact") and a swapped direction (a metric improving
+becomes a metric regressing) — were written as ground truth and left deliberately failing until
+the guard earned them. The upgraded guard tracks directional pairs as single ordered facts and
+negation/deontic markers bound to their anchor phrase, normalised so an honest rephrase ("NEVER"
+→ "do not") stays silent and only a true inversion fires. The exam is green now; the attack
+fixtures stay in the suite as regression contracts, alongside probes for the tolerance cases.
+
+Before building that fix, the pattern was checked against the field: a study of external
+self-improving-agent designs (research and production) confirmed the sturdiest available brake is
+*ship-then-select* — the proposer never judges its own proposal; measured next-cycle performance
+does. That evidence, plus the guard above, is the design law this loop now follows: the model
+proposes, machinery measures, the operator decides.
+
+The same discipline extracted method rules that outlive any one repo: a **portability acid test**
+(strip the source system's name from a principle — does it still say something?), **basis-vector
+extraction** (mine external work along your own doctrine's axes, because "objective extraction is
+the least useful kind"), and a **triangulation rubric** (a pattern independently observed in three
+separate implementations is problem-domain structure, not team preference — only then does it
+harden into law).
+
 ## Honesty boundaries
 
 The atlas was citation-audited (40 of 46 source claims verified against primaries, zero fabricated). Operators that rest on proprietary or unverified mechanics are tagged FLAG and withhold the mechanics by design. No client, sourcing, financial, or private business data appears anywhere in this repo.
