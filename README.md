@@ -1,19 +1,38 @@
 # cdd-harness
 
-**Commercial due diligence exists to answer one question: will this drive sales?** Everything else in a CDD — market sizing, competitive mapping, pricing analysis, customer evidence — is machinery in service of that verdict. This is a Claude Code harness that runs that screen the way a diligence team would run it *before* committing weeks of research, plus an interactive atlas of the decision framework behind it.
+**Commercial due diligence exists to answer one question: will this drive sales?** Everything else in a CDD — market sizing, competitive mapping, pricing analysis, customer evidence — is machinery in service of that verdict. This repo is how I run that screen solo: the way a diligence team would run it *before* committing weeks of research, plus an interactive atlas of the decision framework behind it.
 
 The screen doesn't care what you point it at. An M&A target, a new business or niche entry, a marketing strategy, a paid-media plan, an ad-copy angle — if the underlying question is *"will this generate revenue, and is the claim honest?"*, it goes through the same spine and comes out with the same verdict discipline.
 
-This is the layer McKinsey's diligence practice calls **outside-in**: forming the commercial view from public evidence before anyone opens a data room ([their gen-AI diligence work](https://www.mckinsey.com/capabilities/transformation/our-insights/from-potential-to-performance-using-gen-ai-to-conduct-outside-in-diligence) names exactly this screen). Their [M&A practice](https://www.mckinsey.com/capabilities/m-and-a/how-we-help-clients/m-and-a-strategy-due-diligence) files commercial due diligence alongside commercial excellence and pricing — the growth levers — and their value-creation research holds that in many industries a point of revenue growth is worth more than a point of margin. Sales first is not a simplification of CDD; it *is* CDD.
+This is the layer McKinsey's diligence practice calls **outside-in**: forming the commercial view from public evidence before anyone opens a data room ([their gen-AI diligence work](https://www.mckinsey.com/capabilities/transformation/our-insights/from-potential-to-performance-using-gen-ai-to-conduct-outside-in-diligence) names exactly this screen). Their value-creation research holds that in many industries a point of revenue growth is worth more than a point of margin. Sales first is not a simplification of CDD; it *is* CDD.
 
-> Scope, honestly: this is the **desk layer**, not a full CDD engagement. Real commercial due diligence takes weeks because most of it is primary research (data rooms, management interviews, customer surveys) — no model one-shots that. This harness owns the fast kill-screen that decides what is *worth* researching. The intelligence is in the operator's command; the harness amplifies it.
+> Scope, honestly: this is the **desk layer**, not a full CDD engagement. Real commercial due diligence takes weeks because most of it is primary research (data rooms, management interviews, customer surveys) — no model one-shots that. This harness owns the fast kill-screen that decides what is *worth* researching.
 
-## What this is
+## How I actually run a screen
 
-I reverse-engineered how commercial due-diligence and strategy consultants actually decide, then turned it into a system I can run solo. The result has two parts:
+The method matters more than the tooling, so it goes first. Every screen is a division of labor between me and the machine, and the split is deliberate.
 
-1. **The decision atlas** (`index.html`) — an interactive, citation-audited map of 108 consulting operators (frameworks from McKinsey, Porter, Kano, Van Westendorp, and others), each sorted by where a consultant reaches for it and whether it survives at small scale. Filterable by phase, domain, and verdict; deep-linkable per operator.
-2. **The harness** — the Claude Code agent setup that operationalises the atlas: I own the requirements, the logic, and the quality gates; the agents execute against them.
+**The consulting work is mine, and it happens before any AI is involved.** Problem awareness first: what decision is this screen actually feeding, and what would change my mind? Then the structure — a MECE issue tree of key drivers, falsifiable hypotheses per branch, and an 80/20 cut so the screen attacks the two or three drivers that decide the verdict instead of boiling the ocean. AI cannot own this part. Framing the problem, choosing what *not* to analyze, and knowing what "good" looks like in a market read are domain-expertise work — delegate them and you get confident nonsense with a bibliography.
+
+**Then I describe, and let the AI build on the frame — augmentation.** The issue tree, the hypotheses, the buyer definition, the output format and the register all get communicated up front; the agents then do what they're genuinely better at — sweeping public evidence at breadth, drafting market structure, pulling pricing signals, stress-testing a hypothesis from angles I didn't think to try. Thinking partners, iterating — not an oracle answering once.
+
+**Then discernment, and the loop.** Every output gets judged three ways: the product (is it accurate, relevant, sourced), the process (did it *reason* its way there, or land somewhere plausible by luck), and the collaboration itself (is the back-and-forth still sharpening the answer). What fails gets re-described and re-run. The screen converges by loop, not by one-shot.
+
+**Diligence closes it.** Nothing ships on the model's word. Every claim that survives to a verdict is verified against its source, and I vouch for what goes out — my name on the screen, not the AI's.
+
+Around that loop sits one standing question: **what's automated, what's augmented, what's agentic.** Mechanical, verifiable steps get automated. Judgment-adjacent work is augmented. And work that has earned trust runs agentic — configured once, running 24/7 on my behalf — but always behind a hard gate: an agent can propose, flag, and prepare; the commercial verdict and anything customer-facing waits for my approval.
+
+One distinction does most of the remaining work: a knowledge synthesis (what was read, how strongly sources corroborate) is the **evidence shelf** — supply-side. The **frame** is demand-side: it stands on the actual decision, states the problem, and pulls evidence per question. Confusing the map of what you know with the structure of the problem is how analysis drifts into inventory.
+
+## The framework
+
+Every screen runs on a 6-phase spine:
+
+`Diagnose` (is the problem real, acute, funded?) → `Size` (big enough to live on, small enough to own?) → `Price` (what will the acute buyer pay?) → `Position` (what one slot do we own?) → `Capture` (reach the buyer at zero ad spend?) → `Measure` (stay honest about what worked?)
+
+Each operator gets one of five verdicts: **KEEP** (transfers as-is), **ADAPT** (keep the reasoning, drop the apparatus), **SWITCH** (discarded now, flips to leverage on a named trigger), **DISCARD** (sample- or spend-bound, no honest substitute), **FLAG** (proprietary or unverified, reconstruct the principle but never the hidden mechanics).
+
+The decision atlas (`index.html`) maps 108 consulting operators (frameworks from McKinsey, Porter, Kano, Van Westendorp, and others) onto that spine — each owned by where a consultant reaches for it and whether it survives at small scale. Filterable by phase, domain, and verdict; deep-linkable per operator.
 
 ## Who runs the screen — the agent bench
 
@@ -31,118 +50,28 @@ a reporting vertical: the specialist leads with full mechanism, a director refra
 and risk in plain language, and the C-suite line states what it means for the business — the
 same answer, legible to an engineer and to a founder, with the register shifting per tier.
 
-## The framework
+## After the screen: what the verdict unlocks
 
-Every screen runs on a 6-phase spine:
+The screen isn't the end product — it's the base layer. Every operation downstream inherits its targets from the CDD verdict, which is what makes automating them meaningful instead of merely busy:
 
-`Diagnose` (is the problem real, acute, funded?) → `Size` (big enough to live on, small enough to own?) → `Price` (what will the acute buyer pay?) → `Position` (what one slot do we own?) → `Capture` (reach the buyer at zero ad spend?) → `Measure` (stay honest about what worked?)
+- **Marketing campaigns and analytics** — automated end-to-end, with agents doing the first-pass verification, but hard-gated: nothing spends or publishes without my approval.
+- **Customer data** — augmented: segmented against the *current* operation's goals and challenges, not a static taxonomy.
+- **Buyer personas** — living documents that keep evolving as buyer evidence accumulates, instead of a slide frozen at launch.
+- **Customer service** — agentic, defending the exact promise the screen validated.
 
-Each operator gets one of five verdicts: **KEEP** (transfers as-is), **ADAPT** (keep the reasoning, drop the apparatus), **SWITCH** (discarded now, flips to leverage on a named trigger), **DISCARD** (sample- or spend-bound, no honest substitute), **FLAG** (proprietary or unverified, reconstruct the principle but never the hidden mechanics).
+Automate before the verdict and you're automating guesses. The screen earns the right to run the rest 24/7.
 
-## The operating method: top-down / bottom-up, run as a machine
+## Under the hood
 
-Structured problem solving has two motions, and the harness runs both as machinery rather than
-memory:
+The engineering exists for one purpose: **know the AI's strengths and limitations, then lower the limitations and raise the strengths** — so the augmentation stays honest and the agentic layer can be trusted with more over time. In practice that means retrieval that grounds every screen in prior intel rather than cold starts; write-time gates that machine-check what consultants are actually paid for (every quantified claim carries a citation signal, every document declares whether it's source-fact, interpretation, or synthesis, dead links and portable filler get flagged); and a self-improvement loop that proposes changes to the system's own memory nightly — with a guard that catches not just deleted facts but meaning-inversions (a dropped "never", a swapped direction), because the proposer is never allowed to judge its own proposal. Every gate was built exam-first: known-good and known-bad fixtures written before the checker, and the fixtures stay in the suite as regression contracts.
 
-- **Top-down (the frame).** Every program of work opens with the consulting frame — problem
-  statement → objectives → MECE key drivers → falsifiable hypotheses → key questions. The frame is
-  delivered through *context engineering*: it lives as a persistent context artifact loaded at the
-  open of every work session, so all analytical work descends from one tree instead of being
-  improvised per session.
-- **Bottom-up (the loops).** The analytical work runs as engineered closed loops through *loop
-  engineering*: every work batch carries a machine-checkable exam written **before** the artifact
-  (known-good and known-bad fixtures as kill-tests, a control row in every hypothesis table,
-  bounded iterations, an attended brake). A batch's exam doubles as the kill-test for one of the
-  frame's hypotheses.
-- **Roll-up.** Verdicts — supported, refuted, or partial, each with a proof artifact — write back
-  into the frame; driver status updates; the objectives scorecard fills in. A refuted hypothesis is
-  a finding, not a failure: it redirects scope with evidence.
-
-One distinction does most of the work: a knowledge synthesis (what was read, how strongly sources
-corroborate) is the **evidence shelf** — supply-side. The **frame** is demand-side: it stands on
-the actual system, states the problem, and pulls evidence per question. Confusing the map of what
-you know with the structure of the problem is how analysis drifts into inventory.
-
-Proven live, not just designed: a retrieval-quality regression in the private system was recently
-repaired *as* one of these loops — a 4-threshold machine contract, failing-probe feedback per
-iteration, a 3-iteration brake with operator escalation — and the repair held on the first
-contract re-run.
-
-## How I build
-
-I specify what gets built, how it should work, and what counts as done. The agents write the code against that spec, and I review and validate every output. Database design, data pipelines, agent orchestration, and the decision logic are mine; the execution is AI-augmented. This repo is the public, sanitized slice of a larger private system.
-
-## Architecture (the broader private system)
-
-The harness does not run on the model alone. It orchestrates a set of MCP tools that ground each screen in real context rather than guesswork. These servers live in the private system; this repo is the decision-framework slice, so the tools below are described by role, not shipped here.
-
-- **Hybrid retrieval** (BM25 + vector search with rank fusion over a private knowledge base): pulls prior intel, past screens, and doctrine into the window at decision time, so a screen reasons from what is already known instead of starting cold.
-- **Code-graph intelligence** (symbol and impact graph over the system itself): lets the harness navigate and change its own code safely, knowing what each edit touches before it runs.
-- **Knowledge curation and memory**: persists evergreen findings outside the context window and pulls them back on demand, keeping the working context small and the recall durable.
-- **Live commercial connectors** (e.g. payments and analytics): feed real unit-economics inputs into the Price and Size phases instead of placeholder numbers.
-
-The point of the tool layer is grounding, not autonomy. The operator still issues the command and owns the judgment; the MCP tools just make sure the model is reasoning over real, current context. The harness is exactly as good as the operator commanding it.
-
-## Claims are machine-checked
-
-The private system enforces the discipline consultants are actually paid for — defensible claims —
-as running code, not as a style guide. Every written artifact is checked at write time:
-
-- **Provenance typing:** every research document declares what it is — facts lifted from a source,
-  the analyst's own interpretation, or a cross-source synthesis — and the three never blend in one
-  paragraph. On source disagreement, both sides are presented; numbers are never averaged into a
-  blended statistic.
-- **Verification altitude:** each document declares how deeply its claims were checked (read
-  somewhere / cross-checked against a second source / verified against the primary). Overstating
-  the level is a violation; downgrading is honest.
-- **Quantified claims carry citations:** any percentage, dollar figure, or "studies show" sentence
-  without a citation signal in its paragraph gets flagged.
-- **Filler detection:** sentences that survive swapping the client's name for any other company's
-  say nothing, and are flagged as portable filler.
-- **Link liveness:** cited URLs are HEAD-checked; dead links are dropped or replaced, never invented.
-
-The gates were built exam-first — known-good and known-bad fixture documents with expected verdicts
-written before the checker existed; the checker passed its contract on the first run with zero
-false positives. Rollout is deliberately staged: advisory first, and only the mechanical checks
-(dead links, missing provenance typing) earn blocking status after a measured week of
-zero-false-positive live traffic. Pattern-matchers surface candidates; judgment decides — the
-regex is never the judge.
-
-## The harness engineers itself — under guard
-
-The newest layer is a self-improvement loop with the failure mode designed out. A nightly cycle
-reads the day's work and proposes rewrites to the system's own memory and doctrine files; a human
-reviews every diff (approve / reject / defer), approved changes apply atomically, originals are
-archived never deleted, and rejected proposals feed back as anti-context so the next cycle stops
-re-proposing them.
-
-The guard on that loop is the interesting part. The first version caught *vanished facts* — any
-date, number, path, trigger phrase, or link that a proposed rewrite would drop without relocating.
-An adversarial audit then found the gap that token-counting cannot see: rewrites that keep every
-measured token while destroying the meaning. Two fixtures encoding that attack — a dropped
-negation ("NEVER cite as fact" → "cite as fact") and a swapped direction (a metric improving
-becomes a metric regressing) — were written as ground truth and left deliberately failing until
-the guard earned them. The upgraded guard tracks directional pairs as single ordered facts and
-negation/deontic markers bound to their anchor phrase, normalised so an honest rephrase ("NEVER"
-→ "do not") stays silent and only a true inversion fires. The exam is green now; the attack
-fixtures stay in the suite as regression contracts, alongside probes for the tolerance cases.
-
-Before building that fix, the pattern was checked against the field: a study of external
-self-improving-agent designs (research and production) confirmed the sturdiest available brake is
-*ship-then-select* — the proposer never judges its own proposal; measured next-cycle performance
-does. That evidence, plus the guard above, is the design law this loop now follows: the model
-proposes, machinery measures, the operator decides.
-
-The same discipline extracted method rules that outlive any one repo: a **portability acid test**
-(strip the source system's name from a principle — does it still say something?), **basis-vector
-extraction** (mine external work along your own doctrine's axes, because "objective extraction is
-the least useful kind"), and a **triangulation rubric** (a pattern independently observed in three
-separate implementations is problem-domain structure, not team preference — only then does it
-harden into law).
+I specify what gets built, how it should work, and what counts as done; the agents write the code against that spec, and I review and validate every output. This repo is the public, sanitized slice of a larger private system — the tools are described by role because the point of the tool layer is grounding, not autonomy. The harness is exactly as good as the operator commanding it.
 
 ## Honesty boundaries
 
-The atlas was citation-audited (40 of 46 source claims verified against primaries, zero fabricated). Operators that rest on proprietary or unverified mechanics are tagged FLAG and withhold the mechanics by design. No client, sourcing, financial, or private business data appears anywhere in this repo.
+The atlas was citation-audited (40 of 46 source claims verified against primaries, zero fabricated). Operators that rest on proprietary or unverified mechanics are tagged FLAG and withhold the mechanics by design. No client, sourcing, financial, or private business data appears anywhere in this repo. AI's role in this work is stated plainly: agents execute and draft; the frames, verdicts, and everything shipped carry my judgment and my accountability.
+
+Working method shaped in part by Anthropic's AI Fluency framework (Rick Dakan, Joseph Feller & Anthropic, CC BY-NC-SA 4.0).
 
 ## Auditable, not self-scored
 
