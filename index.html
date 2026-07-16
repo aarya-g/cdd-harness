@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Consultant's Engagement Decision-Tree</title>
-<meta name="description" content="Operator registry of 108 Big4/MBB consulting frameworks audited for solo $0-ad-spend use — origin, rigor, reverse-engineer recipe and verdict for every operator.">
+<meta name="description" content="Operator registry of 109 consulting operators — 108 Big4/MBB frameworks audited for solo $0-ad-spend use plus one operator-original — origin, rigor, reverse-engineer recipe and verdict for every operator.">
 <meta name="theme-color" content="#0f1518">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -909,6 +909,15 @@ const UNVERIFIED = {dr:"DR3",domain:"Paid-Signal-Meta",phase:"Size",verdict:"FLA
  body:`Shown here ONLY to mark it unverified. The transferable substance lives in the "Anti-fragmentation doctrine" card; this ratio is not an established method.`};
 D.push(UNVERIFIED);
 
+/* ---- №109 — the one operator-original entry (not DR-corpus; honesty boundary: source = the operator) ---- */
+D.push({dr:"OPR",domain:"Marketing",phase:"Position",verdict:"KEEP",
+ operator:`Brand-efficiency delta & UBP — unique brag-worthy proposition`,
+ body:`Rate the felt experience of doing the JOB the incumbent way vs. the offer's way on a 1–10 scale (street cab ≈ 3, Uber ≈ 7–8). Brand efficiency is the **delta**, not absolute quality — value-vs-next-best-alternative applied to experience instead of economics. Operator hypothesis: at a delta of ~4+, three effects fire. (1) **Irreversible** — the reference point shifts; the old way is re-graded as a loss and the expectation spills across categories. (2) **High failure tolerance** — equity acts as insurance; performance failures (late, buggy, pricier today) are forgiven because switching back reads as self-punishment. Boundary: the insurance never covers *betrayal* failures (safety, trust, data). (3) **UBP — unique brag-worthy proposition** — telling people makes the *teller* look good, so word-of-mouth is compulsive rather than polite. Sharper than NPS: a brag is self-serving; a recommendation has to be solicited.`,
+ origin:`Operator-original (2026-07). The one entry in this registry that was not reverse-engineered from consulting literature — it was coined running the screen. Mechanisms it rides on are established: reference-point shift + loss aversion (prospect theory), brand-equity-as-insurance, social currency.`,
+ rigor:`The ≥4 threshold is a working fence — directional, observational, unverified at n. Falsifiable: a measured 4+ delta that generates no unprompted mentions breaks it. Never cite the threshold as established.`,
+ reverse:`Desk-screen use (Position fence, $0): estimate the job-experience delta vs. how the acute buyer does it today, from VoC + incumbent-experience evidence. <4 → weak brand potential, note and proceed on other merits; ≥4 → UBP candidate, positioning should lead with the brag. Production use (Measure): UBP trace = unprompted mention rate + referral share; the delta predicts sales composition (organic/direct share, sustained premium, repeat) and composition audits the delta back.`,
+ verdictText:`KEEP — operator-native; born at small-n, no apparatus to strip. Position-phase fence pre-spend, Measure-phase metric in production.`});
+
 /* ============================================================
    DERIVED LAYER (NOT verbatim) — corp/source + industry use case per operator.
    Keyed by № (D index+1) so duplicate operator names don't collide.
@@ -1023,7 +1032,8 @@ const META={
 105:{c:`Academic (GEO)`,s:`Aggarwal et al., GEO, KDD 2024`,u:`Lead sections with a 40–60-word answer plus cited stats and schema to become the source AI engines cite (up to +40% visibility).`},
 106:{c:`Meta`,s:`Meta Business Help`,u:`A fully-automated delivery engine (audience-finding, budget, placements, 150-creative testing) needing ~50 conv/week.`},
 107:{c:`Meta + practitioners`,s:`Meta delivery docs`,u:`Rotate creative against live impression and frequency-fatigue data — irreducibly impression-bound.`},
-108:{c:`UNVERIFIED`,s:`No attributable owner (FLAG)`,u:`A branded 1 campaign : 5 ad sets : 3 ads ratio that could not be verified to any owner — do not cite as fact.`}
+108:{c:`UNVERIFIED`,s:`No attributable owner (FLAG)`,u:`A branded 1 campaign : 5 ad sets : 3 ads ratio that could not be verified to any owner — do not cite as fact.`},
+109:{c:`Operator-original`,s:`Coined in the field, 2026-07 — not from the DR corpus`,u:`Brand strength scored as the felt-experience delta vs. the incumbent way of the job; at ~4+ the offer turns irreversible, failure-tolerant, and brag-worthy (UBP).`}
 };
 
 /* ============================ RENDER ============================ */

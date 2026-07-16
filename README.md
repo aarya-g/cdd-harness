@@ -32,7 +32,9 @@ Every screen runs on a 6-phase spine:
 
 Each operator gets one of five verdicts: **KEEP** (transfers as-is), **ADAPT** (keep the reasoning, drop the apparatus), **SWITCH** (discarded now, flips to leverage on a named trigger), **DISCARD** (sample- or spend-bound, no honest substitute), **FLAG** (proprietary or unverified, reconstruct the principle but never the hidden mechanics).
 
-The decision atlas (`index.html`) maps 108 consulting operators (frameworks from McKinsey, Porter, Kano, Van Westendorp, and others) onto that spine — each owned by where a consultant reaches for it and whether it survives at small scale. Filterable by phase, domain, and verdict; deep-linkable per operator.
+The decision atlas (`index.html`) maps 109 consulting operators onto that spine — 108 reverse-engineered from the consulting literature (McKinsey, Porter, Kano, Van Westendorp, and others), each owned by where a consultant reaches for it and whether it survives at small scale, plus one operator-original. Filterable by phase, domain, and verdict; deep-linkable per operator.
+
+**№109 is the only entry coined in the field rather than extracted from the literature: the brand-efficiency delta.** Score the felt experience of doing the job the incumbent way vs. your way, 1–10 (a street cab is a 3; an Uber is a 7–8). Brand strength is the *delta*, not the absolute. The working hypothesis — a fence, falsifiable, not an established constant — is that at a delta of ~4+ three things fire: the switch becomes irreversible (the old way is re-graded as a loss), the brand earns failure tolerance (performance slips are forgiven; betrayals never are), and word-of-mouth turns compulsive because the product is a **UBP — a unique brag-worthy proposition**: telling people makes the teller look good, which is sharper than NPS, since a brag is self-serving while a recommendation has to be solicited.
 
 ## Who runs the screen — the agent bench
 
@@ -61,6 +63,8 @@ The screen isn't the end product — it's the base layer. Every operation downst
 
 Automate before the verdict and you're automating guesses. The screen earns the right to run the rest 24/7.
 
+And the loop closes on the Measure phase: the brand-efficiency delta (№109) becomes the production metric. Its trace is sales *composition* — unprompted mentions, referral share, organic/direct share, a price premium that holds — which both proves the brand is compounding and audits the original screen verdict. When survey scores and sales behavior disagree, trust the behavior.
+
 ## Under the hood
 
 The engineering exists for one purpose: **know the AI's strengths and limitations, then lower the limitations and raise the strengths** — so the augmentation stays honest and the agentic layer can be trusted with more over time. In practice that means retrieval that grounds every screen in prior intel rather than cold starts; write-time gates that machine-check what consultants are actually paid for (every quantified claim carries a citation signal, every document declares whether it's source-fact, interpretation, or synthesis, dead links and portable filler get flagged); and a self-improvement loop that proposes changes to the system's own memory nightly — with a guard that catches not just deleted facts but meaning-inversions (a dropped "never", a swapped direction), because the proposer is never allowed to judge its own proposal. Every gate was built exam-first: known-good and known-bad fixtures written before the checker, and the fixtures stay in the suite as regression contracts.
@@ -79,4 +83,4 @@ This harness is built to be graded by an independent tool rather than self-attes
 
 ## Live atlas
 
-Explore the interactive decision atlas: **https://cdd-atlas.vercel.app** — filter 108 operators by phase, domain, and verdict; deep-link any operator.
+Explore the interactive decision atlas: **https://cdd-atlas.vercel.app** — filter 109 operators by phase, domain, and verdict; deep-link any operator.
