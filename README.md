@@ -1,86 +1,99 @@
 # cdd-harness
 
-**Commercial due diligence exists to answer one question: will this drive sales?** Everything else in a CDD — market sizing, competitive mapping, pricing analysis, customer evidence — is machinery in service of that verdict. This repo is how I run that screen solo: the way a diligence team would run it *before* committing weeks of research, plus an interactive atlas of the decision framework behind it.
+Commercial due diligence (CDD) answers one question: will this drive sales? Market sizing, competitor maps, pricing work and customer evidence all feed that answer. This repo is how I run that first screen on my own, before anyone commits weeks to research. It also includes an interactive atlas of the framework behind it.
 
-The screen doesn't care what you point it at. An M&A target, a new business or niche entry, a marketing strategy, a paid-media plan, an ad-copy angle — if the underlying question is *"will this generate revenue, and is the claim honest?"*, it goes through the same spine and comes out with the same verdict discipline.
+The screen works on more than acquisitions. I use it on new businesses and niches, marketing strategies, paid-media plans and ad angles. If the question is "will this make money, and is the claim honest?", it goes through the same steps.
 
-This is the layer McKinsey's diligence practice calls **outside-in**: forming the commercial view from public evidence before anyone opens a data room ([their gen-AI diligence work](https://www.mckinsey.com/capabilities/transformation/our-insights/from-potential-to-performance-using-gen-ai-to-conduct-outside-in-diligence) names exactly this screen). Their value-creation research holds that in many industries a point of revenue growth is worth more than a point of margin. Sales first is not a simplification of CDD; it *is* CDD.
+McKinsey calls this layer **outside-in** diligence: forming a commercial view from public evidence before anyone opens a data room ([their article on doing it with gen AI](https://www.mckinsey.com/capabilities/transformation/our-insights/from-potential-to-performance-using-gen-ai-to-conduct-outside-in-diligence)). Their research also finds that in many industries a point of revenue growth is worth more than a point of margin. That is why the screen starts with sales.
 
-> Scope, honestly: this is the **desk layer**, not a full CDD engagement. Real commercial due diligence takes weeks because most of it is primary research (data rooms, management interviews, customer surveys) — no model one-shots that. This harness owns the fast kill-screen that decides what is *worth* researching.
+> Scope: this is the desk layer, not a full CDD. A real engagement takes weeks because most of it is primary research: data rooms, management interviews and customer surveys. This harness does the fast first cut that decides what is worth researching.
 
-## How I actually run a screen
+## How I run a screen
 
-The method matters more than the tooling, so it goes first. Every screen is a division of labor between me and the machine, and the split is deliberate.
+I split the work between me and the AI on purpose.
 
-**The consulting work is mine, and it happens before any AI is involved.** Problem awareness first: what decision is this screen actually feeding, and what would change my mind? Then the structure — a MECE issue tree of key drivers, falsifiable hypotheses per branch, and an 80/20 cut so the screen attacks the two or three drivers that decide the verdict instead of boiling the ocean. AI cannot own this part. Framing the problem, choosing what *not* to analyze, and knowing what "good" looks like in a market read are domain-expertise work — delegate them and you get confident nonsense with a bibliography.
+**I do the framing myself, before any AI is involved.** I start with the decision the screen feeds and what would change my mind. Then I build an issue tree of the key drivers, write a testable hypothesis for each branch, and pick the two or three drivers that decide the answer. Framing, choosing what to leave out and knowing what a good market looks like need domain judgement, so I keep them.
 
-**Then I describe, and let the AI build on the frame — augmentation.** The issue tree, the hypotheses, the buyer definition, the output format and the register all get communicated up front; the agents then do what they're genuinely better at — sweeping public evidence at breadth, drafting market structure, pulling pricing signals, stress-testing a hypothesis from angles I didn't think to try. Thinking partners, iterating — not an oracle answering once.
+**Then the agents build on that frame.** I hand over the issue tree, the hypotheses, the buyer definition and the output format. The agents do what they are faster at: reading public evidence widely, drafting the market structure, pulling pricing signals and testing a hypothesis from angles I missed. We go back and forth; I don't take one answer and stop.
 
-**Then discernment, and the loop.** Every output gets judged three ways: the product (is it accurate, relevant, sourced), the process (did it *reason* its way there, or land somewhere plausible by luck), and the collaboration itself (is the back-and-forth still sharpening the answer). What fails gets re-described and re-run. The screen converges by loop, not by one-shot.
+**Then I review and loop.** I check each output three ways: is it accurate and sourced, did it reason its way there, and is the back-and-forth still improving the answer. Anything that fails gets re-briefed and re-run.
 
-**Diligence closes it.** Nothing ships on the model's word. Every claim that survives to a verdict is verified against its source, and I vouch for what goes out — my name on the screen, not the AI's.
+**Nothing ships on the model's word.** I check every claim that reaches a verdict against its source, and my name goes on the result.
 
-Around that loop sits one standing question: **what's automated, what's augmented, what's agentic.** Mechanical, verifiable steps get automated. Judgment-adjacent work is augmented. And work that has earned trust runs agentic — configured once, running 24/7 on my behalf — but always behind a hard gate: an agent can propose, flag, and prepare; the commercial verdict and anything customer-facing waits for my approval.
+I also sort each task into one of three modes. Mechanical steps that are easy to check are automated. Judgement-heavy work is augmented, with me in the loop. Work that has earned trust runs as an agent on its own, but behind a hard gate: an agent can propose, flag and prepare, and the verdict and anything a customer sees wait for my approval.
 
-One distinction does most of the remaining work: a knowledge synthesis (what was read, how strongly sources corroborate) is the **evidence shelf** — supply-side. The **frame** is demand-side: it stands on the actual decision, states the problem, and pulls evidence per question. Confusing the map of what you know with the structure of the problem is how analysis drifts into inventory.
+One distinction matters a lot. A summary of what I have read is the **evidence shelf**. The **frame** starts from the decision and pulls evidence question by question. Mixing the two up turns analysis into an inventory of facts.
 
 ## The framework
 
-Every screen runs on a 6-phase spine:
+Every screen runs through six phases:
 
-`Diagnose` (is the problem real, acute, funded?) → `Size` (big enough to live on, small enough to own?) → `Price` (what will the acute buyer pay?) → `Position` (what one slot do we own?) → `Capture` (reach the buyer at zero ad spend?) → `Measure` (stay honest about what worked?)
+`Diagnose` (is the problem real, urgent and funded?) → `Size` (big enough to live on, small enough to own?) → `Price` (what will the urgent buyer pay?) → `Position` (which one slot do we own?) → `Capture` (can we reach the buyer with no ad spend?) → `Measure` (how do we stay honest about what worked?)
 
-Each operator gets one of five verdicts: **KEEP** (transfers as-is), **ADAPT** (keep the reasoning, drop the apparatus), **SWITCH** (discarded now, flips to leverage on a named trigger), **DISCARD** (sample- or spend-bound, no honest substitute), **FLAG** (proprietary or unverified, reconstruct the principle but never the hidden mechanics).
+Each method (I call them operators) gets one of five verdicts:
+- **KEEP**: works as it is.
+- **ADAPT**: keep the reasoning, drop the heavy process.
+- **SWITCH**: skip it for now, and use it once a named trigger happens.
+- **DISCARD**: needs a sample size or budget we don't have, with no honest substitute.
+- **FLAG**: proprietary or unverified. I use the principle and never guess the hidden parts.
 
-The decision atlas (`index.html`) maps 109 consulting operators onto that spine — 108 reverse-engineered from the consulting literature (McKinsey, Porter, Kano, Van Westendorp, and others), each owned by where a consultant reaches for it and whether it survives at small scale, plus one operator-original. Filterable by phase, domain, and verdict; deep-linkable per operator.
+The decision atlas (`index.html`) maps 109 operators onto those six phases. 108 come from the consulting literature (McKinsey, Porter, Kano, Van Westendorp and others). For each one it records where a consultant uses it and whether it still works at small scale. The last one is my own. You can filter by phase, domain and verdict, and link to any operator.
 
-**№109 is the only entry coined in the field rather than extracted from the literature: the brand-efficiency delta.** Score the felt experience of doing the job the incumbent way vs. your way, 1–10 (a street cab is a 3; an Uber is a 7–8). Brand strength is the *delta*, not the absolute. The working hypothesis — a fence, falsifiable, not an established constant — is that at a delta of ~4+ three things fire: the switch becomes irreversible (the old way is re-graded as a loss), the brand earns failure tolerance (performance slips are forgiven; betrayals never are), and word-of-mouth turns compulsive because the product is a **UBP — a unique brag-worthy proposition**: telling people makes the teller look good, which is sharper than NPS, since a brag is self-serving while a recommendation has to be solicited.
+**№109, the brand-efficiency delta, is the one I came up with in the field.** Score how it feels to do a job the old way and your way, from 1 to 10. A street cab might be a 3 and an Uber a 7 or 8. Brand strength is the gap between the two, not either score. My working hypothesis, which is testable and not proven, is that at a gap of about 4 or more, three things happen:
+- people don't switch back, because the old way now feels like a loss;
+- customers forgive a slip in performance, though not a betrayal;
+- people talk about it unprompted, because telling others makes them look good.
 
-## Who runs the screen — the agent bench
+I call that last one a **UBP, a unique brag-worthy proposition**. It is a sharper signal than NPS: people brag without being asked, while a recommendation has to be requested.
 
-Every operator in the atlas has exactly one owning specialist agent — an owner-map, not a
-free-for-all. The bench mirrors how a diligence team actually staffs: a **STRATEGIST** owns
-market-entry and positioning operators, a **QUANT** owns pricing and modeling, an **ANALYST**
-owns scorecards and causal reads, a **RESEARCHER** owns jobs-to-be-done and voice-of-customer,
-a **CONVERSION** specialist owns the sales-methodology operators, **SEO/ACQUISITION** own
-zero-spend capture, and **PAID** owns the media-buying operators (mostly to rule spend *out*
-until a named trigger flips it). Nineteen specialists in all, reporting through directors to a
-C-suite tier.
+## Who runs the screen
 
-The tiering isn't decoration — it's how a verdict stays readable. A non-trivial screen rolls up
-a reporting vertical: the specialist leads with full mechanism, a director reframes it as scope
-and risk in plain language, and the C-suite line states what it means for the business — the
-same answer, legible to an engineer and to a founder, with the register shifting per tier.
+Every operator in the atlas has one owning specialist agent, so nothing is owned by everyone. The setup mirrors how a diligence team is staffed:
+- a **STRATEGIST** owns market entry and positioning;
+- a **QUANT** owns pricing and modelling;
+- an **ANALYST** owns scorecards and cause-and-effect reads;
+- a **RESEARCHER** owns jobs-to-be-done and customer voice;
+- a **CONVERSION** specialist owns sales methods;
+- **SEO** and **ACQUISITION** own reaching buyers without ads;
+- **PAID** owns media buying, mostly to rule spend out until a trigger says otherwise.
 
-## After the screen: what the verdict unlocks
+There are nineteen specialists in all, reporting through directors to a C-suite layer. The layers keep a verdict readable. The specialist gives the full detail, a director restates it as scope and risk in plain language, and the C-suite line says what it means for the business. It is the same answer, pitched for an engineer and for a founder.
 
-The screen isn't the end product — it's the base layer. Every operation downstream inherits its targets from the CDD verdict, which is what makes automating them meaningful instead of merely busy:
+## After the screen
 
-- **Marketing campaigns and analytics** — automated end-to-end, with agents doing the first-pass verification, but hard-gated: nothing spends or publishes without my approval.
-- **Customer data** — augmented: segmented against the *current* operation's goals and challenges, not a static taxonomy.
-- **Buyer personas** — living documents that keep evolving as buyer evidence accumulates, instead of a slide frozen at launch.
-- **Customer service** — agentic, defending the exact promise the screen validated.
+The screen is the base layer. Everything after it takes its targets from the verdict, which is why automating it is worth doing:
+- **Marketing campaigns and analytics**: automated end to end, with agents doing the first checks. Nothing spends or publishes without my approval.
+- **Customer data**: segmented against what the business is trying to do now, not a fixed list.
+- **Buyer personas**: kept up to date as new buyer evidence comes in.
+- **Customer service**: run by agents, holding to the promise the screen validated.
 
-Automate before the verdict and you're automating guesses. The screen earns the right to run the rest 24/7.
+Automating before the verdict means automating guesses.
 
-And the loop closes on the Measure phase: the brand-efficiency delta (№109) becomes the production metric. Its trace is sales *composition* — unprompted mentions, referral share, organic/direct share, a price premium that holds — which both proves the brand is compounding and audits the original screen verdict. When survey scores and sales behavior disagree, trust the behavior.
+The loop closes in the Measure phase, where the brand-efficiency delta (№109) becomes the metric to track. You see it in where sales come from: unprompted mentions, referral share, organic and direct share, and a price premium that holds. Those tell you whether the brand is growing and whether the original verdict was right. When survey scores and buying behaviour disagree, trust the behaviour.
 
 ## Under the hood
 
-The engineering exists for one purpose: **know the AI's strengths and limitations, then lower the limitations and raise the strengths** — so the augmentation stays honest and the agentic layer can be trusted with more over time. In practice that means retrieval that grounds every screen in prior intel rather than cold starts; write-time gates that machine-check what consultants are actually paid for (every quantified claim carries a citation signal, every document declares whether it's source-fact, interpretation, or synthesis, dead links and portable filler get flagged); and a self-improvement loop that proposes changes to the system's own memory nightly — with a guard that catches not just deleted facts but meaning-inversions (a dropped "never", a swapped direction), because the proposer is never allowed to judge its own proposal. Every gate was built exam-first: known-good and known-bad fixtures written before the checker, and the fixtures stay in the suite as regression contracts.
+The engineering has one job: know where the AI is strong and where it is weak, and push both in the right direction. In practice that means:
+- **Retrieval:** every screen starts from past research, not from scratch.
+- **Checks on every write:**
+  - every number needs a source;
+  - every document says whether it is a sourced fact, an interpretation or a synthesis;
+  - dead links and generic filler get flagged.
+- **A nightly self-review:** the system proposes changes to its own memory. A separate check catches deleted facts and reversed meanings, like a dropped "never" or a flipped direction. The part that proposes a change never approves it.
+- **Tests first:** I wrote good and bad test cases before each checker, and they stay in the suite so old bugs can't come back.
 
-I specify what gets built, how it should work, and what counts as done; the agents write the code against that spec, and I review and validate every output. This repo is the public, sanitized slice of a larger private system — the tools are described by role because the point of the tool layer is grounding, not autonomy. The harness is exactly as good as the operator commanding it.
+I decide what gets built, how it should work and what counts as done. The agents write the code to that spec, and I review every output. This repo is the public, cleaned-up part of a larger private system. The tools are described by role, because their job is to keep the work grounded in evidence.
 
 ## Honesty boundaries
 
-The atlas was citation-audited (40 of 46 source claims verified against primaries, zero fabricated). Operators that rest on proprietary or unverified mechanics are tagged FLAG and withhold the mechanics by design. No client, sourcing, financial, or private business data appears anywhere in this repo. AI's role in this work is stated plainly: agents execute and draft; the frames, verdicts, and everything shipped carry my judgment and my accountability.
+I audited the atlas citations: 40 of 46 source claims checked against the original sources, none made up. Operators that rest on proprietary or unverified methods are tagged FLAG and leave those parts out. There is no client, supplier, financial or private business data in this repo. The agents run tasks and write drafts. The frames, the verdicts and anything that ships are my judgement and my responsibility.
 
-Working method shaped in part by Anthropic's AI Fluency framework (Rick Dakan, Joseph Feller & Anthropic, CC BY-NC-SA 4.0).
+My working method draws on Anthropic's AI Fluency framework (Rick Dakan, Joseph Feller and Anthropic, CC BY-NC-SA 4.0).
 
-## Auditable, not self-scored
+## Audit it yourself
 
-This harness is built to be graded by an independent tool rather than self-attested. Audit it yourself: [Dallionking/claude-harness-audit](https://github.com/Dallionking/claude-harness-audit) (MIT, local-only) — install it and run `/harness-audit` against a harness to get a findings + benchmark report.
+You can grade this harness with an independent tool instead of taking my word for it: [Dallionking/claude-harness-audit](https://github.com/Dallionking/claude-harness-audit) (MIT, runs locally). Install it and run `/harness-audit` to get a findings and benchmark report.
 
 ## Live atlas
 
-Explore the interactive decision atlas: **https://cdd-atlas.vercel.app** — filter 109 operators by phase, domain, and verdict; deep-link any operator.
+The interactive decision atlas is at **https://cdd-atlas.vercel.app**. Filter the 109 operators by phase, domain and verdict, or link straight to one.
