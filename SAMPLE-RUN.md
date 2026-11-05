@@ -1,8 +1,8 @@
 # Sample run: a $0 desk screen
 
-This is an illustrative walkthrough on a **made-up product** ("PosturePing", a clip-on wearable that buzzes when you slouch, sold direct to remote workers). It is not a real candidate. It shows how the harness reasons, not a result to act on.
+This is an illustrative walkthrough on a **made-up product** ("PosturePing", a clip-on wearable that buzzes when you slouch, sold direct to remote workers). It is not a real candidate. It shows how the method reasons, not a result to act on.
 
-The engine runs every candidate through a 6-phase spine and closes each phase with a quantified, falsifiable claim before moving on. A candidate has to survive all six.
+It runs every candidate through a 6-phase spine and closes each phase with a quantified, falsifiable claim before moving on. A candidate has to survive all six.
 
 ---
 
@@ -28,6 +28,6 @@ Kill metric defined up front: if a one-week organic test cannot produce 25 quali
 ---
 
 **Verdict: DISCARD.**
-Low acuity, a free substitute that caps price, and no ownable slot. The engine is useful because it kills a plausible-looking product in an afternoon, before any ad budget is spent. Most candidates end here.
+Low acuity, a free substitute that caps price, and no ownable slot. This is useful because it kills a plausible-looking product in an afternoon, before any ad budget is spent. Most candidates end here.
 
 > Honesty note: every claim above is directional and would be checked against real buyer evidence before any spend. Operators that depend on proprietary or unverified mechanics are tagged FLAG in the atlas and are never reconstructed.
