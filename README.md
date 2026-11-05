@@ -1,5 +1,22 @@
 # cdd-harness
 
+## Marketing and CDD
+
+Marketing and commercial due diligence (CDD) overlap. They start in the same place, with the same questions:
+
+- Who is the customer?
+- What do they want, and what will they pay?
+- Who else serves them?
+- Can this grow and make money?
+
+Marketing acts on the answers. CDD tests them.
+
+Customers alone don't prove scale, so CDD also checks margin, cash and supply.
+
+The agent library behind this repo: [`library/TREE.md`](library/TREE.md).
+
+---
+
 Commercial due diligence (CDD) answers one question: will this drive sales? Market sizing, competitor maps, pricing work and customer evidence all feed that answer. This repo is how I run that first screen on my own, before anyone commits weeks to research. It also includes an interactive atlas of the framework behind it.
 
 The screen works on more than acquisitions. I use it on new businesses and niches, marketing strategies, paid-media plans and ad angles. If the question is "will this make money, and is the claim honest?", it goes through the same steps.
